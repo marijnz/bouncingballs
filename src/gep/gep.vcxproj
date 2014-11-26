@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\gepimpl\subsystems\animation\havok\animation.h" />
+    <ClInclude Include="include\gepimpl\subsystems\animation\havok\animationFactory.h" />
+    <ClInclude Include="include\gepimpl\subsystems\cameraManager.h" />
+    <ClInclude Include="include\gep\interfaces\cameraManager.h" />
+    <ClInclude Include="include\gepimpl\havok\includes.h" />
+    <ClInclude Include="include\gepimpl\havok\config.h" />
+    <ClInclude Include="include\gepimpl\havok\features.h" />
+    <ClInclude Include="include\gepimpl\subsystems\animation\havok\includes.h" />
+    <ClInclude Include="include\gepimpl\subsystems\animation\havok\config.h" />
+    <ClInclude Include="include\gepimpl\subsystems\events\eventManager.h" />
+    <ClInclude Include="include\gepimpl\subsystems\havok.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\contact.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\includes.h" />
+    <ClInclude Include="include\gepimpl\subsystems\inputHandler.h" />
+    <ClInclude Include="include\gepimpl\subsystems\logging.h" />
+    <ClInclude Include="include\gepimpl\subsystems\memoryManager.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havokPhysics.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\action.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\characterController.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\conversion\characterInputAndOutput.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\conversion\quaternion.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\conversion\shape.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\conversion\transformation.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\conversion\vector.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\compressedMeshCinfo.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\displayHandler.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\factory.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\manager.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\entity.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\havokPhysicsShape.h" />
+    <ClInclude Include="include\gepimpl\havok\util.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\world.h" />
+    <ClInclude Include="include\gepimpl\subsystems\renderer\ddsLoader.h" />
+    <ClInclude Include="include\gepimpl\subsystems\renderer\extractor.h" />
+    <ClInclude Include="include\gepimpl\subsystems\renderer\font.h" />
+    <ClInclude Include="include\gepimpl\subsystems\renderer\imageData2d.h" />
+    <ClInclude Include="include\gepimpl\subsystems\renderer\model.h" />
+    <ClInclude Include="include\gepimpl\subsystems\renderer\renderer.h" />
+    <ClInclude Include="include\gepimpl\subsystems\scripting.h" />
+    <ClInclude Include="include\gepimpl\subsystems\renderer\shader.h" />
+    <ClInclude Include="include\gepimpl\subsystems\renderer\texture2d.h" />
+    <ClInclude Include="include\gepimpl\subsystems\renderer\vertexbuffer.h" />
+    <ClInclude Include="include\gepimpl\subsystems\resourceManager.h" />
+    <ClInclude Include="include\gepimpl\subsystems\sound\library.h" />
+    <ClInclude Include="include\gepimpl\subsystems\sound\sound.h" />
+    <ClInclude Include="include\gepimpl\subsystems\sound\system.h" />
+    <ClInclude Include="include\gepimpl\subsystems\updateFramework.h" />
+    <ClInclude Include="include\gep\ArrayPtr.h" />
+    <ClInclude Include="include\gep\cameras.h" />
+    <ClInclude Include="include\gep\chunkfile.h" />
+    <ClInclude Include="include\gep\common.h" />
+    <ClInclude Include="include\gep\container\DynamicArray.h" />
+    <ClInclude Include="include\gep\container\hashmap.h" />
+    <ClInclude Include="include\gep\container\policies.h" />
+    <ClInclude Include="include\gep\container\queue.h" />
+    <ClInclude Include="include\gep\directory.h" />
+    <ClInclude Include="include\gep\exception.h" />
+    <ClInclude Include="include\gep\exit.h" />
+    <ClInclude Include="include\gep\file.h" />
+    <ClInclude Include="include\gep\gepmodule.h" />
+    <ClInclude Include="include\gep\globalManager.h" />
+    <ClInclude Include="include\gep\comleakfinder.h" />
+    <ClInclude Include="include\gep\input\windowsVirtualKeyCodes.h" />
+    <ClInclude Include="include\gep\interfaces\animation.h" />
+    <ClInclude Include="include\gep\interfaces\events.h" />
+    <ClInclude Include="include\gep\interfaces\events\event.h" />
+    <ClInclude Include="include\gep\interfaces\events\eventId.h" />
+    <ClInclude Include="include\gep\interfaces\events\eventManager.h" />
+    <ClInclude Include="include\gep\interfaces\events\eventScriptingManager.h" />
+    <ClInclude Include="include\gep\interfaces\events\eventUpdateFramework.h" />
+    <ClInclude Include="include\gep\interfaces\game.h" />
+    <ClInclude Include="include\gep\interfaces\inputHandler.h" />
+    <ClInclude Include="include\gep\interfaces\logging.h" />
+    <ClInclude Include="include\gep\interfaces\memoryManager.h" />
+    <ClInclude Include="include\gep\interfaces\physics\characterController.h" />
+    <ClInclude Include="include\gep\interfaces\physics\contact.h" />
+    <ClInclude Include="include\gep\interfaces\physics\entity.h" />
+    <ClInclude Include="include\gep\interfaces\physics\factory.h" />
+    <ClInclude Include="include\gep\interfaces\physics\rayCast.h" />
+    <ClInclude Include="include\gep\interfaces\physics\shape.h" />
+    <ClInclude Include="include\gep\interfaces\physics\system.h" />
+    <ClInclude Include="include\gep\interfaces\physics\world.h" />
+    <ClInclude Include="include\gep\interfaces\renderer.h" />
+    <ClInclude Include="include\gep\interfaces\resourceManager.h" />
+    <ClInclude Include="include\gep\interfaces\scripting.h" />
+    <ClInclude Include="include\gep\math3d\transform.h" />
+    <ClInclude Include="include\gep\scripting\luaEnumOrTypeHandling.h" />
+    <ClInclude Include="include\gep\scripting\luaFunctionWrapper.h" />
+    <ClInclude Include="include\gep\scripting\luaHelper.h" />
+    <ClInclude Include="include\gep\interfaces\sound.h" />
+    <ClInclude Include="include\gep\interfaces\subsystem.h" />
+    <ClInclude Include="include\gep\interfaces\updateFramework.h" />
+    <ClInclude Include="include\gep\math3d\aabb.h" />
+    <ClInclude Include="include\gep\math3d\algorithm.h" />
+    <ClInclude Include="include\gep\math3d\color.h" />
+    <ClInclude Include="include\gep\math3d\constants.h" />
+    <ClInclude Include="include\gep\math3d\mat3.h" />
+    <ClInclude Include="include\gep\math3d\mat4.h" />
+    <ClInclude Include="include\gep\math3d\plane.h" />
+    <ClInclude Include="include\gep\math3d\quaternion.h" />
+    <ClInclude Include="include\gep\math3d\ray.h" />
+    <ClInclude Include="include\gep\math3d\sphere.h" />
+    <ClInclude Include="include\gep\math3d\vec2.h" />
+    <ClInclude Include="include\gep\math3d\vec3.h" />
+    <ClInclude Include="include\gep\math3d\vec4.h" />
+    <ClInclude Include="include\gep\memory\allocator.h" />
+    <ClInclude Include="include\gep\memory\allocators.h" />
+    <ClInclude Include="include\gep\memory\leakDetection.h" />
+    <ClInclude Include="include\gep\memory\MemoryUtils.h" />
+    <ClInclude Include="include\gep\modelloader.h" />
+    <ClInclude Include="include\gep\ReferenceCounting.h" />
+    <ClInclude Include="include\gep\scripting\luaReferenceCounting.h" />
+    <ClInclude Include="include\gep\scripting\luaTableWrapper.h" />
+    <ClInclude Include="include\gep\scripting\luaTypeHandling.h" />
+    <ClInclude Include="include\gep\scripting\luaMacros.h" />
+    <ClInclude Include="include\gep\scripting\luaUtils.h" />
+    <ClInclude Include="include\gep\settings.h" />
+    <ClInclude Include="include\gep\singleton.h" />
+    <ClInclude Include="include\gep\stackWalker.h" />
+    <ClInclude Include="include\gep\threading\mutex.h" />
+    <ClInclude Include="include\gep\threading\semaphore.h" />
+    <ClInclude Include="include\gep\threading\taskQueue.h" />
+    <ClInclude Include="include\gep\threading\thread.h" />
+    <ClInclude Include="include\gep\timer.h" />
+    <ClInclude Include="include\gep\traits.h" />
+    <ClInclude Include="include\gep\types.h" />
+    <ClInclude Include="include\gep\unittest\UnittestManager.h" />
+    <ClInclude Include="include\gep\utils.h" />
+    <ClInclude Include="include\gep\weakPtr.h" />
+    <ClInclude Include="include\gep\interfaces\physics.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\config.h" />
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\conversion\surfaceInfo.h" />
+    <ClInclude Include="include\gepimpl\settings.h" />
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="include\gepimpl\transform.cpp" />
+    <ClCompile Include="src\gep\events.cpp" />
+    <ClCompile Include="src\gep\settings.cpp" />
+    <ClCompile Include="src\gep\subsystems\animation\havok\animation.cpp" />
+    <ClCompile Include="src\gep\subsystems\animation\havok\animationFactory.cpp" />
+    <ClCompile Include="src\gep\subsystems\havok.cpp" />
+    <ClCompile Include="src\gep\subsystems\physics\havok\havokPhysicsShape.cpp" />
+    <ClCompile Include="src\gep\subsystems\scripting\basicBindings.cpp" />
+    <ClCompile Include="src\gep\subsystems\scripting\luaHelper.cpp" />
+    <ClCompile Include="src\gep\subsystems\cameraManager.cpp" />
+    <ClCompile Include="src\gep\subsystems\physics\havok\factory.cpp" />
+    <ClCompile Include="src\gep\subsystems\physics\havok\compressedMeshCinfo.cpp" />
+    <ClCompile Include="src\gep\subsystems\physics\havok\action.cpp" />
+    <ClCompile Include="src\dllmain.cpp" />
+    <ClCompile Include="src\gep\cameras.cpp" />
+    <ClCompile Include="src\gep\chunkfile.cpp" />
+    <ClCompile Include="src\gep\comleakfinder.cpp" />
+    <ClCompile Include="src\gep\common.cpp" />
+    <ClCompile Include="src\gep\container\hashmap.cpp" />
+    <ClCompile Include="src\gep\directory.cpp" />
+    <ClCompile Include="src\gep\exit.cpp" />
+    <ClCompile Include="src\gep\file.cpp" />
+    <ClCompile Include="src\gep\globalManager.cpp" />
+    <ClCompile Include="src\gep\memory\allocator.cpp" />
+    <ClCompile Include="src\gep\memory\allocators.cpp" />
+    <ClCompile Include="src\gep\memory\leakDetection.cpp" />
+    <ClCompile Include="src\gep\modelloader.cpp" />
+    <ClCompile Include="src\gep\referenceCounting.cpp" />
+    <ClCompile Include="src\gep\stackWalker.cpp" />
+    <ClCompile Include="src\gep\subsystems\inputHandler.cpp" />
+    <ClCompile Include="src\gep\subsystems\logging.cpp" />
+    <ClCompile Include="src\gep\subsystems\memoryManager.cpp" />
+    <ClCompile Include="src\gep\subsystems\physics\havok\characterController.cpp" />
+    <ClCompile Include="src\gep\subsystems\physics\havok\displayHandler.cpp" />
+    <ClCompile Include="src\gep\subsystems\physics\havok\entity.cpp" />
+    <ClCompile Include="src\gep\subsystems\physics\havok\manager.cpp" />
+    <ClCompile Include="src\gep\subsystems\physics\havok\world.cpp" />
+    <ClCompile Include="src\gep\subsystems\renderer\ddsLoader.cpp" />
+    <ClCompile Include="src\gep\subsystems\renderer\extractor.cpp" />
+    <ClCompile Include="src\gep\subsystems\renderer\font.cpp" />
+    <ClCompile Include="src\gep\subsystems\renderer\imageData2d.cpp" />
+    <ClCompile Include="src\gep\subsystems\renderer\model.cpp" />
+    <ClCompile Include="src\gep\subsystems\renderer\renderer.cpp" />
+    <ClCompile Include="src\gep\subsystems\renderer\shader.cpp" />
+    <ClCompile Include="src\gep\subsystems\renderer\texture2d.cpp" />
+    <ClCompile Include="src\gep\subsystems\renderer\vertexbuffer.cpp" />
+    <ClCompile Include="src\gep\subsystems\resourceManager.cpp" />
+    <ClCompile Include="src\gep\subsystems\scripting\scriptingManager.cpp" />
+    <ClCompile Include="src\gep\subsystems\sound\library.cpp" />
+    <ClCompile Include="src\gep\subsystems\sound\sound.cpp" />
+    <ClCompile Include="src\gep\subsystems\sound\system.cpp" />
+    <ClCompile Include="src\gep\subsystems\updateFramework.cpp" />
+    <ClCompile Include="src\gep\threading\mutex.cpp" />
+    <ClCompile Include="src\gep\threading\semaphore.cpp" />
+    <ClCompile Include="src\gep\threading\taskQueue.cpp" />
+    <ClCompile Include="src\gep\threading\thread.cpp" />
+    <ClCompile Include="src\gep\timer.cpp" />
+    <ClCompile Include="src\gep\unittest\UnittestManager.cpp" />
+    <ClCompile Include="src\gep\utils.cpp" />
+    <ClCompile Include="src\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\gep\memory\newdelete.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="include\gepimpl\subsystems\physics\havok\conversion\notes.txt" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{09089A8F-4427-4248-8316-5121E31C4FCB}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>gep</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\gep.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\gep.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\bin\bin$(PlatformArchitecture)\</OutDir>
+    <IntDir>..\intermediates\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
+    <TargetName>$(ProjectName)$(ConfigSuffix)</TargetName>
+    <IncludePath>$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\bin\bin$(PlatformArchitecture)\</OutDir>
+    <IntDir>..\intermediates\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
+    <TargetName>$(ProjectName)$(ConfigSuffix)</TargetName>
+    <IncludePath>$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)\Lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\bin\bin$(PlatformArchitecture)\</OutDir>
+    <IntDir>..\intermediates\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
+    <IncludePath>$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
+    <TargetName>$(ProjectName)$(ConfigSuffix)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\bin\bin$(PlatformArchitecture)\</OutDir>
+    <IntDir>..\intermediates\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
+    <IncludePath>$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)\Lib\x64;$(LibraryPath)</LibraryPath>
+    <TargetName>$(ProjectName)$(ConfigSuffix)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>LUA_BUILD_AS_DLL;WIN32;GEP_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(FMOD_API)\api\lowlevel\inc;$(FMOD_API)\api\studio\inc;$(HAVOK_API)\Source;../thirdparty;./;./include;../thirdparty/lua/src</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <DisableSpecificWarnings>4250</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName)d.pdb</ProgramDatabaseFile>
+      <AdditionalDependencies>DbgHelp.lib;d3d11.lib;d3dx11.lib;xinput.lib;freetype.lib;hkBase.lib;hkCompat.lib;hkSceneData.lib;hkSerialize.lib;hkVisualize.lib;hkInternal.lib;hkGeometryUtilities.lib;hkcdInternal.lib;hkcdCollide.lib;hkpCollide.lib;hkpConstraint.lib;hkpConstraintSolver.lib;hkpDynamics.lib;hkpInternal.lib;hkpUtilities.lib;hkpVehicle.lib;hkaInternal.lib;hkaAnimation.lib;hkaPhysics2012Bridge.lib;fmodL_vc.lib;fmodstudioL_vc.lib;D3DX11EffectsD.lib;d3dcompiler.lib;libluad.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\lib\lib$(PlatformArchitecture)\;$(FMOD_API)\api\lowlevel\lib;$(FMOD_API)\api\studio\lib;$(HAVOK_API)\Lib\win32_vs2012_win7\$(Configuration)_dll;$(HAVOK_API)\Lib\win32_vs2012_win8\$(Configuration)_dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\lib\lib$(PlatformArchitecture)\$(TargetName).lib</ImportLibrary>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>"$(ProjectDir)\postBuild$(PlatformArchitecture).bat" "$(FMOD_API)" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>LUA_BUILD_AS_DLL;WIN32;GEP_EXPORTS;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(FMOD_API)\api\lowlevel\inc;$(FMOD_API)\api\studio\inc;$(HAVOK_API)\Source;../thirdparty;./;./include;../;../thirdparty/lua/src;../include/lua/src/;../thirdparty/lua/src</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <DisableSpecificWarnings>4250</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName)d.pdb</ProgramDatabaseFile>
+      <AdditionalDependencies>DbgHelp.lib;d3d11.lib;d3dx11.lib;xinput.lib;freetype.lib;hkBase.lib;hkCompat.lib;hkSceneData.lib;hkSerialize.lib;hkVisualize.lib;hkInternal.lib;hkGeometryUtilities.lib;hkcdInternal.lib;hkcdCollide.lib;hkpCollide.lib;hkpConstraint.lib;hkpConstraintSolver.lib;hkpDynamics.lib;hkpInternal.lib;hkpUtilities.lib;hkpVehicle.lib;hkaInternal.lib;hkaAnimation.lib;hkaPhysics2012Bridge.lib;fmodL64_vc.lib;fmodstudioL64_vc.lib;D3DX11EffectsD.lib;d3dcompiler.lib;libluad.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\lib\lib$(PlatformArchitecture)\;$(FMOD_API)\api\lowlevel\lib;$(FMOD_API)\api\studio\lib;$(HAVOK_API)\Lib\win32_vs2012_win7\$(Configuration)_dll;$(HAVOK_API)\Lib\win32_vs2012_win8\$(Configuration)_dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\lib\lib$(PlatformArchitecture)\$(TargetName).lib</ImportLibrary>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>"$(ProjectDir)\postBuild$(PlatformArchitecture).bat" "$(FMOD_API)" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>LUA_BUILD_AS_DLL;WIN32;GEP_EXPORTS;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(FMOD_API)\api\lowlevel\inc;$(FMOD_API)\api\studio\inc;$(HAVOK_API)\Source;../thirdparty;./;./include;../;../thirdparty/lua/src;../include/lua/src/;../thirdparty/lua/src</AdditionalIncludeDirectories>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4250</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>DbgHelp.lib;d3d11.lib;d3dx11.lib;xinput.lib;freetype.lib;hkBase.lib;hkCompat.lib;hkSceneData.lib;hkSerialize.lib;hkVisualize.lib;hkInternal.lib;hkGeometryUtilities.lib;hkcdInternal.lib;hkcdCollide.lib;hkpCollide.lib;hkpConstraint.lib;hkpConstraintSolver.lib;hkpDynamics.lib;hkpInternal.lib;hkpUtilities.lib;hkpVehicle.lib;hkaInternal.lib;hkaAnimation.lib;hkaPhysics2012Bridge.lib;fmodL_vc.lib;fmodstudioL_vc.lib;D3DX11Effects.lib;d3dcompiler.lib;liblua.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\lib\lib$(PlatformArchitecture)\;$(FMOD_API)\api\lowlevel\lib;$(FMOD_API)\api\studio\lib;$(HAVOK_API)\Lib\win32_vs2012_win7\$(Configuration)_dll;$(HAVOK_API)\Lib\win32_vs2012_win8\$(Configuration)_dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\lib\lib$(PlatformArchitecture)\$(TargetName).lib</ImportLibrary>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>"$(ProjectDir)\postBuild$(PlatformArchitecture).bat" "$(FMOD_API)" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>LUA_BUILD_AS_DLL;WIN32;GEP_EXPORTS;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(FMOD_API)\api\lowlevel\inc;$(FMOD_API)\api\studio\inc;$(HAVOK_API)\Source;../thirdparty;./;./include;../;../thirdparty/lua/src;../include/lua/src/;../thirdparty/lua/src</AdditionalIncludeDirectories>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4250</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>DbgHelp.lib;d3d11.lib;d3dx11.lib;xinput.lib;freetype.lib;hkBase.lib;hkCompat.lib;hkSceneData.lib;hkSerialize.lib;hkVisualize.lib;hkInternal.lib;hkGeometryUtilities.lib;hkcdInternal.lib;hkcdCollide.lib;hkpCollide.lib;hkpConstraint.lib;hkpConstraintSolver.lib;hkpDynamics.lib;hkpInternal.lib;hkpUtilities.lib;hkpVehicle.lib;hkaInternal.lib;hkaAnimation.lib;hkaPhysics2012Bridge.lib;fmodL64_vc.lib;fmodstudioL64_vc.lib;D3DX11Effects.lib;d3dcompiler.lib;liblua.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\lib\lib$(PlatformArchitecture)\;$(FMOD_API)\api\lowlevel\lib;$(FMOD_API)\api\studio\lib;$(HAVOK_API)\Lib\win32_vs2012_win7\$(Configuration)_dll;$(HAVOK_API)\Lib\win32_vs2012_win8\$(Configuration)_dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\lib\lib$(PlatformArchitecture)\$(TargetName).lib</ImportLibrary>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>"$(ProjectDir)\postBuild$(PlatformArchitecture).bat" "$(FMOD_API)" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

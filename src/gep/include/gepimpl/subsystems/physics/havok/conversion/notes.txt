@@ -1,0 +1,8 @@
+Conversion functions always have either of these signatures:
+	void to(const Input_GepType&, Output_HavokType&)
+	Output_HavokType to(const Input_GepType&)
+
+	void from(const Input_HavokType&, Output_GepType&)
+	Output_GepType from(const Input_HavokType&)
+
+The conversion functions also take care of converting from/to left/right handed systems as well as time units where appropriate.

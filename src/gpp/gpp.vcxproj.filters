@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\gpp">
+      <UniqueIdentifier>{adab9b83-9f72-425a-8886-4b6578f9418d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gpp\gameComponents">
+      <UniqueIdentifier>{a2dd653d-354a-48ac-8293-108d7fbee146}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gpp">
+      <UniqueIdentifier>{0a7d7217-1451-49da-b96e-7912e713258d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gpp\gameComponents">
+      <UniqueIdentifier>{aa8f5a90-41e7-49ed-be42-162d445acc00}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\gameComponents\characterComponent.cpp">
+      <Filter>Source Files\gpp\gameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\gameComponents\physicsComponent.cpp">
+      <Filter>Source Files\gpp\gameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\gameComponents\renderComponent.cpp">
+      <Filter>Source Files\gpp\gameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\gameComponents\scriptComponent.cpp">
+      <Filter>Source Files\gpp\gameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\gameObjectSystem.cpp">
+      <Filter>Source Files\gpp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\scriptBindings.cpp">
+      <Filter>Source Files\gpp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\gameComponents\cameraComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\includeOnce.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\game.cpp">
+      <Filter>Source Files\gpp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\stateMachines\stateMachine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\stateMachines\state.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\stateMachines\stateMachineFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\stateMachines\stateEnterEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\stateMachines\stateLeaveEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\stateMachines\stateUpdateEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\stringUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\gameComponents\animationComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\gameComponents\audioComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpp\cameras.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\ExperimentalContactListener.h">
+      <Filter>Header Files\gpp</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\gameComponents\characterComponent.h">
+      <Filter>Header Files\gpp\gameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\gameObjectSystem.h">
+      <Filter>Header Files\gpp\gameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\gameComponents\physicsComponent.h">
+      <Filter>Header Files\gpp\gameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\gameComponents\renderComponent.h">
+      <Filter>Header Files\gpp\gameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\gameComponents\scriptComponent.h">
+      <Filter>Header Files\gpp\gameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\gameComponents\cameraComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\gppmodule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\game.h">
+      <Filter>Header Files\gpp</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\dummyLogging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\stateMachines\stateMachine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\stateMachines\state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\stateMachines\stateMachineFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\stateMachines\updateStepBehavior.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\stateMachines\enterEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\stateMachines\leaveEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\stateMachines\transition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\stateMachines\updateEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\stateMachines\stateNameInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\stringUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\gameComponents\animationComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\gameComponents\audioComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gpp\cameras.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\gpp\stateMachines\state.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="include\gpp\stateMachines\stateMachine.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="include\gpp\stateMachines\stateMachineFactory.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="include\gpp\stateMachines\stateNameInfo.inl">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

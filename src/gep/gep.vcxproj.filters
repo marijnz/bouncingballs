@@ -1,0 +1,715 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\gep">
+      <UniqueIdentifier>{c1c58435-e849-4f8c-80e3-419b68df69f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gep\container">
+      <UniqueIdentifier>{45aaa1cb-5a8c-4a94-975c-d9bb14abce1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gep\interfaces">
+      <UniqueIdentifier>{515d4ded-413c-457e-989b-2be5ba8aaa24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gep\threading">
+      <UniqueIdentifier>{c9e44ec1-d34e-4725-b927-209193d9de08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gep\memory">
+      <UniqueIdentifier>{32eeff07-4d9f-4b48-96b4-b1ae9a65f4fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gep\math3d">
+      <UniqueIdentifier>{c76d9f73-0f5a-45e3-a2d2-0043bd01f941}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gep">
+      <UniqueIdentifier>{d77a6254-f123-4b6e-b72f-94466bbfe086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gep\memory">
+      <UniqueIdentifier>{282ddd34-70f4-45e5-8733-e56551348766}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gep\threading">
+      <UniqueIdentifier>{8ab351f9-659f-4a09-91b6-b39e439ea510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gepimpl">
+      <UniqueIdentifier>{bbc850eb-f3e6-49f1-8677-b35ceb9b2737}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gepimpl\subsystems">
+      <UniqueIdentifier>{388b7206-f087-4aa7-8291-c119bd8479fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gepimpl\subsystems\renderer">
+      <UniqueIdentifier>{d2c9f50c-3ae5-47dc-8ac2-d0347a1b96ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gep\subsystems">
+      <UniqueIdentifier>{85ba9c86-8f5a-4554-8ff6-eebbbe315482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gep\subsystems\renderer">
+      <UniqueIdentifier>{ca49bd59-b148-47e6-a07d-e327be083342}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gep\container">
+      <UniqueIdentifier>{2fcbf32e-391a-4789-8a39-18b371cda2c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gepimpl\subsystems\sound">
+      <UniqueIdentifier>{617ec749-34e4-4806-b0b0-5ed5b2d2e66e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gep\subsystems\sound">
+      <UniqueIdentifier>{618ad071-251c-40d7-bd6c-e38abd0d0e75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gep\unittest">
+      <UniqueIdentifier>{3e345307-0a2f-4176-b6c8-bb29aba4cfdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gep\unittest">
+      <UniqueIdentifier>{18be976e-96a6-4362-b437-eb5a6095d678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gepimpl\subsystems\physics">
+      <UniqueIdentifier>{ca3851c0-86cc-4093-b1d9-05043c753736}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gep\subsystems\physics">
+      <UniqueIdentifier>{9638cb5a-26c1-4715-9834-66a366c2ed30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gepimpl\subsystems\physics\havok">
+      <UniqueIdentifier>{513eb639-48f6-4ab6-b9b5-e2c1fbb484a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gep\subsystems\physics\havok">
+      <UniqueIdentifier>{ee9dccb3-eb86-4a4b-9066-95075911bca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gep\input">
+      <UniqueIdentifier>{aa466924-181c-46a2-8407-352519fa9fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gepimpl\havok">
+      <UniqueIdentifier>{82444e9d-0e51-42d5-8fa4-8bf0e6e6749f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gep\interfaces\physics">
+      <UniqueIdentifier>{1b24fd6c-b167-4849-8d12-1682178f3aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gep\interfaces\scripting">
+      <UniqueIdentifier>{452ce40d-9d16-4a63-b558-c37427621d93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gepimpl\subsystems\physics\havok\conversion">
+      <UniqueIdentifier>{96046cf2-4e54-4354-a0e0-58319e2e1213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gepimpl\subsystems\animation">
+      <UniqueIdentifier>{9a92387b-6068-4fb4-a67e-1da2053b2d6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gepimpl\subsystems\animation\havok">
+      <UniqueIdentifier>{d131f6f2-cba3-4930-b1f4-badef111bc52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gep\subsystems\scripting">
+      <UniqueIdentifier>{523a842b-b5eb-471e-967f-c116edcdd6dc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\gep\ReferenceCounting.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\ArrayPtr.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\traits.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\container\DynamicArray.h">
+      <Filter>Header Files\gep\container</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\threading\mutex.h">
+      <Filter>Header Files\gep\threading</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\renderer.h">
+      <Filter>Header Files\gep\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\subsystem.h">
+      <Filter>Header Files\gep\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\memoryManager.h">
+      <Filter>Header Files\gep\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\resourceManager.h">
+      <Filter>Header Files\gep\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\singleton.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\timer.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\container\hashmap.h">
+      <Filter>Header Files\gep\container</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\logging.h">
+      <Filter>Header Files\gepimpl\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\renderer\renderer.h">
+      <Filter>Header Files\gepimpl\subsystems\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\memory\allocator.h">
+      <Filter>Header Files\gep\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\memory\allocators.h">
+      <Filter>Header Files\gep\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\memory\MemoryUtils.h">
+      <Filter>Header Files\gep\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\aabb.h">
+      <Filter>Header Files\gep\math3d</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\algorithm.h">
+      <Filter>Header Files\gep\math3d</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\color.h">
+      <Filter>Header Files\gep\math3d</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\constants.h">
+      <Filter>Header Files\gep\math3d</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\mat3.h">
+      <Filter>Header Files\gep\math3d</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\mat4.h">
+      <Filter>Header Files\gep\math3d</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\quaternion.h">
+      <Filter>Header Files\gep\math3d</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\vec2.h">
+      <Filter>Header Files\gep\math3d</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\vec3.h">
+      <Filter>Header Files\gep\math3d</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\globalManager.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\logging.h">
+      <Filter>Header Files\gep\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\updateFramework.h">
+      <Filter>Header Files\gep\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\common.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\gepmodule.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\memoryManager.h">
+      <Filter>Header Files\gepimpl\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\resourceManager.h">
+      <Filter>Header Files\gepimpl\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\updateFramework.h">
+      <Filter>Header Files\gepimpl\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\weakPtr.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\stackWalker.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\renderer\imageData2d.h">
+      <Filter>Header Files\gepimpl\subsystems\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\renderer\ddsLoader.h">
+      <Filter>Header Files\gepimpl\subsystems\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\exception.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\utils.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\file.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\memory\leakDetection.h">
+      <Filter>Header Files\gep\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\sphere.h">
+      <Filter>Header Files\gep\math3d</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\ray.h">
+      <Filter>Header Files\gep\math3d</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\plane.h">
+      <Filter>Header Files\gep\math3d</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\types.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\renderer\vertexbuffer.h">
+      <Filter>Header Files\gepimpl\subsystems\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\renderer\font.h">
+      <Filter>Header Files\gepimpl\subsystems\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\renderer\texture2d.h">
+      <Filter>Header Files\gepimpl\subsystems\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\renderer\shader.h">
+      <Filter>Header Files\gepimpl\subsystems\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\directory.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\chunkfile.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\renderer\model.h">
+      <Filter>Header Files\gepimpl\subsystems\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\renderer\extractor.h">
+      <Filter>Header Files\gepimpl\subsystems\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\threading\semaphore.h">
+      <Filter>Header Files\gep\threading</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\inputHandler.h">
+      <Filter>Header Files\gep\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\inputHandler.h">
+      <Filter>Header Files\gepimpl\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\cameras.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\game.h">
+      <Filter>Header Files\gep\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\threading\thread.h">
+      <Filter>Header Files\gep\threading</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\container\policies.h">
+      <Filter>Header Files\gep\container</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\container\queue.h">
+      <Filter>Header Files\gep\container</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\threading\taskQueue.h">
+      <Filter>Header Files\gep\threading</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\sound.h">
+      <Filter>Header Files\gep\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\sound\system.h">
+      <Filter>Header Files\gepimpl\subsystems\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\sound\library.h">
+      <Filter>Header Files\gepimpl\subsystems\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\sound\sound.h">
+      <Filter>Header Files\gepimpl\subsystems\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\comleakfinder.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\unittest\UnittestManager.h">
+      <Filter>Header Files\gep\unittest</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\physics.h">
+      <Filter>Header Files\gep\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\exit.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havokPhysics.h">
+      <Filter>Header Files\gepimpl\subsystems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\action.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\config.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\entity.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\manager.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\world.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\modelloader.h">
+      <Filter>Header Files\gep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\havok\util.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\includes.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\input\windowsVirtualKeyCodes.h">
+      <Filter>Header Files\gep\input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\havok\config.h">
+      <Filter>Header Files\gepimpl\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\animation.h">
+      <Filter>Header Files\gep\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\physics\contact.h">
+      <Filter>Header Files\gep\interfaces\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\scripting.h">
+      <Filter>Header Files\gep\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\physics\shape.h">
+      <Filter>Header Files\gep\interfaces\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\physics\world.h">
+      <Filter>Header Files\gep\interfaces\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\physics\factory.h">
+      <Filter>Header Files\gep\interfaces\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\physics\entity.h">
+      <Filter>Header Files\gep\interfaces\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\conversion\vector.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok\conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\conversion\transformation.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok\conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\conversion\shape.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok\conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\conversion\quaternion.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok\conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\havok\features.h">
+      <Filter>Header Files\gepimpl\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\animation\havok\config.h">
+      <Filter>Header Files\gepimpl\subsystems\animation\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\havok\includes.h">
+      <Filter>Header Files\gepimpl\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\animation\havok\includes.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\characterController.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\conversion\characterInputAndOutput.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok\conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\compressedMeshCinfo.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\displayHandler.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\factory.h">
+      <Filter>Header Files\gepimpl\subsystems\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\havok.h">
+      <Filter>Header Files\gepimpl\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\physics\characterController.h">
+      <Filter>Header Files\gep\interfaces\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\physics\rayCast.h">
+      <Filter>Header Files\gep\interfaces\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\scripting.h">
+      <Filter>Header Files\gepimpl\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\conversion\surfaceInfo.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok\conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\vec4.h">
+      <Filter>Header Files\gep\math3d</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\physics\system.h">
+      <Filter>Header Files\gep\interfaces\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\events\eventId.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\events\event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\events\eventId.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\events\event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\events\eventManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\events\eventManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\cameraManager.h">
+      <Filter>Header Files\gep\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\cameraManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\contact.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\scripting\luaHelper.h">
+      <Filter>Header Files\gep\interfaces\scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\scripting\luaTypeHandling.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\scripting\luaEnumOrTypeHandling.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\scripting\luaReferenceCounting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\scripting\luaMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\scripting\luaUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\scripting\luaFunctionWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\scripting\luaTableWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\events\eventUpdateFramework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\interfaces\events\eventScriptingManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\animation\havok\animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\animation\havok\animationFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gep\math3d\transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gepimpl\subsystems\physics\havok\havokPhysicsShape.h">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\memory\allocator.cpp">
+      <Filter>Source Files\gep\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\memory\allocators.cpp">
+      <Filter>Source Files\gep\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\threading\mutex.cpp">
+      <Filter>Source Files\gep\threading</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\globalManager.cpp">
+      <Filter>Source Files\gep</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\logging.cpp">
+      <Filter>Source Files\gep\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\memoryManager.cpp">
+      <Filter>Source Files\gep\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\renderer\renderer.cpp">
+      <Filter>Source Files\gep\subsystems\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\common.cpp">
+      <Filter>Source Files\gep</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\resourceManager.cpp">
+      <Filter>Source Files\gep\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\updateFramework.cpp">
+      <Filter>Source Files\gep\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\container\hashmap.cpp">
+      <Filter>Source Files\gep\container</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\referenceCounting.cpp">
+      <Filter>Source Files\gep</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\stackWalker.cpp">
+      <Filter>Source Files\gep</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\renderer\imageData2d.cpp">
+      <Filter>Source Files\gep\subsystems\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\renderer\ddsLoader.cpp">
+      <Filter>Source Files\gep\subsystems\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\utils.cpp">
+      <Filter>Source Files\gep</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\memory\leakDetection.cpp">
+      <Filter>Source Files\gep\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\timer.cpp">
+      <Filter>Source Files\gep</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\renderer\vertexbuffer.cpp">
+      <Filter>Source Files\gep\subsystems\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\renderer\font.cpp">
+      <Filter>Source Files\gep\subsystems\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\renderer\texture2d.cpp">
+      <Filter>Source Files\gep\subsystems\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\renderer\shader.cpp">
+      <Filter>Source Files\gep\subsystems\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\directory.cpp">
+      <Filter>Source Files\gep</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\chunkfile.cpp">
+      <Filter>Source Files\gep</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\renderer\model.cpp">
+      <Filter>Source Files\gep\subsystems\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\renderer\extractor.cpp">
+      <Filter>Source Files\gep\subsystems\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\threading\semaphore.cpp">
+      <Filter>Source Files\gep\threading</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\inputHandler.cpp">
+      <Filter>Source Files\gep\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\threading\thread.cpp">
+      <Filter>Source Files\gep\threading</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\threading\taskQueue.cpp">
+      <Filter>Source Files\gep\threading</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\sound\system.cpp">
+      <Filter>Source Files\gep\subsystems\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\sound\library.cpp">
+      <Filter>Source Files\gep\subsystems\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\sound\sound.cpp">
+      <Filter>Source Files\gep\subsystems\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\unittest\UnittestManager.cpp">
+      <Filter>Source Files\gep\unittest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\physics\havok\action.cpp">
+      <Filter>Source Files\gep\subsystems\physics\havok</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\physics\havok\entity.cpp">
+      <Filter>Source Files\gep\subsystems\physics\havok</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\physics\havok\manager.cpp">
+      <Filter>Source Files\gep\subsystems\physics\havok</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\physics\havok\world.cpp">
+      <Filter>Source Files\gep\subsystems\physics\havok</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\cameras.cpp">
+      <Filter>Source Files\gep</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\modelloader.cpp">
+      <Filter>Source Files\gep</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\file.cpp">
+      <Filter>Source Files\gep</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\comleakfinder.cpp">
+      <Filter>Source Files\gep</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\exit.cpp">
+      <Filter>Source Files\gep</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\physics\havok\characterController.cpp">
+      <Filter>Source Files\gep\subsystems\physics\havok</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\physics\havok\compressedMeshCinfo.cpp">
+      <Filter>Source Files\gep\subsystems\physics\havok</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\physics\havok\displayHandler.cpp">
+      <Filter>Source Files\gep\subsystems\physics\havok</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\physics\havok\factory.cpp">
+      <Filter>Source Files\gep\subsystems\physics\havok</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\scripting\scriptingManager.cpp">
+      <Filter>Source Files\gep\subsystems\scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\scripting\luaHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\cameraManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\scripting\basicBindings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\events.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\animation\havok\animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\animation\havok\animationFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\physics\havok\havokPhysicsShape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\gepimpl\transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gep\subsystems\havok.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\gep\memory\newdelete.inl">
+      <Filter>Header Files\gep\memory</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="include\gepimpl\subsystems\physics\havok\conversion\notes.txt">
+      <Filter>Header Files\gepimpl\subsystems\physics\havok\conversion</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
