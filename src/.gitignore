@@ -1,20 +1,10 @@
-# Other
+# Custom 
 logfile.txt
 intermediates/
 gepd.exp
 gepd.lib
 gppd.exp
 gppd.lib
-
-
-### vim ###
-[._]*.s[a-w][a-z]
-[._]s[a-w][a-z]
-*.un~
-Session.vim
-.netrwhist
-*~
-
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and
