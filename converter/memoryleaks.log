@@ -1,0 +1,38 @@
+---------------------------------
+memory leak 48 bytes 1 times
+0x00403BA2
+0x0041C866
+0x0041FBFB
+0x004403E0 in gc_clrProxy
+0x004403E0 in gc_clrProxy
+0x00422C48
+0x7511919F in BaseThreadInitThunk
+(null)
+(null)
+(null)
+(null)
+(null)
+(null)
+(null)
+---------------------------------
+ROOTS
+---------------------------------
+memory leak 48 bytes
+0x00403BA2
+0x0041C866
+0x0041FBFB
+0x004403E0 in gc_clrProxy
+0x004403E0 in gc_clrProxy
+0x00422C48
+0x7511919F in BaseThreadInitThunk
+(null)
+(null)
+(null)
+(null)
+(null)
+(null)
+(null)
+Object of type 'core.refcounted.RCException'
+
+total leaked memory 48 bytes
+Total leaks 1
