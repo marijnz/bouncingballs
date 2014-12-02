@@ -1,3 +1,5 @@
+logMessage("using main.lua")
+
 -- Options
 local options = {
     freecamera = false 
@@ -7,9 +9,11 @@ local options = {
 include("defaults/stateMachine.lua")
 
 -- World
+local world
 include("world.lua")
 
 -- Camera
+local camera
 if (options.freecamera) then
     include("freecamera.lua")
 else
@@ -20,6 +24,9 @@ level = GameObjectManager:createGameObject("level")
 level.render = level:createRenderComponent()
 level.render:setPath("data/models/cube-level.thModel")
 level:setPosition(Vec3(0, 0, 0))
+
+local player
+include("player.lua");
 
 -- Default update function
 function update(deltaTime)
