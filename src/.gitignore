@@ -25,7 +25,10 @@ x64/
 x86/
 build/
 bld/
-[Bb]in/
+# [Bb]in/
+bin/bin32/gameapp_gppd.exe
+bin/bin32/gepd.dll
+bin/bin32/gppd.dll
 [Oo]bj/
 
 # Roslyn cache directories
