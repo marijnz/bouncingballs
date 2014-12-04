@@ -81,7 +81,7 @@
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                initialized = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                gep::atexit(&amp;destroyScriptTypeInfoMap);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">return</span> scriptTypeInfos;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        }</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
@@ -132,7 +132,7 @@
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        {</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            stackDump = lua::utils::dumpStack(L);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keyword">auto</span> fmt = <span class="stringliteral">&quot;in Lua: %s\n&quot;</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                   <span class="stringliteral">&quot;Lua call%s\n&quot;</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                   <span class="stringliteral">&quot;Lua stack dump %s&quot;</span>;</div>
@@ -177,7 +177,7 @@
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">return</span> lua_gc(m_L, LUA_GCCOUNT, 0) * 1000 + lua_gc(m_L, LUA_GCCOUNTB, 0);</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
-<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classgep_1_1_scripting_allocator.html#a3e1ad077733a7d1c3f6d084d6bd5f2b9">  128</a></span>&#160;<a class="code" href="classgep_1_1_i_allocator_statistics.html">gep::IAllocatorStatistics</a>* <a class="code" href="classgep_1_1_scripting_allocator.html#a3e1ad077733a7d1c3f6d084d6bd5f2b9">gep::ScriptingAllocator::getParentAllocator</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classgep_1_1_scripting_allocator.html#a27bc55188d94c6d015780c30486861b1">  128</a></span>&#160;<a class="code" href="classgep_1_1_i_allocator.html">gep::IAllocator</a>* <a class="code" href="classgep_1_1_scripting_allocator.html#a27bc55188d94c6d015780c30486861b1">gep::ScriptingAllocator::getParentAllocator</a>()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keyword"></span>{</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">return</span> m_pParentAllocator;</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;}</div>
@@ -368,17 +368,17 @@
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    GEP_DEBUG_BREAK;</div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;}</div>
 <div class="ttc" id="classgep_1_1_scripting_allocator_html_a2c2f252d11eb2e0e99caa5e71714cb38"><div class="ttname"><a href="classgep_1_1_scripting_allocator.html#a2c2f252d11eb2e0e99caa5e71714cb38">gep::ScriptingAllocator::getNumBytesUsed</a></div><div class="ttdeci">virtual size_t getNumBytesUsed() const override</div><div class="ttdoc">returns the amount of memory that is actually used by alive allocations </div><div class="ttdef"><b>Definition:</b> <a href="scripting_manager_8cpp_source.html#l00122">scriptingManager.cpp:122</a></div></div>
-<div class="ttc" id="classgep_1_1_scripting_allocator_html_a3e1ad077733a7d1c3f6d084d6bd5f2b9"><div class="ttname"><a href="classgep_1_1_scripting_allocator.html#a3e1ad077733a7d1c3f6d084d6bd5f2b9">gep::ScriptingAllocator::getParentAllocator</a></div><div class="ttdeci">virtual IAllocatorStatistics * getParentAllocator() const override</div><div class="ttdoc">returns the allocator this allocator takes the memory from, nullptr if it does not obtain the memory ...</div><div class="ttdef"><b>Definition:</b> <a href="scripting_manager_8cpp_source.html#l00128">scriptingManager.cpp:128</a></div></div>
 <div class="ttc" id="classgep_1_1_scripting_allocator_html_af2c0e52db777f227e57c422f6dc13637"><div class="ttname"><a href="classgep_1_1_scripting_allocator.html#af2c0e52db777f227e57c422f6dc13637">gep::ScriptingAllocator::getNumBytesReserved</a></div><div class="ttdeci">virtual size_t getNumBytesReserved() const override</div><div class="ttdoc">returns the amount of memory that is reserved by this allocator </div><div class="ttdef"><b>Definition:</b> <a href="scripting_manager_8cpp_source.html#l00117">scriptingManager.cpp:117</a></div></div>
-<div class="ttc" id="classgep_1_1_i_allocator_statistics_html"><div class="ttname"><a href="classgep_1_1_i_allocator_statistics.html">gep::IAllocatorStatistics</a></div><div class="ttdoc">interface for a allocator which keeps statistics </div><div class="ttdef"><b>Definition:</b> <a href="allocator_8h_source.html#l00023">allocator.h:23</a></div></div>
-<div class="ttc" id="classgep_1_1_hashmap_impl_html_a3ad97302c34db8ec2502ae17fda1b057"><div class="ttname"><a href="classgep_1_1_hashmap_impl.html#a3ad97302c34db8ec2502ae17fda1b057">gep::HashmapImpl::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">removes all entries from the HashmapImpl </div><div class="ttdef"><b>Definition:</b> <a href="hashmap_8h_source.html#l00590">hashmap.h:590</a></div></div>
+<div class="ttc" id="classgep_1_1_hashmap_impl_html_a3ad97302c34db8ec2502ae17fda1b057"><div class="ttname"><a href="classgep_1_1_hashmap_impl.html#a3ad97302c34db8ec2502ae17fda1b057">gep::HashmapImpl::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">removes all entries from the HashmapImpl </div><div class="ttdef"><b>Definition:</b> <a href="hashmap_8h_source.html#l00629">hashmap.h:629</a></div></div>
 <div class="ttc" id="classgep_1_1_scripting_manager_html_a143f407869148b27cfed96ca3b5df5b2"><div class="ttname"><a href="classgep_1_1_scripting_manager.html#a143f407869148b27cfed96ca3b5df5b2">gep::ScriptingManager::initialize</a></div><div class="ttdeci">virtual void initialize()</div><div class="ttdoc">IScriptingManager interface. </div><div class="ttdef"><b>Definition:</b> <a href="scripting_manager_8cpp_source.html#l00165">scriptingManager.cpp:165</a></div></div>
+<div class="ttc" id="classgep_1_1_scripting_allocator_html_a27bc55188d94c6d015780c30486861b1"><div class="ttname"><a href="classgep_1_1_scripting_allocator.html#a27bc55188d94c6d015780c30486861b1">gep::ScriptingAllocator::getParentAllocator</a></div><div class="ttdeci">virtual IAllocator * getParentAllocator() const override</div><div class="ttdoc">returns the allocator this allocator takes the memory from, nullptr if it does not obtain the memory ...</div><div class="ttdef"><b>Definition:</b> <a href="scripting_manager_8cpp_source.html#l00128">scriptingManager.cpp:128</a></div></div>
 <div class="ttc" id="classgep_1_1_scripting_allocator_html_a9d719e18a1c4b9b03adc8fd9e63e4422"><div class="ttname"><a href="classgep_1_1_scripting_allocator.html#a9d719e18a1c4b9b03adc8fd9e63e4422">gep::ScriptingAllocator::getNumAllocations</a></div><div class="ttdeci">virtual size_t getNumAllocations() const override</div><div class="ttdoc">returns the number of allocations this allocator did so far </div><div class="ttdef"><b>Definition:</b> <a href="scripting_manager_8cpp_source.html#l00107">scriptingManager.cpp:107</a></div></div>
+<div class="ttc" id="classgep_1_1_i_allocator_html"><div class="ttname"><a href="classgep_1_1_i_allocator.html">gep::IAllocator</a></div><div class="ttdoc">generic allocator interface </div><div class="ttdef"><b>Definition:</b> <a href="allocator_8h_source.html#l00015">allocator.h:15</a></div></div>
 <div class="ttc" id="classgep_1_1_scripting_allocator_html_a9578717fadbe4832cc84aa93e167f6f6"><div class="ttname"><a href="classgep_1_1_scripting_allocator.html#a9578717fadbe4832cc84aa93e167f6f6">gep::ScriptingAllocator::getNumFrees</a></div><div class="ttdeci">virtual size_t getNumFrees() const override</div><div class="ttdoc">returns the number of free operations this allocator did so far </div><div class="ttdef"><b>Definition:</b> <a href="scripting_manager_8cpp_source.html#l00112">scriptingManager.cpp:112</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 28 2014 11:48:31 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 25 2014 15:16:18 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

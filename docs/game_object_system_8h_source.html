@@ -234,7 +234,7 @@
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordtype">void</span> setComponentStates(IComponent::State::Enum value);</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="keyword">inline</span> <span class="keyword">const</span> std::string&amp; getName()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_name; }</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="keyword">inline</span> <span class="keyword">const</span> std::string&amp; getGuid()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_guid; }</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keyword">inline</span>       <a class="code" href="classgep_1_1_i_transform.html">gep::ITransform</a>&amp; getTransform()       { <span class="keywordflow">return</span> *m_transform; }</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="classgep_1_1_i_transform.html">gep::ITransform</a>&amp; getTransform()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> *m_transform; }</div>
@@ -271,19 +271,19 @@
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;            LUA_BIND_FUNCTION(setComponentStates)</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;            LUA_BIND_FUNCTION(setBaseOrientation)</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            LUA_BIND_FUNCTION(setBaseViewDirection)</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            LUA_BIND_FUNCTION_NAMED(getNameCopy, <span class="stringliteral">&quot;getName&quot;</span>)</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            LUA_BIND_FUNCTION_NAMED(getGuidCopy, <span class="stringliteral">&quot;getGuid&quot;</span>)</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            LUA_BIND_FUNCTION(setParent)</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        LUA_BIND_REFERENCE_TYPE_END;</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        std::string m_name;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        std::string m_guid;</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <span class="keywordtype">bool</span> m_isActive;</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <a class="code" href="classgep_1_1_transform.html">gep::Transform</a> m_defaultTransform;</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <a class="code" href="classgep_1_1_i_transform.html">gep::ITransform</a>* m_transform;</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        <a class="code" href="structgep_1_1_hashmap.html">gep::Hashmap&lt;const char*, ComponentWrapper&gt;</a> m_components;</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        <a class="code" href="structgep_1_1_dynamic_array.html">gep::DynamicArray&lt;ComponentWrapper&gt;</a> m_updateQueue;</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <span class="keyword">inline</span> std::string getNameCopy() { <span class="keywordflow">return</span> getName(); }</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <span class="keyword">inline</span> std::string getGuidCopy() { <span class="keywordflow">return</span> getGuid(); }</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        <span class="keywordtype">void</span> addComponent(T* specializedComponent)</div>
@@ -299,8 +299,8 @@
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> typeName = <a class="code" href="structgpp_1_1_component_meta_info.html">ComponentMetaInfo&lt;T&gt;::name</a>();</div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            <span class="keywordflow">if</span>(m_components[typeName].component != <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            {</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                GEP_ASSERT(<span class="keyword">false</span>, <span class="stringliteral">&quot;A component of the same type has already been added to this gameObject&quot;</span>, typeName, m_name);</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                <span class="keywordflow">throw</span> <a class="code" href="classgep_1_1_exception.html">gep::Exception</a>(gep::format(<span class="stringliteral">&quot;The component %s has already been added to gameObject %s&quot;</span>, typeName, m_name));</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                GEP_ASSERT(<span class="keyword">false</span>, <span class="stringliteral">&quot;A component of the same type has already been added to this gameObject&quot;</span>, typeName, m_guid);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                <span class="keywordflow">throw</span> <a class="code" href="classgep_1_1_exception.html">gep::Exception</a>(gep::format(<span class="stringliteral">&quot;The component %s has already been added to gameObject %s&quot;</span>, typeName, m_guid));</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            }</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            component-&gt;setParentGameObject(<span class="keyword">this</span>);</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            m_components[typeName] = wrapper;</div>
@@ -379,7 +379,7 @@
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 28 2014 11:48:31 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 25 2014 15:16:18 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

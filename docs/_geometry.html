@@ -48,15 +48,19 @@
 <div class="textblock"><div class="image">
 <img src="Derp.png" alt="Derp.png"/>
 </div>
-<h2>Importing Data to the GEP Engine </h2>
-<p>You will need</p><ul>
-<li>this archive available at <a href="http://metafnord.net/files/gep.zip">http://metafnord.net/files/gep.zip</a></li>
-<li>3ds Max 2013 (e.g. educational plan available for HdM students)</li>
-<li>Havok Content Tools available at <a href="http://www.havok.com/try-havok">http://www.havok.com/try-havok</a></li>
-</ul>
 <div class="image">
 <img src="Flow.png" alt="Flow.png"/>
 </div>
+<p>NOTE: Even though this guide mainly uses .DAE files, it is highly recommended to use the .FBX format instead of Collada (.DAE). The <code>ModelConverterD.exe</code> can handle this format much better.</p>
+<h2>Importing Model Data to the GEP Engine </h2>
+<p>You will need</p><ul>
+<li>The model converter from the <a href="ftp://mirror.mi.hdm-stuttgart.de/Gaming/GEP_GPP/Tools">GEP/GPP Tools folder</a></li>
+<li>A 3D modelling tool of your choosing that is able to export Collada (.DAE) or .FBX files, e.g.:<ul>
+<li>3ds Max 2013 (e.g. educational plan available for HdM students)</li>
+<li><a href="http://www.blender.org/Downloads">Blender 3D</a> Note: For <b>animated</b> or physical <b>collision geometry</b> you will still need 3ds Max or Maya!</li>
+</ul>
+</li>
+</ul>
 <p>Acquire a model or create your own using 3ds Max 2013. Important: Make sure that the textures are in the .dds format (DXT5)! If necessary, convert them.</p>
 <p>Export the selected model from 3ds Max 2013: </p><div class="image">
 <img src="ExportSelected.png" alt="ExportSelected.png"/>
@@ -64,20 +68,48 @@
 <p>Important: Select Z as the Up-Axis! </p><div class="image">
 <img src="ExportOptions.png" alt="ExportOptions.png"/>
 </div>
-<p>Use the <code>ModelConverterD.exe</code> to convert the <code>.dae</code> file (Collada) to the <code>.thModel</code> format. This can be done either on the command line or by using drag drop. </p><div class="image">
+<p>Use the <code>ModelConverterD.exe</code> to convert the <code>.dae</code> file (Collada) to the <code>.thModel</code> format. This can be done either on the command line or by using drag &amp; drop. </p><div class="image">
 <img src="ModelConverterCommand.png" alt="ModelConverterCommand.png"/>
 </div>
 <p>Additional Information:</p><ul>
-<li>Copy the exported <code>.thModel</code> to <code>GEP%\data\models\</code></li>
-<li>Use relative paths for textures!</li>
+<li>Copy the exported <code>.thModel</code> to <code>%GEP%\data\models\</code></li>
+<li>The texture paths in the model file need to be relative to the working directory of the game!<ul>
+<li>E.g. The textures that the model <code>data/models/barbarian/barbarianStatic.thModel</code> uses are referenced in its .FBX file like this:<ul>
+<li><code>data/models/barbarian/Barbarian_Belt_Low_d.dds</code></li>
+<li><code>data/models/barbarian/Barbarian_Body_Low_d.dds</code></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p>Creating a <code>RenderComponent</code>:</p>
-<div class="fragment"><div class="line">local renderComponent = go:createRenderComponent()</div>
+<div class="fragment"><div class="line">-- go =&gt; the game <span class="keywordtype">object</span> instance created <span class="keyword">using</span> GameObjectManager:createGameObject(...)</div>
+<div class="line">local renderComponent = go:createRenderComponent()</div>
 <div class="line">renderComponent:setPath(&quot;data/models/box.thModel&quot;)</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><h3>Troubleshooting</h3>
+<ul>
+<li>All textures need to be quadratic and have to have a dimension of (2<sup>N</sup>)x(2<sup>N</sup>), e.g. 128x128, 256x256, etc.</li>
+<li>All textures need to be in <code>.dds</code> format using the <b>DXT5 compression</b> setting.</li>
+<li>When converting your model to a <code>.thModel</code> using <code>ModelConverterD.exe</code>, make sure your model has UV coordinates, i.e. your model is unwrapped.<ul>
+<li>Note: The model does not necessarily have to have a texture.</li>
+</ul>
+</li>
+</ul>
+<h2>Importing Animation Data to the GEP Engine </h2>
+<p>You will need</p><ul>
+<li>3ds Max 2013 (e.g. educational plan available for HdM students)</li>
+<li>Havok Content Tools available in the <a href="ftp://mirror.mi.hdm-stuttgart.de/Gaming/GEP_GPP/Tools">GEP/GPP Tools folder</a> or at <a href="http://www.havok.com/try-havok">http://www.havok.com/try-havok</a><ul>
+<li>Note that these tools are only available for 3ds Max or Maya, <b>not for Blender 3D</b>!</li>
+</ul>
+</li>
+</ul>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd><p class="startdd">Explain this section using screenshots, just like the previous section </p>
+<p class="enddd">Add the Havok Content Tools Export Profile file for animation export</p>
+</dd></dl>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 28 2014 11:48:31 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 25 2014 15:16:18 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

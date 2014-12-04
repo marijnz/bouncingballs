@@ -201,7 +201,7 @@
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keyword">auto</span> aspectRatio = float(m_settings.screenResolution.x) / float(m_settings.screenResolution.y);</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        m_projection = <a class="code" href="structgep_1_1mat4__t.html#ab1c8d7d6e116e41db843761b4a2d4cb3">mat4::projectionMatrix</a>(60.0f, aspectRatio, 0.1f, 10000.0f);</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    }</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    m_view = <a class="code" href="structgep_1_1mat4__t.html#a2a8b4371762e9384c6ad14bfdcf327c0">mat4::lookAtMatrix</a>(vec3(300, 0, 205), vec3(0, 0, 150), vec3(0,0,1));</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    m_view = <a class="code" href="structgep_1_1mat4__t.html#a2a8b4371762e9384c6ad14bfdcf327c0">mat4::lookAtMatrix</a>(vec3(100, 0, 50), vec3(0, 0, 25), vec3(0,0,1));</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    {</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        Vertexbuffer::DataChannel dataChannels[] =</div>
@@ -1255,7 +1255,7 @@
 <div class="ttc" id="classgep_1_1_generator_texture_loader_html"><div class="ttname"><a href="classgep_1_1_generator_texture_loader.html">gep::GeneratorTextureLoader</a></div><div class="ttdef"><b>Definition:</b> <a href="texture2d_8h_source.html#l00050">texture2d.h:50</a></div></div>
 <div class="ttc" id="classgep_1_1_shader_html"><div class="ttname"><a href="classgep_1_1_shader.html">gep::Shader</a></div><div class="ttdoc">a shader </div><div class="ttdef"><b>Definition:</b> <a href="shader_8h_source.html#l00165">shader.h:165</a></div></div>
 <div class="ttc" id="classgep_1_1_renderer_html_a2f3e8e7c61edefc5bafb61e0eb903de8"><div class="ttname"><a href="classgep_1_1_renderer.html#a2f3e8e7c61edefc5bafb61e0eb903de8">gep::Renderer::createGeneratedTexture</a></div><div class="ttdeci">virtual ResourcePtr&lt; IResource &gt; createGeneratedTexture(uint32 width, uint32 height, const char *resourceId, std::function&lt; void(ArrayPtr&lt; uint8 &gt;)&gt; generatorFunction) override</div><div class="ttdoc">creates a new texture generator </div><div class="ttdef"><b>Definition:</b> <a href="renderer_8cpp_source.html#l00873">renderer.cpp:873</a></div></div>
-<div class="ttc" id="structgep_1_1_quaternion__t_html_a9fa43255027cca2b6aa0caadc1183caa"><div class="ttname"><a href="structgep_1_1_quaternion__t.html#a9fa43255027cca2b6aa0caadc1183caa">gep::Quaternion_t::toMat3</a></div><div class="ttdeci">const mat3_t&lt; T &gt; toMat3() const </div><div class="ttdoc">converts this quaternion into a 3x3 rotation matrix </div><div class="ttdef"><b>Definition:</b> <a href="math3d_2quaternion_8h_source.html#l00194">quaternion.h:194</a></div></div>
+<div class="ttc" id="structgep_1_1_quaternion__t_html_a9fa43255027cca2b6aa0caadc1183caa"><div class="ttname"><a href="structgep_1_1_quaternion__t.html#a9fa43255027cca2b6aa0caadc1183caa">gep::Quaternion_t::toMat3</a></div><div class="ttdeci">const mat3_t&lt; T &gt; toMat3() const </div><div class="ttdoc">converts this quaternion into a 3x3 rotation matrix </div><div class="ttdef"><b>Definition:</b> <a href="math3d_2quaternion_8h_source.html#l00197">quaternion.h:197</a></div></div>
 <div class="ttc" id="classgep_1_1_renderer_html_ad4ccca7c39b69fd880f592518d22faeb"><div class="ttname"><a href="classgep_1_1_renderer.html#ad4ccca7c39b69fd880f592518d22faeb">gep::Renderer::loadModel</a></div><div class="ttdeci">virtual ResourcePtr&lt; IModel &gt; loadModel(const char *path) override</div><div class="ttdoc">loads a model from a file </div><div class="ttdef"><b>Definition:</b> <a href="renderer_8cpp_source.html#l00816">renderer.cpp:816</a></div></div>
 <div class="ttc" id="classgep_1_1_reference_counted_html"><div class="ttname"><a href="classgep_1_1_reference_counted.html">gep::ReferenceCounted</a></div><div class="ttdoc">base class for all reference counted classes </div><div class="ttdef"><b>Definition:</b> <a href="_reference_counting_8h_source.html#l00015">ReferenceCounting.h:15</a></div></div>
 <div class="ttc" id="structgep_1_1vec3__t_html"><div class="ttname"><a href="structgep_1_1vec3__t.html">gep::vec3_t&lt; float &gt;</a></div></div>
@@ -1291,7 +1291,7 @@
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 28 2014 11:48:31 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 25 2014 15:16:18 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

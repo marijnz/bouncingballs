@@ -113,7 +113,7 @@
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        }</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    GEP_ASSERT(m_soundInstances.exists(soundName) == <span class="keyword">false</span>, <span class="stringliteral">&quot;A soundInstance with the name provided alredy exists!&quot;</span>, soundName.c_str(), m_pParentGameObject-&gt;getName().c_str())</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    GEP_ASSERT(m_soundInstances.exists(soundName) == <span class="keyword">false</span>, <span class="stringliteral">&quot;A soundInstance with the name provided alredy exists!&quot;</span>, soundName.c_str(), m_pParentGameObject-&gt;getGuid().c_str())</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">auto</span> sound = m_sounds[path]-&gt;createInstance();</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    GEP_ASSERT(sound.isValid(), <span class="stringliteral">&quot;Invalid sound instance.&quot;</span>);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">auto</span> instance = <span class="keyword">new</span> SoundInstanceWrapper();</div>
@@ -124,7 +124,7 @@
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<a class="code" href="classgpp_1_1_sound_instance_wrapper.html">gpp::SoundInstanceWrapper</a>* gpp::AudioComponent::getSoundInstance( <span class="keyword">const</span> std::string&amp; soundName )</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;{</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    GEP_ASSERT(m_soundInstances.exists(soundName) == <span class="keyword">true</span>, <span class="stringliteral">&quot;A soundInstance with the name provided doesn&#39;t exist!&quot;</span>, soundName.c_str(), m_pParentGameObject-&gt;getName().c_str())</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    GEP_ASSERT(m_soundInstances.exists(soundName) == <span class="keyword">true</span>, <span class="stringliteral">&quot;A soundInstance with the name provided doesn&#39;t exist!&quot;</span>, soundName.c_str(), m_pParentGameObject-&gt;getGuid().c_str())</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">return</span> m_soundInstances[soundName];</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
@@ -133,7 +133,7 @@
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 28 2014 11:48:31 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 25 2014 15:16:18 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

@@ -92,9 +92,9 @@
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> gpp::AnimationComponent::initalize()</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    GEP_ASSERT(m_skeletonPath != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Can&#39;t initialize animation component without skeleton path&quot;</span>, m_pParentGameObject-&gt;getName().c_str());</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    GEP_ASSERT(m_animationPaths.count() &gt;= 1, <span class="stringliteral">&quot;Can&#39;t initialize animation component without animation path&quot;</span>, m_pParentGameObject-&gt;getName().c_str());</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    GEP_ASSERT(m_skinPath != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Can&#39;t initialize animation component without skin path&quot;</span>, m_pParentGameObject-&gt;getName().c_str());</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    GEP_ASSERT(m_skeletonPath != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Can&#39;t initialize animation component without skeleton path&quot;</span>, m_pParentGameObject-&gt;getGuid().c_str());</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    GEP_ASSERT(m_animationPaths.count() &gt;= 1, <span class="stringliteral">&quot;Can&#39;t initialize animation component without animation path&quot;</span>, m_pParentGameObject-&gt;getGuid().c_str());</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    GEP_ASSERT(m_skinPath != <span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Can&#39;t initialize animation component without skin path&quot;</span>, m_pParentGameObject-&gt;getGuid().c_str());</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">auto</span> animationFactory = g_globalManager.getAnimationSystem()-&gt;getAnimationFactory();</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
@@ -301,7 +301,7 @@
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 28 2014 11:48:31 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 25 2014 15:16:18 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

@@ -88,10 +88,10 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgep_1_1_scripting_allocator.html#a2c2f252d11eb2e0e99caa5e71714cb38">getNumBytesUsed</a> () const override</td></tr>
 <tr class="memdesc:a2c2f252d11eb2e0e99caa5e71714cb38"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the amount of memory that is actually used by alive allocations <br /></td></tr>
 <tr class="separator:a2c2f252d11eb2e0e99caa5e71714cb38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e1ad077733a7d1c3f6d084d6bd5f2b9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e1ad077733a7d1c3f6d084d6bd5f2b9"></a>
-virtual <a class="el" href="classgep_1_1_i_allocator_statistics.html">IAllocatorStatistics</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgep_1_1_scripting_allocator.html#a3e1ad077733a7d1c3f6d084d6bd5f2b9">getParentAllocator</a> () const override</td></tr>
-<tr class="memdesc:a3e1ad077733a7d1c3f6d084d6bd5f2b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the allocator this allocator takes the memory from, nullptr if it does not obtain the memory from another allocator <br /></td></tr>
-<tr class="separator:a3e1ad077733a7d1c3f6d084d6bd5f2b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27bc55188d94c6d015780c30486861b1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27bc55188d94c6d015780c30486861b1"></a>
+virtual <a class="el" href="classgep_1_1_i_allocator.html">IAllocator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgep_1_1_scripting_allocator.html#a27bc55188d94c6d015780c30486861b1">getParentAllocator</a> () const override</td></tr>
+<tr class="memdesc:a27bc55188d94c6d015780c30486861b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the allocator this allocator takes the memory from, nullptr if it does not obtain the memory from another allocator <br /></td></tr>
+<tr class="separator:a27bc55188d94c6d015780c30486861b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa68b8d623097ebb310a771861b5d3dbe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa68b8d623097ebb310a771861b5d3dbe"></a>
 virtual void *&#160;</td><td class="memItemRight" valign="bottom"><b>allocateMemory</b> (size_t size) override</td></tr>
 <tr class="separator:aa68b8d623097ebb310a771861b5d3dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,7 +115,7 @@ lua_State *&#160;</td><td class="memItemRight" valign="bottom"><b>getLuaState</b
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 28 2014 11:49:14 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 25 2014 15:17:04 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

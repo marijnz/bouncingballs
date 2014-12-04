@@ -103,10 +103,10 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgep_1_1_stack_allocator.html#a14ad2e986c15cc8dca5c68da02d41d60">getNumBytesUsed</a> () const override</td></tr>
 <tr class="memdesc:a14ad2e986c15cc8dca5c68da02d41d60"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the amount of memory that is actually used by alive allocations <br /></td></tr>
 <tr class="separator:a14ad2e986c15cc8dca5c68da02d41d60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a813748064f7d6b1c91568fe895e75b3e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a813748064f7d6b1c91568fe895e75b3e"></a>
-virtual <a class="el" href="classgep_1_1_i_allocator_statistics.html">IAllocatorStatistics</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgep_1_1_stack_allocator.html#a813748064f7d6b1c91568fe895e75b3e">getParentAllocator</a> () const override</td></tr>
-<tr class="memdesc:a813748064f7d6b1c91568fe895e75b3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the allocator this allocator takes the memory from, nullptr if it does not obtain the memory from another allocator <br /></td></tr>
-<tr class="separator:a813748064f7d6b1c91568fe895e75b3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a089b36fb69db488473afff2ca6d869d0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a089b36fb69db488473afff2ca6d869d0"></a>
+virtual <a class="el" href="classgep_1_1_i_allocator.html">IAllocator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgep_1_1_stack_allocator.html#a089b36fb69db488473afff2ca6d869d0">getParentAllocator</a> () const override</td></tr>
+<tr class="memdesc:a089b36fb69db488473afff2ca6d869d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the allocator this allocator takes the memory from, nullptr if it does not obtain the memory from another allocator <br /></td></tr>
+<tr class="separator:a089b36fb69db488473afff2ca6d869d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1dcfc47d23a276beb0503c751cd6229"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad1dcfc47d23a276beb0503c751cd6229"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>StackAllocator</b> (bool front, size_t size, <a class="el" href="classgep_1_1_i_allocator.html">IAllocator</a> *pParentAllocator=nullptr)</td></tr>
 <tr class="separator:ad1dcfc47d23a276beb0503c751cd6229"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,7 +134,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>DoubleEndedStackAllo
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 28 2014 11:49:18 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 25 2014 15:17:08 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

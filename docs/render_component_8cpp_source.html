@@ -86,7 +86,7 @@
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">if</span>(m_path.empty())</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        g_globalManager.getLogging()-&gt;logError(<span class="stringliteral">&quot;Render Component&#39;s path on GameObject %s hasn&#39;t been set!&quot;</span>, m_pParentGameObject-&gt;getName().c_str());</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        g_globalManager.getLogging()-&gt;logError(<span class="stringliteral">&quot;Render Component&#39;s path on GameObject %s hasn&#39;t been set!&quot;</span>, m_pParentGameObject-&gt;getGuid().c_str());</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        GEP_ASSERT(<span class="keyword">false</span>);</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">else</span></div>
@@ -175,7 +175,7 @@
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 28 2014 11:48:31 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 25 2014 15:16:18 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

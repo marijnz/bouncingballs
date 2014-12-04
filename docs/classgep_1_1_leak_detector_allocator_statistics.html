@@ -94,10 +94,10 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgep_1_1_leak_detector_allocator_statistics.html#a03cee4346609bf731bfe14db1accd314">getNumBytesUsed</a> () const </td></tr>
 <tr class="memdesc:a03cee4346609bf731bfe14db1accd314"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the amount of memory that is actually used by alive allocations <br /></td></tr>
 <tr class="separator:a03cee4346609bf731bfe14db1accd314"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbfb2865b83bb2b6427af7e88c10c0d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adbfb2865b83bb2b6427af7e88c10c0d8"></a>
-virtual <a class="el" href="classgep_1_1_i_allocator_statistics.html">IAllocatorStatistics</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgep_1_1_leak_detector_allocator_statistics.html#adbfb2865b83bb2b6427af7e88c10c0d8">getParentAllocator</a> () const </td></tr>
-<tr class="memdesc:adbfb2865b83bb2b6427af7e88c10c0d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the allocator this allocator takes the memory from, nullptr if it does not obtain the memory from another allocator <br /></td></tr>
-<tr class="separator:adbfb2865b83bb2b6427af7e88c10c0d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae7b347f702a1ba434edcdd55bf8c7d1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aae7b347f702a1ba434edcdd55bf8c7d1"></a>
+virtual <a class="el" href="classgep_1_1_i_allocator.html">IAllocator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgep_1_1_leak_detector_allocator_statistics.html#aae7b347f702a1ba434edcdd55bf8c7d1">getParentAllocator</a> () const </td></tr>
+<tr class="memdesc:aae7b347f702a1ba434edcdd55bf8c7d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the allocator this allocator takes the memory from, nullptr if it does not obtain the memory from another allocator <br /></td></tr>
+<tr class="separator:aae7b347f702a1ba434edcdd55bf8c7d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77f4064309c2f070523a2d954d2dad20"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77f4064309c2f070523a2d954d2dad20"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasLeaks</b> () const </td></tr>
 <tr class="separator:a77f4064309c2f070523a2d954d2dad20"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,7 +110,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>findLeaks</b> (std::o
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="leak_detection_8h_source.html#l00125">125</a> of file <a class="el" href="leak_detection_8h_source.html">leakDetection.h</a>.</p>
+<p>Definition at line <a class="el" href="leak_detection_8h_source.html#l00130">130</a> of file <a class="el" href="leak_detection_8h_source.html">leakDetection.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>Engine/gep/include/gep/memory/<a class="el" href="leak_detection_8h_source.html">leakDetection.h</a></li>
 <li>Engine/gep/src/gep/memory/<a class="el" href="leak_detection_8cpp_source.html">leakDetection.cpp</a></li>
@@ -118,7 +118,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>findLeaks</b> (std::o
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 28 2014 11:49:09 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 25 2014 15:16:59 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

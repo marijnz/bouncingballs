@@ -58,7 +58,7 @@
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;gep/math3d/quaternion.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;gpp/cameras.h&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>gpp </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>gpp</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
 <div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classgpp_1_1_camera_component.html">   11</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classgpp_1_1_camera_component.html">CameraComponent</a> : <span class="keyword">public</span> <a class="code" href="classgpp_1_1_component.html">Component</a>, <span class="keyword">public</span> <a class="code" href="classgep_1_1_i_transform.html">gep::ITransform</a></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
@@ -74,11 +74,11 @@
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setPosition(<span class="keyword">const</span> <a class="code" href="structgep_1_1vec3__t.html">gep::vec3</a>&amp; pos) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setRotation(<span class="keyword">const</span> <a class="code" href="structgep_1_1_quaternion__t.html">gep::Quaternion</a>&amp; rot) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="structgep_1_1vec3__t.html">gep::vec3</a> getWorldPosition() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="structgep_1_1_quaternion__t.html">gep::Quaternion</a> getWorldRotation() <span class="keyword">const  override</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="structgep_1_1mat4__t.html">gep::mat4</a> getWorldTransformationMatrix() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="structgep_1_1_quaternion__t.html">gep::Quaternion</a> getRotation()<span class="keyword">const override</span>;</div>
@@ -91,9 +91,9 @@
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="structgep_1_1_ray.html">gep::Ray</a> getRayForNormalizedScreenPos(<span class="keyword">const</span> <a class="code" href="structgep_1_1vec2__t.html">gep::vec2</a> screenPos) { <span class="keywordflow">return</span> m_pCamera-&gt;getRayForNormalizedScreenPos(screenPos);};</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="structgep_1_1_ray.html">gep::Ray</a> getRayForAbsoluteScreenPos(<span class="keyword">const</span> <a class="code" href="structgep_1_1vec2__t.html">gep::uvec2</a> screenPos) { <span class="keywordflow">return</span> m_pCamera-&gt;getRayForAbsoluteScreenPos(screenPos);};</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">void</span> setViewDirection(<span class="keyword">const</span> <a class="code" href="structgep_1_1vec3__t.html">gep::vec3</a>&amp; vector);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> setUpDirection(<span class="keyword">const</span> <a class="code" href="structgep_1_1vec3__t.html">gep::vec3</a>&amp; vector);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">void</span> setActive();</div>
@@ -115,7 +115,7 @@
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">void</span> setFar(<span class="keywordtype">float</span> farValue){m_pCamera-&gt;setFar(farValue);}</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordtype">float</span> getFar(){<span class="keywordflow">return</span> m_pCamera-&gt;getFar();}</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">float</span> getAspectRatio(){<span class="keywordflow">return</span> m_pCamera-&gt;getAspectRatio();}</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordtype">void</span> setAspectRatio(<span class="keywordtype">float</span> ratio){m_pCamera-&gt;setAspectRatio(ratio);}</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
@@ -127,13 +127,13 @@
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordtype">float</span> getHeight();</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="structgep_1_1vec3__t.html">gep::vec3</a> getRightDirection() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="structgep_1_1vec3__t.html">gep::vec3</a> getUpDirection() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="structgep_1_1vec3__t.html">gep::vec3</a> getViewDirection() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBaseViewDirection(<span class="keyword">const</span> <a class="code" href="structgep_1_1vec3__t.html">gep::vec3</a>&amp; direction) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBaseOrientation(<span class="keyword">const</span> <a class="code" href="structgep_1_1_quaternion__t.html">gep::Quaternion</a>&amp; orientation) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setState(State::Enum state) <span class="keyword">override</span>;</div>
@@ -141,19 +141,19 @@
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keyword">virtual</span>       <a class="code" href="classgep_1_1_i_transform.html">gep::ITransform</a>* getParent()       <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="classgep_1_1_i_transform.html">gep::ITransform</a>* getParent() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setParent(<a class="code" href="classgep_1_1_i_transform.html">gep::ITransform</a>* parent) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordtype">void</span> setViewTarget(<a class="code" href="classgep_1_1_i_transform.html">gep::ITransform</a>* view);</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordtype">void</span> setUpTarget(<a class="code" href="classgep_1_1_i_transform.html">gep::ITransform</a>* view);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordtype">void</span> unsetViewTarget() { m_viewTarget.setParent(<span class="keyword">nullptr</span>); };</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordtype">void</span> unsetUpTarget() { m_upTarget.setParent(<span class="keyword">nullptr</span>); };</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordtype">void</span> setViewTargetPositionOffset(<span class="keyword">const</span> <a class="code" href="structgep_1_1vec3__t.html">gep::vec3</a>&amp; positionOffset) { </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            m_viewTarget.setPosition(positionOffset); </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordtype">void</span> setViewTargetPositionOffset(<span class="keyword">const</span> <a class="code" href="structgep_1_1vec3__t.html">gep::vec3</a>&amp; positionOffset) {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            m_viewTarget.setPosition(positionOffset);</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        };</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordtype">void</span> setUpTargetPositionOffset(<span class="keyword">const</span> <a class="code" href="structgep_1_1vec3__t.html">gep::vec3</a>&amp; positionOffset) { m_upTarget.setPosition(positionOffset); };</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        LUA_BIND_REFERENCE_TYPE_BEGIN</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            LUA_BIND_FUNCTION(setPosition)</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            LUA_BIND_FUNCTION(lookAt)</div>
@@ -199,21 +199,20 @@
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <a class="code" href="classgpp_1_1_camera_look_at_horizon.html">CameraLookAtHorizon</a>* m_pCamera;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <a class="code" href="structgep_1_1vec3__t.html">gep::vec3</a> m_lookAt;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <a class="code" href="classgep_1_1_transform.html">gep::Transform</a> m_viewTarget;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <a class="code" href="classgep_1_1_transform.html">gep::Transform</a> m_upTarget;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    };</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="structgpp_1_1_component_meta_info_3_01_camera_component_01_4.html">  157</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structgpp_1_1_component_meta_info.html">ComponentMetaInfo</a>&lt;<a class="code" href="classgpp_1_1_camera_component.html">CameraComponent</a>&gt;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    {</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* name(){ <span class="keywordflow">return</span> <span class="stringliteral">&quot;CameraComponent&quot;</span>; }</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> gep::int32 <a class="code" href="structgpp_1_1_component_meta_info.html#a38efc7d905b6e2b021eb95f8f2e3b267">initializationPriority</a>() { <span class="keywordflow">return</span> 0; }</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> gep::int32 <a class="code" href="structgpp_1_1_component_meta_info.html#afb2536977b010fe7953aa8a5a255d7e0">updatePriority</a>() { <span class="keywordflow">return</span> 23; }</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keyword">static</span> <a class="code" href="classgpp_1_1_camera_component.html">CameraComponent</a>* create(){ <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classgpp_1_1_camera_component.html">CameraComponent</a>(); }</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    };</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <a class="code" href="classgep_1_1_transform.html">gep::Transform</a> m_viewTarget;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <a class="code" href="classgep_1_1_transform.html">gep::Transform</a> m_upTarget;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    };</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="structgpp_1_1_component_meta_info_3_01_camera_component_01_4.html">  156</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structgpp_1_1_component_meta_info.html">ComponentMetaInfo</a>&lt;<a class="code" href="classgpp_1_1_camera_component.html">CameraComponent</a>&gt;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* name(){ <span class="keywordflow">return</span> <span class="stringliteral">&quot;CameraComponent&quot;</span>; }</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> gep::int32 <a class="code" href="structgpp_1_1_component_meta_info.html#a38efc7d905b6e2b021eb95f8f2e3b267">initializationPriority</a>() { <span class="keywordflow">return</span> 0; }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> gep::int32 <a class="code" href="structgpp_1_1_component_meta_info.html#afb2536977b010fe7953aa8a5a255d7e0">updatePriority</a>() { <span class="keywordflow">return</span> 23; }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keyword">static</span> <a class="code" href="classgpp_1_1_camera_component.html">CameraComponent</a>* create(){ <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classgpp_1_1_camera_component.html">CameraComponent</a>(); }</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    };</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;}</div>
 <div class="ttc" id="classgep_1_1_i_transform_html"><div class="ttname"><a href="classgep_1_1_i_transform.html">gep::ITransform</a></div><div class="ttdef"><b>Definition:</b> <a href="transform_8h_source.html#l00007">transform.h:7</a></div></div>
 <div class="ttc" id="structgep_1_1vec2__t_html"><div class="ttname"><a href="structgep_1_1vec2__t.html">gep::vec2_t&lt; float &gt;</a></div></div>
 <div class="ttc" id="classgpp_1_1_camera_look_at_horizon_html"><div class="ttname"><a href="classgpp_1_1_camera_look_at_horizon.html">gpp::CameraLookAtHorizon</a></div><div class="ttdef"><b>Definition:</b> <a href="gpp_2include_2gpp_2cameras_8h_source.html#l00064">cameras.h:64</a></div></div>
@@ -230,7 +229,7 @@
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 28 2014 11:48:31 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 25 2014 15:16:18 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

@@ -75,7 +75,7 @@
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    {</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        g_globalManager.getScriptingManager()-&gt;callFunction&lt;<span class="keywordtype">void</span>&gt;(</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            m_funcRef_initialize,          </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            m_pParentGameObject-&gt;getName() </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            m_pParentGameObject-&gt;getGuid() </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        );</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    setState(State::Active); <span class="comment">// In case we were in the initial state.</span></div>
@@ -89,12 +89,12 @@
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        g_globalManager.getScriptingManager()-&gt;callFunction&lt;<span class="keywordtype">void</span>&gt;(</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            m_funcRef_destroy,             </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            m_pParentGameObject-&gt;getName() </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            m_pParentGameObject-&gt;getGuid() </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        );</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classgpp_1_1_script_component.html#a4afb8aa5026f8c375aa4c699112c6862">   45</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classgpp_1_1_script_component.html#a4afb8aa5026f8c375aa4c699112c6862">gpp::ScriptComponent::update</a>(<span class="keywordtype">float</span> elapsedMS)</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classgpp_1_1_script_component.html#a4afb8aa5026f8c375aa4c699112c6862">   45</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classgpp_1_1_script_component.html#a4afb8aa5026f8c375aa4c699112c6862">gpp::ScriptComponent::update</a>(<span class="keywordtype">float</span> deltaSeconds)</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span>(m_state == State::Inactive) { <span class="keywordflow">return</span>; }</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
@@ -102,8 +102,8 @@
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        g_globalManager.getScriptingManager()-&gt;callFunction&lt;<span class="keywordtype">void</span>&gt;(</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            m_funcRef_update,               </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            m_pParentGameObject-&gt;getName(), </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            elapsedMS</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            m_pParentGameObject-&gt;getGuid(), </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            deltaSeconds</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        );</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
@@ -129,7 +129,7 @@
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 28 2014 11:48:31 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 25 2014 15:16:18 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

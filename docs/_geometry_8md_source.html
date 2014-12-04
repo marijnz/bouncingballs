@@ -51,41 +51,69 @@
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;![](Derp.png)</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;Importing Data to the GEP Engine</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;--------------------------------</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;You will need</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;* <span class="keyword">this</span> archive available at http:<span class="comment">//metafnord.net/files/gep.zip</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;* 3ds Max 2013 (e.g. educational plan available <span class="keywordflow">for</span> HdM students)</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;* Havok Content Tools available at http:<span class="comment">//www.havok.com/try-havok</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;![](Flow.png)</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;Acquire a model or create your own <span class="keyword">using</span> 3ds Max 2013. Important: Make sure that the textures are in the .dds format (DXT5)! If necessary, convert them.</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;Export the selected model from 3ds Max 2013:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;![](ExportSelected.png)</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;![](Flow.png)</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;NOTE: Even though <span class="keyword">this</span> guide mainly uses .DAE files, it is highly recommended to use the .FBX format instead of Collada (.DAE). The `ModelConverterD.exe` can handle <span class="keyword">this</span> format much better.</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;Importing Model Data to the GEP Engine</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;--------------------------------------</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;You will need</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;* The model converter from the [GEP/GPP Tools folder][GPP_Tools]</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;* A 3D modelling tool of your choosing that is able to export Collada (.DAE) or .FBX files, e.g.:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  * 3ds Max 2013 (e.g. educational plan available for HdM students)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  * [Blender 3D][Blender] Note: For __animated__ or physical __collision geometry__ you will still need 3ds Max or Maya!</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;Acquire a model or create your own using 3ds Max 2013. Important: Make sure that the textures are in the .dds format (DXT5)! If necessary, convert them.</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;Important: Select Z as the Up-Axis!</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;![](ExportOptions.png)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;Export the selected model from 3ds Max 2013:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;![](ExportSelected.png)</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;Use the `ModelConverterD.exe` to convert the `.dae` file (Collada) to the `.thModel` format. This can be done either on the command line or by using drag drop.</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;![](ModelConverterCommand.png)</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;Important: Select Z as the Up-Axis!</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;![](ExportOptions.png)</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;Additional Information:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;* Copy the exported `.thModel` to `%GEP%\data\models\`</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;* Use relative paths for textures!</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;Creating a `RenderComponent`:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;~~~{.lua}</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;local renderComponent = go:createRenderComponent()</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;renderComponent:setPath(&quot;data/models/box.thModel&quot;)</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;~~~</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;Use the `ModelConverterD.exe` to convert the `.dae` file (Collada) to the `.thModel` format. This can be done either on the command line or by using drag &amp; drop.</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;![](ModelConverterCommand.png)</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;Additional Information:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;* Copy the exported `.thModel` to `%%GEP%\data\models\`</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;* The texture paths in the model file need to be relative to the working directory of the game!</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  * E.g. The textures that the model `data/models/barbarian/barbarianStatic.thModel` uses are referenced in its .FBX file like this:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    * `data/models/barbarian/Barbarian_Belt_Low_d.dds`</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    * `data/models/barbarian/Barbarian_Body_Low_d.dds`</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;Creating a `RenderComponent`:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;~~~{.lua}</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;-- go =&gt; the game <span class="keywordtype">object</span> instance created <span class="keyword">using</span> GameObjectManager:createGameObject(...)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;local renderComponent = go:createRenderComponent()</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;renderComponent:setPath(&quot;data/models/box.thModel&quot;)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;~~~</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">### Troubleshooting</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;* All textures need to be quadratic and have to have a dimension of (2&lt;SUP&gt;N&lt;/SUP&gt;)x(2&lt;SUP&gt;N&lt;/SUP&gt;), e.g. 128x128, 256x256, etc.</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;* All textures need to be in `.dds` format using the __DXT5 compression__ setting.</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;* When converting your model to a `.thModel` using `ModelConverterD.exe`, make sure your model has UV coordinates, i.e. your model is unwrapped.</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  * Note: The model does not necessarily have to have a texture.</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;Importing Animation Data to the GEP Engine</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;------------------------------------------</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;You will need</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;* 3ds Max 2013 (e.g. educational plan available for HdM students)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;* Havok Content Tools available in the [GEP/GPP Tools folder][GPP_Tools] or at http:<span class="comment">//www.havok.com/try-havok</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  * Note that these tools are only available for 3ds Max or Maya, __not for Blender 3D__!</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;\todo Explain this section using screenshots, just like the previous section</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;\todo Add the Havok Content Tools Export Profile file for animation export</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;[GPP_Tools]: ftp:<span class="comment">//mirror.mi.hdm-stuttgart.de/Gaming/GEP_GPP/Tools</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;[Blender]: http:<span class="comment">//www.blender.org/Downloads</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 28 2014 11:48:30 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 25 2014 15:16:17 for Gameplay Programming by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>
