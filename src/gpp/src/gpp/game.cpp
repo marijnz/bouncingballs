@@ -131,12 +131,6 @@ void gpp::Game::update(float elapsedTime)
     auto pPhysicsSystem = g_globalManager.getPhysicsSystem();
     auto pRenderer = g_globalManager.getRenderer();
 
-    if (pInputHandler->wasTriggered(gep::Key::Escape)) // Escape
-    {
-        m_continueRunningGame = false;
-        return;
-    }
-
     if (pInputHandler->wasTriggered(gep::Key::F9))
     {
         pPhysicsSystem->setDebugDrawingEnabled(!pPhysicsSystem->getDebugDrawingEnabled());
@@ -198,28 +192,11 @@ void gpp::Game::setUpStateMachine()
     auto pLogging = g_globalManager.getLogging();
     m_pStateMachine->setLogging(pLogging);
 
-    auto state_loading = m_pStateMachine->create<State>("loading");
-    auto state_mainMenu = m_pStateMachine->create<State>("mainMenu");
-    auto state_gameRunning = m_pStateMachine->create<StateMachine>("gameRunning");
-
-    auto leaveGameCondition = [&](){
-        return !m_continueRunningGame;
-    };
-
-    m_pStateMachine->addTransition("__enter", "loading");
-    m_pStateMachine->addTransition("loading", "mainMenu");
-    m_pStateMachine->addTransition("mainMenu", "__leave", [](){
-        return g_globalManager.getInputHandler()->wasTriggered(Key::Escape);
-    });
-    m_pStateMachine->addTransition("mainMenu", "gameRunning");
-    m_pStateMachine->addTransition("gameRunning", "__leave", [](){
-        return g_globalManager.getInputHandler()->wasTriggered(Key::Escape);
-    });
-
     // Add listeners
     //////////////////////////////////////////////////////////////////////////
-    m_pStateMachine->getLeaveEvent()->registerListener([](LeaveEventData*){
+    m_pStateMachine->getLeaveEvent()->registerListener([this](LeaveEventData*){
         g_globalManager.getUpdateFramework()->stop();
+		m_continueRunningGame = false;
         return gep::EventResult::Handled;
     });
 

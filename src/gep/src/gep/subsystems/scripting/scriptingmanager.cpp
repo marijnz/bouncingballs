@@ -29,7 +29,7 @@ namespace gep
                 initialized = true;
                 gep::atexit(&destroyScriptTypeInfoMap);
             }
-            
+
             return scriptTypeInfos;
         }
     }
@@ -80,7 +80,7 @@ namespace gep
         {
             stackDump = lua::utils::dumpStack(L);
         }
-        
+
         auto fmt = "in Lua: %s\n"
                    "Lua call%s\n"
                    "Lua stack dump %s";
@@ -125,7 +125,7 @@ size_t gep::ScriptingAllocator::getNumBytesUsed() const
     return lua_gc(m_L, LUA_GCCOUNT, 0) * 1000 + lua_gc(m_L, LUA_GCCOUNTB, 0);
 }
 
-gep::IAllocatorStatistics* gep::ScriptingAllocator::getParentAllocator() const
+gep::IAllocator* gep::ScriptingAllocator::getParentAllocator() const
 {
     return m_pParentAllocator;
 }

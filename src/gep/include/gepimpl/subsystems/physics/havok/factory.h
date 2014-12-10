@@ -97,7 +97,7 @@ namespace gep
 
         virtual size_t getNumBytesUsed() const override { return m_cachedNumBytesUsed; }
 
-        virtual IAllocatorStatistics* getParentAllocator() const override { return m_pParentAllocator; }
+        virtual IAllocator* getParentAllocator() const override { return m_pParentAllocator; }
 
         virtual void* allocateMemory(size_t size) override;
 

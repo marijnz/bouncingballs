@@ -34,10 +34,10 @@ namespace gpp
         void setFar(float value) { m_far = value; }
 
         float getWidth() const { return m_width; }
-        void setWidth(float value) { m_width = value; m_height = m_width * m_aspectRatio; }
+        void setWidth(float value) { m_width = value; m_height = m_width / m_aspectRatio; }
 
         float getHeight() const { return m_height; }
-        void setHeight(float value) { m_height = value; m_width = m_height / m_aspectRatio; }
+        void setHeight(float value) { m_height = value; m_width = m_height * m_aspectRatio; }
 
         void setPosition(const gep::vec3& pos){m_position = pos;}
 

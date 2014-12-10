@@ -62,10 +62,10 @@ namespace gep
                this->angle = 0;
                return;
            }
-           
+
            T cosTheta = axis1.dot(axis2);
            T theta = acos(cosTheta);
-           
+
            vec3_t<T> nAxis = axis1.cross(axis2);
            if(gep::epsilonCompare<T>(nAxis.squaredLength(), 0)) // Axis 1 and Axis2 are parallel!
            {
@@ -78,7 +78,7 @@ namespace gep
 
            angle = theta /2;
            float temp = sin(angle);
-           
+
            this->x = nAxis.x * temp;
            this->y = nAxis.y * temp;
            this->z = nAxis.z * temp;
@@ -133,12 +133,15 @@ namespace gep
         {
             Quaternion_t<T> res(DO_NOT_INITIALIZE);
             auto length = gep::sqrt(x * x + y * y + z * z + angle * angle);
-            if(length != 0){
-                res.x = x / length;
-                res.y = y / length;
-                res.z = z / length;
-                res.angle = angle / length;
+            if(gep::epsilonCompare<decltype(length)>(length, 0.0f))
+            {
+                GEP_ASSERT(false, "Cannot normalize an invalid quaternion!");
             }
+
+            res.x = x / length;
+            res.y = y / length;
+            res.z = z / length;
+            res.angle = angle / length;
             return res;
         }
 
@@ -222,7 +225,7 @@ namespace gep
             res.angle = this->angle * rh.angle - this->x * rh.x     - this->y * rh.y - this->z * rh.z;
             return res;
         }
-        
+
         /// \brief * operator for multiplying with a scalar
         const Quaternion_t<T> operator * (const float rh) const
         {
@@ -255,7 +258,7 @@ namespace gep
                 && epsilonCompare(z, 0.0f)
                 && epsilonCompare(angle, 1.0f);
         }
-		
+
         const vec4_t<T> toVec4()
         {
             return vec4_t<T>(this->x,this->y,this->z,this->angle);
@@ -337,7 +340,7 @@ namespace gep
             LUA_BIND_FUNCTION_NAMED(mulScalarFromScript, "mulScalar")
             LUA_BIND_FUNCTION(toMat3)
             LUA_BIND_FUNCTION(isValid)
-            LUA_BIND_FUNCTION(Integrate)
+            //LUA_BIND_FUNCTION(Integrate) // Not exactly sure what this does...
         LUA_BIND_VALUE_TYPE_MEMBERS
             LUA_BIND_MEMBER(x)
             LUA_BIND_MEMBER(y)

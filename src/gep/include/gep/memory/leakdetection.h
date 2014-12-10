@@ -24,7 +24,7 @@ namespace gep
         virtual size_t getNumFrees() const override { return 0; }
         virtual size_t getNumBytesReserved() const override { return 0; }
         virtual size_t getNumBytesUsed() const override { return 0; }
-        virtual IAllocatorStatistics* getParentAllocator() const override { return nullptr; }
+        virtual IAllocator* getParentAllocator() const override { return nullptr; }
 
         virtual void* allocateMemory(size_t size) override { return malloc(size); }
         virtual void freeMemory(void* mem) override { free(mem); }
@@ -125,7 +125,7 @@ namespace gep
         virtual size_t getNumFrees() const { return m_allocator->getNumFrees(); }
         virtual size_t getNumBytesReserved() const { return m_allocator->getNumBytesReserved(); }
         virtual size_t getNumBytesUsed() const { return m_allocator->getNumBytesUsed(); }
-        virtual IAllocatorStatistics* getParentAllocator() const { return m_allocator->getParentAllocator(); }
+        virtual IAllocator* getParentAllocator() const { return m_allocator->getParentAllocator(); }
 
         inline bool hasLeaks() const { return m_leakDetector.hasLeaks(); }
         inline void findLeaks(std::ostream& printTo) { m_leakDetector.findLeaks(printTo); }

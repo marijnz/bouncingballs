@@ -20,7 +20,7 @@ namespace gep
         virtual size_t getNumBytesReserved() const override;
         virtual size_t getNumBytesUsed() const override;
 
-        virtual IAllocatorStatistics* getParentAllocator() const override;
+        virtual IAllocator* getParentAllocator() const override;
 
         virtual void* allocateMemory(size_t size) override;
         virtual void freeMemory(void* mem) override;
@@ -41,14 +41,14 @@ namespace gep
 
         ScriptingManager(settings::Scripts* pScriptSettings);
         virtual ~ScriptingManager();
-        
+
         /// \brief IScriptingManager interface
         virtual void initialize();
         virtual void update(float elapsedTime);
         virtual void destroy();
 
         virtual void loadScript(const std::string& filename, LoadOptions::Enum loadOptions = LoadOptions::Default);
-        
+
         virtual void setManagerState(State state) override { m_state = state; }
         virtual State getManagerState() const override { return m_state; }
 

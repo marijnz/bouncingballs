@@ -18,6 +18,12 @@ gep::CollisionMesh::~CollisionMesh()
 
 void gep::CollisionMesh::setShape(IShape* shape)
 {
+    if(shape)
+        shape->addReference();
+
+    if(m_pShape)
+        m_pShape->removeReference();
+
     m_pShape = shape;
 }
 
@@ -63,7 +69,11 @@ void gep::CollisionMesh::finalize()
 
 void gep::CollisionMesh::unload()
 {
-    DELETE_AND_NULL(m_pShape);
+    if(m_pShape)
+    {
+        m_pShape->removeReference();
+        m_pShape = nullptr;
+    }
 }
 
 void gep::CollisionMesh::setLoader(IResourceLoader* loader)
@@ -154,25 +164,24 @@ gep::CollisionMesh* gep::CollisionMeshFileLoader::loadResource(CollisionMesh* pI
             auto shape = conversion::hk::from(const_cast<hkpShape*>(hkShape));
 
             auto type = shape->getShapeType();
-            if ( type == hkcdShapeType::TRIANGLE || 
+            if ( type == hkcdShapeType::TRIANGLE ||
                  type == hkcdShapeType::BV_COMPRESSED_MESH ||
                  type == hkcdShapeType::CONVEX_VERTICES )
             {
-                auto transform = body->getTransform();
-                auto meshShape = static_cast<HavokMeshShape*>(shape);
+                const hkTransform& transform = body->getTransform();
                 Transform* tempTrans = new Transform();
                 conversion::hk::from(transform, *tempTrans);
-                
+
                 // Since havok content tools are buggy (?) and no custom transformation can be applied,
                 // we have to convert into our engine's space by hand.
                 // TODO: Ensure, that this transformation is correct in every case
                 tempTrans->setRotation(tempTrans->getRotation() * Quaternion(vec3(1,0,0),180));
-                meshShape->setTransform(tempTrans);
+                static_cast<HavokMeshShape*>(shape)->setTransform(tempTrans);
             }
 
 
             result->setShape(shape);
-            
+
         }
 
     }
@@ -212,7 +221,7 @@ void gep::HavokPhysicsFactoryAllocator::freeMemory(void* mem)
     {
         GEP_ASSERT(false, "double or invalid free.");
     }
-    
+
     m_allocations.remove(mem);
     m_cachedNumBytesUsed -= allocation.m_size;
     ++m_numFrees;

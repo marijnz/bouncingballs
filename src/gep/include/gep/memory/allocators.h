@@ -29,7 +29,7 @@ namespace gep
         virtual size_t getNumFrees() const override;
         virtual size_t getNumBytesReserved() const override;
         virtual size_t getNumBytesUsed() const override;
-        virtual IAllocatorStatistics* getParentAllocator() const override;
+        virtual IAllocator* getParentAllocator() const override;
 
         inline size_t getAllocCount() const { return m_allocCount; }
         inline size_t getFreeCount() const { return m_freeCount; }
@@ -86,7 +86,7 @@ namespace gep
         virtual size_t getNumFrees() const override;
         virtual size_t getNumBytesReserved() const override;
         virtual size_t getNumBytesUsed() const override;
-        virtual IAllocatorStatistics* getParentAllocator() const override;
+        virtual IAllocator* getParentAllocator() const override;
 
         PoolAllocator(size_t chunkSize, size_t numChuks, IAllocator* pParentAllocator = nullptr);
         ~PoolAllocator();
@@ -136,7 +136,7 @@ namespace gep
         virtual size_t getNumFrees() const override;
         virtual size_t getNumBytesReserved() const override;
         virtual size_t getNumBytesUsed() const override;
-        virtual IAllocatorStatistics* getParentAllocator() const override;
+        virtual IAllocator* getParentAllocator() const override;
 
         StackAllocator(bool front, size_t size, IAllocator* pParentAllocator = nullptr);
         StackAllocator(bool front, size_t size, char* pBuffer);
@@ -187,7 +187,7 @@ namespace gep
         virtual size_t getNumFrees() const override;
         virtual size_t getNumBytesReserved() const override;
         virtual size_t getNumBytesUsed() const override;
-        virtual IAllocatorStatistics* getParentAllocator() const override;
+        virtual IAllocator* getParentAllocator() const override;
 
         // stack allocator proxies
         StackAllocatorProxy* getFront();
