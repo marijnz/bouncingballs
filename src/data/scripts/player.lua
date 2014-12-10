@@ -5,6 +5,12 @@ player.render = player:createRenderComponent()
 player.render:setPath("data/models/player.thModel")
 player:setPosition(Vec3(0, 0, 0))
 player.speed = 0.1
+
+local bullet = Bullet(player:getPosition() + Vec3(0,0,0))
+
+--logMessage("using player.lua")
+
+
 player.update = function (deltaTime)
     -- The direction the player is going to walk this frame
     local direction = Vec3(0.0, 0.0, 0.0)
@@ -19,6 +25,10 @@ player.update = function (deltaTime)
     end
     if (InputHandler:isPressed(Key.D)) then
         direction = direction + Vec3(-1, 1, 0)
+    end
+	
+	if (InputHandler:isPressed(32)) then
+        
     end
 
     -- If a direction is set, walk 
