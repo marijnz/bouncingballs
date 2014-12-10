@@ -3,10 +3,9 @@ logMessage("using freecamera.lua")
 do -- cameraera
 	camera = GameObjectManager:createGameObject("camera")
 	camera.cc = camera:createCameraComponent()
-	camera.cc:setPosition(Vec3(0.0, 0.0, 0.0))
-	camera.cc:setViewDirection(Vec3(1.0, 0.0, 0.0))
-	camera.baseViewDir = Vec3(1.0, 0.0, 0.0)
-	camera.cc:setBaseViewDirection(camera.baseViewDir)
+    local lookAt = Vec3(-3.0, -3.0, 0.0)
+	camera.cc:setPosition(lookAt + Vec3(15.0, 15.0, 15.0))
+    camera.cc:lookAt(lookAt)
 end
 
 function cameraEnter(enterData)
