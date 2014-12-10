@@ -4,20 +4,33 @@ player = GameObjectManager:createGameObject("player")
 player.render = player:createRenderComponent()
 player.render:setPath("data/models/player.thModel")
 player:setPosition(Vec3(0, 0, 0))
-player.speed = 0.1
+
+player.pc = player:createPhysicsComponent()
+cinfo = RigidBodyCInfo()
+cinfo.shape = PhysicsFactory:createCapsule(Vec3(0.0, 0.0, 0.35), Vec3(0.0, 0.0, 1.05), 0.4)
+cinfo.motionType = MotionType.Dynamic
+cinfo.mass = 1.0
+cinfo.friction = 1.0
+cinfo.angularDamping = 0.0
+cinfo.restitution = 1.0
+cinfo.position = Vec3(0.0, 0.0, 0.0)
+cinfo.maxAngularVelocity = 0.0
+player.pc:createRigidBody(cinfo)
+
+player.speed = 5
 player.update = function (deltaTime)
     -- The direction the player is going to walk this frame
     local direction = Vec3(0.0, 0.0, 0.0)
-    if (InputHandler:isPressed(Key.W)) then
+    if (InputHandler:isPressed(Key.Up)) then
         direction = direction + Vec3(-1, -1, 0)
     end
-    if (InputHandler:isPressed(Key.S)) then
+    if (InputHandler:isPressed(Key.Down)) then
         direction = direction + Vec3(1, 1, 0)
     end
-    if (InputHandler:isPressed(Key.A)) then
+    if (InputHandler:isPressed(Key.Left)) then
         direction = direction + Vec3(1, -1, 0)
     end
-    if (InputHandler:isPressed(Key.D)) then
+    if (InputHandler:isPressed(Key.Right)) then
         direction = direction + Vec3(-1, 1, 0)
     end
 
@@ -26,7 +39,11 @@ player.update = function (deltaTime)
         -- Normalize the direction for when two buttons are pressed at the same time
         local normalized = direction:normalized()
         -- Multiply speed by the direction to walk
-        player:setPosition(player:getPosition() + Vec3(normalized.x * player.speed, normalized.y * player.speed, normalized.z * player.speed))
+        -- player:setPosition(player:getPosition() + Vec3(normalized.x * player.speed, normalized.y * player.speed, normalized.z * player.speed))
+
+        player.pc:getRigidBody():setLinearVelocity(Vec3(normalized.x * player.speed, normalized.y * player.speed, 0.0))
+    else 
+        player.pc:getRigidBody():setLinearVelocity(Vec3(0.0, 0.0, 0.0))
     end
 end
 player.sc = player:createScriptComponent()
