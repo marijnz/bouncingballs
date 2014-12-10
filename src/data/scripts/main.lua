@@ -56,6 +56,7 @@ cinfo.restitution = 1.0
 cinfo.position = Vec3(5.0, 0.0, 0.0)
 wall.pc:createRigidBody(cinfo)
 
+--[[
 local ball = GameObjectManager:createGameObject("ball")
 ball.pc = ball:createPhysicsComponent()
 cinfo = RigidBodyCInfo()
@@ -68,6 +69,14 @@ cinfo.restitution = 1.0
 cinfo.position = Vec3(0.0, 0.0, 5.0)
 cinfo.linearVelocity = Vec3(2.0, 1.0, 0.0)
 ball.pc:createRigidBody(cinfo)
+]]--
+
+
+include("ball.lua")
+
+ball1 = balls("ball1", 3, Vec3(0.0, 0.0, 5.0))
+ball2 = balls("ball2", 3, Vec3(3.0, 0.0, 5.0))
+
 
 -- Default update function
 function update(deltaTime)

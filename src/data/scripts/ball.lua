@@ -1,31 +1,39 @@
 
 logMessage("using ball.lua")
 
-local ball = {}
-ball.__index = ball
+balls = {}
 
-setmetatable(ball, {__index = GameObjectManager:createGameObject("ball"),
-	__call = function (cls, ...)
-		local self = setmetatable({}, cls)
-		self:_init(...)
-		return self
-	end,
-})
 
-function ball:_init(hp)
-	local render = ball:createRenderComponent()
-	render:setPath("data/models/ball.thModel")
-	ball.sc = ball:createScriptComponent()
-	ball.sc:setUpdateFunction(ball:update)
-	ball.speed = 0.05
-	ball:setPosition(Vec3(-3,-3, 0))
-	ball.direction = Vec3(1,1,0)
-	ball.hitpoints = hp
+
+
+
+function balls:__call(name, hp, startpos)
+
+local ball = GameObjectManager:createGameObject(name)
+ball.pc = ball:createPhysicsComponent()
+cinfo = RigidBodyCInfo()
+cinfo.shape = PhysicsFactory:createSphere(0.5)
+cinfo.motionType = MotionType.Dynamic
+cinfo.mass = 1.0
+cinfo.friction = 0.0
+cinfo.angularDamping = 0.0
+cinfo.restitution = 1.0
+cinfo.position = startpos
+cinfo.linearVelocity = Vec3(2.0, 1.0, 0.0)
+ball.pc:createRigidBody(cinfo)
+
+ball.hp = hp
 	
+return ball
+
 end
 
-ball:update = function (deltaTime)
+--balls.__call = balls:init
+setmetatable(balls, balls)
+--[[
+balls:update = function (deltaTime)
 
-	self:setPosition(self:getPosition() + Vec3(normalized.x * self.speed, normalized.y * self.speed, normalized.z * self.speed))
 	
-end
+	
+end 
+]]--
