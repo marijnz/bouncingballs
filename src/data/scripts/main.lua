@@ -3,7 +3,9 @@ logMessage("using main.lua")
 -- Options
 local options = {
     freecamera = false 
-}
+}	
+
+PhysicsSystem:setDebugDrawingEnabled(true)
 
 PhysicsSystem:setDebugDrawingEnabled(true)
 
@@ -26,6 +28,9 @@ level = GameObjectManager:createGameObject("level")
 level.render = level:createRenderComponent()
 level.render:setPath("data/models/cube-level.thModel")
 level:setPosition(Vec3(0, 0, 0))
+
+-- Classes
+include("bullet.lua")
 
 local player
 include("player.lua");

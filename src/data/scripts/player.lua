@@ -33,6 +33,10 @@ player.update = function (deltaTime)
     if (InputHandler:isPressed(Key.Right)) then
         direction = direction + Vec3(-1, 1, 0)
     end
+	
+	if (InputHandler:isPressed(32)) then
+        
+    end
 
     -- If a direction is set, walk 
     if (direction.x ~= 0 or direction.y ~= 0) then
@@ -48,3 +52,5 @@ player.update = function (deltaTime)
 end
 player.sc = player:createScriptComponent()
 player.sc:setUpdateFunction(player.update)
+
+local bullet = Bullet(player:getPosition() + Vec3(0,0,0))
