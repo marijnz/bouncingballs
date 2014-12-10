@@ -75,7 +75,7 @@ void gpp::Game::bindOther()
     scripting->bind<gep::ivec2>("Vec2i");
     scripting->bind<gep::vec2>("Vec2");
     scripting->bind<gep::vec3>("Vec3");
-    scripting->bind<gep::Quaternion>("_Quaternion");
+    scripting->bind<gep::Quaternion>("Quaternion");
     scripting->bind<gep::mat3>("Mat3");
     scripting->bind<gep::mat4>("Mat4");
     scripting->bind<gep::ITransform>("Transform");

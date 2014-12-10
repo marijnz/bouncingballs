@@ -3,7 +3,7 @@
 
 
 gep::Camera::Camera() :
-    m_aspectRatio(9.0f / 16.0f),
+    m_aspectRatio(16.0f / 9.0f),
     m_viewAngleInDegrees(60),
     m_near(0.1f),
     m_far(10000.0f)
@@ -21,7 +21,7 @@ const gep::mat4 gep::Camera::getProjectionMatrix() const
 gep::FreeCamera::FreeCamera() :
     m_rotation(vec3(1,0,0), 90.0f)
 {
-
+	m_rotation = m_rotation * Quaternion(vec3(0, 1, 0), -90.0);
 }
 
 void gep::FreeCamera::look(vec2 delta)
@@ -116,7 +116,7 @@ void gep::ThirdPersonCamera::follow(const mat4& matrixToFollow)
 {
     m_matrixToFollow = matrixToFollow;
     vec3 diff = (m_matrixToFollow.translationPart() - m_position) + (m_matrixToFollow.rotationPart() * m_offset);
-    const float k = 0.1f; // spring constant
+    const float k = 0.075f; // spring constant
     m_position += diff * k;
 }
 

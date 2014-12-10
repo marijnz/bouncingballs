@@ -71,7 +71,7 @@ function updateShip(guid, elapsedTime)
 	
 	-- ship rotation
 	local angularVelocity = ship.rb:getAngularVelocity()
-	angularVelocity.x = 0
+	-- angularVelocity.x = 0
 	local rotationSpeed = 5
 	if (InputHandler:isPressed(Key.Left) and InputHandler:isPressed(Key.Right)) then
 		if (not angularVelocitySwapped) then

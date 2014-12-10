@@ -35,7 +35,7 @@ namespace gep
 
         /// \brief returns the allocator this allocator takes the memory from,
         ///  nullptr if it does not obtain the memory from another allocator
-        virtual IAllocatorStatistics* getParentAllocator() const = 0;
+        virtual IAllocator* getParentAllocator() const = 0;
     };
 
     /// \brief standard allocator
@@ -69,7 +69,7 @@ namespace gep
         virtual size_t getNumFrees() const override;
         virtual size_t getNumBytesReserved() const override;
         virtual size_t getNumBytesUsed() const override;
-        virtual IAllocatorStatistics* getParentAllocator() const override;
+        virtual IAllocator* getParentAllocator() const override;
 
         #ifdef TRACK_MEMORY_LEAKS
         /// \brief returns the only instance of this class
@@ -86,7 +86,7 @@ namespace gep
     {
         GEP_API static IAllocatorStatistics* getAllocator();
     };
-    
+
     struct MallocAllocatorPolicy
     {
         GEP_API static IAllocator* getAllocator();

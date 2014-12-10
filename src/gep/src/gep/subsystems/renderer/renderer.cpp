@@ -130,7 +130,7 @@ void gep::Renderer::initialize()
         auto aspectRatio = float(m_settings.screenResolution.x) / float(m_settings.screenResolution.y);
         m_projection = mat4::projectionMatrix(60.0f, aspectRatio, 0.1f, 10000.0f);
     }
-    m_view = mat4::lookAtMatrix(vec3(300, 0, 205), vec3(0, 0, 150), vec3(0,0,1));
+	m_view = mat4::lookAtMatrix(vec3(100, 0, 50), vec3(0, 0, 25), vec3(0,0,1));
 
     {
         Vertexbuffer::DataChannel dataChannels[] =

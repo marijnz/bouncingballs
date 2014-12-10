@@ -160,33 +160,28 @@ namespace gep
             return res;
         }
 
-
-
-		LUA_BIND_VALUE_TYPE_BEGIN
+        LUA_BIND_VALUE_TYPE_BEGIN
             LUA_BIND_FUNCTION(inverse)
-            LUA_BIND_FUNCTION_NAMED(multMat3FromScript, "__mul")
-            LUA_BIND_FUNCTION_NAMED(mulVec3FromScript, "mulVec3")
+            // mat3 * mat3 operator
+            LUA_BIND_FUNCTION_PTR(static_cast<const mat3_t<T>(mat3_t<T>::*)(const mat3_t<T>&) const>(&operator *), "__mul")
+            // mat3 * vec3 operator
+            LUA_BIND_FUNCTION_PTR(static_cast<const vec3_t<T>(mat3_t<T>::*)(const vec3_t<T>&) const>(&operator *), "mulVec3")
             LUA_BIND_FUNCTION(transposed)
             LUA_BIND_FUNCTION(det)
-		LUA_BIND_VALUE_TYPE_MEMBERS
+        LUA_BIND_VALUE_TYPE_MEMBERS
             LUA_BIND_MEMBER(m00)
             LUA_BIND_MEMBER(m01)
             LUA_BIND_MEMBER(m02)
-            LUA_BIND_MEMBER(m00)
             LUA_BIND_MEMBER(m10)
             LUA_BIND_MEMBER(m11)
             LUA_BIND_MEMBER(m12)
             LUA_BIND_MEMBER(m20)
             LUA_BIND_MEMBER(m21)
             LUA_BIND_MEMBER(m22)
-		LUA_BIND_VALUE_TYPE_END
-     
-        private:
-                    const mat3_t<T> multMat3FromScript (const mat3_t<T>& m) const {return *this * m;}
-                    const vec3_t<T> mulVec3FromScript (const vec3_t<T>& v) const {return *this * v;}
-                    
+        LUA_BIND_VALUE_TYPE_END
 
-     
+        private:
+            const vec3_t<T> mulVec3FromScript (const vec3_t<T>& v) const { return *this * v; }
     };
 
     typedef mat3_t<float> mat3;

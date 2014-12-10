@@ -7,7 +7,7 @@
 
 
 gpp::Camera::Camera() :
-    m_aspectRatio(9.0f / 16.0f),
+    m_aspectRatio(16.0f / 9.0f),
     m_viewAngleInDegrees(60),
     m_near(0.1f),
     m_far(10000.0f),
@@ -24,7 +24,7 @@ const gep::mat4 gpp::Camera::getProjectionMatrix() const
         float viewAngleHalfInRad = gep::toRadians(m_viewAngleInDegrees/2);
         float tangens = gep::sin(viewAngleHalfInRad) / gep::cos(viewAngleHalfInRad);
         float topDist = tangens * distance; // tan * adjacent = opposite
-        float rightDist = m_aspectRatio * topDist;
+        float rightDist = topDist / m_aspectRatio;
         return gep::mat4::ortho(-topDist, topDist, -rightDist, rightDist, m_near, m_far);
     }
     else

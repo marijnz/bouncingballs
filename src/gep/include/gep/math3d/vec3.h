@@ -224,9 +224,8 @@ namespace gep
             LUA_BIND_FUNCTION(length)
             LUA_BIND_FUNCTION(squaredLength)
             LUA_BIND_FUNCTION(normalized)
-            LUA_BIND_FUNCTION(set)
-            LUA_BIND_FUNCTION_NAMED(negate, "negate")
-            LUA_BIND_FUNCTION_NAMED(negate, "__unm")
+            LUA_BIND_FUNCTION_NAMED(negated, "negated")
+            LUA_BIND_FUNCTION_NAMED(negated, "__unm")
             LUA_BIND_FUNCTION_NAMED(addFromScript, "add")
             LUA_BIND_FUNCTION_NAMED(addFromScript, "__add")
             LUA_BIND_FUNCTION_NAMED(subFromScript, "sub")
@@ -246,7 +245,7 @@ namespace gep
         LUA_BIND_VALUE_TYPE_END
 
     private:
-        const vec3_t<T> negate(const vec3_t<T>& rh) const { return -*this; }
+        const vec3_t<T> negated(const vec3_t<T>& rh) const { return -*this; }
         const vec3_t<T> addFromScript(const vec3_t<T>& rh) const { return *this + rh; }
         const vec3_t<T> subFromScript(const vec3_t<T>& rh) const { return *this - rh; }
         const vec3_t<T> mulFromScript(const vec3_t<T>& rh) const { return *this * rh; }

@@ -254,12 +254,12 @@ namespace gep
         static const mat4_t<T> projectionMatrix(T pViewAngle, T pAspectRatio, T pNear, T pFar)
         {
             mat4_t<T> res;
-            pViewAngle = pViewAngle / static_cast<T>(180) * GetPi<T>::value();
+            pViewAngle = (pViewAngle / static_cast<T>(180)) * GetPi<T>::value();
             //T yScale = cos(pViewAngle / 2) / sin(pViewAngle / 2);
             //T xScale = yScale / pAspectRatio;
             // X-Achse
             //res.data[0] = xScale;
-            res.data[0] = 1 / tan( pViewAngle/2) * pAspectRatio;
+            res.data[0] = 1 / (tan( pViewAngle/2) * pAspectRatio);
             res.data[1] = 0; res.data[2] = 0; res.data[3] = 0;
 
             // Y-Achse

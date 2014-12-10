@@ -9,7 +9,7 @@ end
 
 includeUtilLibrary("builtins.lua")
 includeUtilLibrary("type.lua")
---includeUtilLibrary("debugging.lua")
+includeUtilLibrary("debugging.lua")
 includeUtilLibrary("tables.lua")
 includeUtilLibrary("logging.lua")
 includeUtilLibrary("math.lua")

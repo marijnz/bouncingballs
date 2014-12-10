@@ -55,7 +55,7 @@ size_t gep::StdAllocator::getNumBytesUsed() const
     return m_bytesAllocated;
 }
 
-gep::IAllocatorStatistics* gep::StdAllocator::getParentAllocator() const
+gep::IAllocator* gep::StdAllocator::getParentAllocator() const
 {
     return nullptr;
 }

@@ -53,7 +53,7 @@ size_t gep::SimpleLeakCheckingAllocator::getNumBytesUsed() const
     return StdAllocator::globalInstance().getNumBytesUsed();
 }
 
-gep::IAllocatorStatistics* gep::SimpleLeakCheckingAllocator::getParentAllocator() const
+gep::IAllocator* gep::SimpleLeakCheckingAllocator::getParentAllocator() const
 {
     return StdAllocator::globalInstance().getParentAllocator();
 }
@@ -121,9 +121,9 @@ size_t gep::PoolAllocator::getNumBytesUsed() const
     return m_chunkSize * m_allocatedChunks;
 }
 
-gep::IAllocatorStatistics* gep::PoolAllocator::getParentAllocator() const
+gep::IAllocator* gep::PoolAllocator::getParentAllocator() const
 {
-    return dynamic_cast<IAllocatorStatistics*>(m_pParentAllocator);
+    return m_pParentAllocator;
 }
 
 gep::PoolAllocator::PoolAllocator(size_t chunkSize, size_t numChunks, IAllocator* pParentAllocator)
@@ -267,9 +267,9 @@ size_t gep::StackAllocator::getNumBytesUsed() const
     return used;
 }
 
-gep::IAllocatorStatistics* gep::StackAllocator::getParentAllocator() const
+gep::IAllocator* gep::StackAllocator::getParentAllocator() const
 {
-    return dynamic_cast<IAllocatorStatistics*>(m_pParentAllocator);
+    return m_pParentAllocator;
 }
 
 gep::StackAllocator::StackAllocator(bool front, size_t size, IAllocator* pParentAllocator)
@@ -395,7 +395,7 @@ size_t gep::DoubleEndedStackAllocator::getNumBytesUsed() const
     return m_Front.m_StackAllocator.getNumBytesUsed() + m_Back.m_StackAllocator.getNumBytesUsed();
 }
 
-gep::IAllocatorStatistics* gep::DoubleEndedStackAllocator::getParentAllocator() const
+gep::IAllocator* gep::DoubleEndedStackAllocator::getParentAllocator() const
 {
     return m_Front.m_StackAllocator.getParentAllocator();
 }
