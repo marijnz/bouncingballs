@@ -7,7 +7,7 @@ balls = {}
 
 
 
-function balls:__call(name, hp, startpos)
+function balls:__call(name, hp, startpos, startvel)
 
 local ball = GameObjectManager:createGameObject(name)
 ball.pc = ball:createPhysicsComponent()
@@ -19,12 +19,14 @@ cinfo.friction = 0.0
 cinfo.angularDamping = 0.0
 cinfo.restitution = 1.0
 cinfo.position = startpos
-cinfo.linearVelocity = Vec3(2.0, 1.0, 0.0)
+cinfo.linearVelocity = startvel
 ball.pc:createRigidBody(cinfo)
+local render = ball:createRenderComponent()
+render:setPath("data/models/ball.thModel")
 
 ball.hp = hp
 	
-return ball
+rawset(balls, name, ball)
 
 end
 
