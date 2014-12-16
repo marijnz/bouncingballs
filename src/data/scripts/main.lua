@@ -30,7 +30,14 @@ level.render:setPath("data/models/cube-level.thModel")
 level:setPosition(Vec3(0, 0, 0))
 
 -- Classes
+include("poolsystem.lua")
+poolSystem = PoolSystem()
+include("poolobject.lua")
+include("poolexampleobject.lua")
 include("bullet.lua")
+
+--example = PoolExampleObject()
+--example.exampleDoSomething()
 
 local player
 include("player.lua");
