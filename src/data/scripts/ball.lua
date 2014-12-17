@@ -4,9 +4,6 @@ logMessage("using ball.lua")
 balls = {}
 
 
-
-
-
 function balls:__call(name, hp, startpos, startvel)
 
 local ball = GameObjectManager:createGameObject(name)
@@ -22,7 +19,7 @@ cinfo.position = startpos
 cinfo.linearVelocity = startvel
 ball.pc:createRigidBody(cinfo)
 local render = ball:createRenderComponent()
-render:setPath("data/models/ball.thModel")
+render:setPath("data/models/balls/mediumBall.thModel")
 
 ball.hp = hp
 	
