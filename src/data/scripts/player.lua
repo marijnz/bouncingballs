@@ -18,6 +18,9 @@ cinfo.maxAngularVelocity = 0.0
 player.pc:createRigidBody(cinfo)
 
 player.speed = 5
+
+
+--local bullet = Bullet(player:getPosition() + Vec3(0,0,0))
 player.update = function (deltaTime)
     -- The direction the player is going to walk this frame
     local direction = Vec3(0.0, 0.0, 0.0)
@@ -34,8 +37,9 @@ player.update = function (deltaTime)
         direction = direction + Vec3(-1, 1, 0)
     end
 	
+	-- space press
 	if (InputHandler:isPressed(32)) then
-        
+        bullet.go.rrender = go:createRenderComponent()
     end
 
     -- If a direction is set, walk 
@@ -53,4 +57,3 @@ end
 player.sc = player:createScriptComponent()
 player.sc:setUpdateFunction(player.update)
 
-local bullet = Bullet(player:getPosition() + Vec3(0,0,0))

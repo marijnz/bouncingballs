@@ -2,12 +2,11 @@ logMessage("using main.lua")
 
 -- Options
 local options = {
-    freecamera = false 
+    freecamera = false,
+    debugDrawing = false
 }	
 
-PhysicsSystem:setDebugDrawingEnabled(true)
-
-PhysicsSystem:setDebugDrawingEnabled(true)
+PhysicsSystem:setDebugDrawingEnabled(options.debugDrawing)
 
 -- Default state machine.
 include("defaults/stateMachine.lua")
@@ -30,33 +29,45 @@ level.render:setPath("data/models/cube-level.thModel")
 level:setPosition(Vec3(0, 0, 0))
 
 -- Classes
+include("poolsystem.lua")
+poolSystem = PoolSystem()
+include("poolobject.lua")
+include("poolexampleobject.lua")
 include("bullet.lua")
+
+--example = PoolExampleObject()
+--example.exampleDoSomething()
 
 local player
 include("player.lua");
 
-local floor = GameObjectManager:createGameObject("floor")
-floor.pc = floor:createPhysicsComponent()
-local cinfo = RigidBodyCInfo()
-cinfo.shape = PhysicsFactory:createBox(Vec3(5, 5, 0.1))
-cinfo.motionType = MotionType.Fixed
-cinfo.friction = 0.0
-cinfo.angularDamping = 0.0
-cinfo.restitution = 1.0
-floor.pc:createRigidBody(cinfo)
+-- Create the floor and walls of the cube level
+do
+    local floor = GameObjectManager:createGameObject("floor")
+    floor.pc = floor:createPhysicsComponent()
+    local cinfo = RigidBodyCInfo()
+    cinfo.shape = PhysicsFactory:createBox(Vec3(5, 5, 0.1))
+    cinfo.motionType = MotionType.Fixed
+    floor.pc:createRigidBody(cinfo)
 
-local wall = GameObjectManager:createGameObject("wall")
-wall.pc = wall:createPhysicsComponent()
-local cinfo = RigidBodyCInfo()
-cinfo.shape = PhysicsFactory:createBox(Vec3(0.1, 5, 5))
-cinfo.motionType = MotionType.Fixed
-cinfo.friction = 0.0
-cinfo.angularDamping = 0.0
-cinfo.restitution = 1.0
-cinfo.position = Vec3(5.0, 0.0, 0.0)
-wall.pc:createRigidBody(cinfo)
+    local wallIndex = 0
+    local createWall = function (width, angle, position)
+        local wall = GameObjectManager:createGameObject("wall" .. wallIndex)
+        wall.pc = wall:createPhysicsComponent()
+        local cinfo = RigidBodyCInfo()
+        cinfo.shape = PhysicsFactory:createBox(Vec3(width, 0.1, 2.5))
+        cinfo.motionType = MotionType.Fixed
+        cinfo.position = position
+        cinfo.rotation = Quaternion(Vec3(0, 0, 1), angle)
+        wall.pc:createRigidBody(cinfo)
+        wallIndex = wallIndex + 1
+    end
 
-
+    createWall(5, 90, Vec3(4.9, 0.0, 2.5))
+    createWall(5, 90, Vec3(-4.9, 0.0, 2.5))
+    createWall(5, 0, Vec3(0.0, 4.9, 2.5))
+    createWall(5, 0, Vec3(0.0, -4.9, 2.5))
+end
 
 include("ball.lua")
 --balls(name, hp, startpos, startvel)
