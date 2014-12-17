@@ -1,10 +1,12 @@
+logMessage("using poolobject.lua")
+
 PoolObject = {}
 PoolObject.__index = PoolObject
 
 setmetatable(PoolObject, {
   __call = function (cls, ...)
     local self = setmetatable({}, cls)
-    self:_initialize(...)
+    self:_create(...)
     return self
   end,
 })
@@ -14,12 +16,20 @@ setmetatable(PoolObject, {
 -- go = GameObjectManager:createGameObject("enemy")
 -- go.render = go:createRenderComponent()
 -- self.go = go
-function PoolObject:_initialize()
+function PoolObject:create()
+    logMessage("CREATED".. self.uniqueIdentifier)
+end
+
+function PoolObject:initialize()
+    
+end
+
+function PoolObject:dispose()
     
 end
 
 function PoolObject:update()
--- TODO
+	
 end
 
 function PoolObject:doSomething()

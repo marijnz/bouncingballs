@@ -1,3 +1,5 @@
+logMessage("using poolexample.lua")
+
 PoolExampleObject = {}
 PoolExampleObject.__index = PoolExampleObject
 
@@ -13,6 +15,18 @@ function PoolExampleObject:exampleDoSomething()
 	PoolObject.doSomething()
 end
 
+function PoolExampleObject:create()
+    logMessage("Created PoolExampleObject ".. self.uniqueIdentifier)
+end
+
+function PoolExampleObject:initialize()
+     logMessage("Initializing PoolExampleObject ".. self.uniqueIdentifier)
+end
+
+function PoolExampleObject:dispose()
+    logMessage("Disposing PoolExampleObject ".. self.uniqueIdentifier)
+end
+
 function PoolExampleObject:update()
--- TODO
+	logMessage("Updating PoolExampleObject ".. self.uniqueIdentifier)
 end

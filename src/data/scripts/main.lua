@@ -30,14 +30,23 @@ level.render:setPath("data/models/cube-level.thModel")
 level:setPosition(Vec3(0, 0, 0))
 
 -- Classes
-include("poolsystem.lua")
-poolSystem = PoolSystem()
+include("objectManager.lua")
 include("poolobject.lua")
-include("poolexampleobject.lua")
 include("bullet.lua")
 
---example = PoolExampleObject()
---example.exampleDoSomething()
+--[[ Example usage of the PoolExampleObject
+include("poolexampleobject.lua")
+
+objectManager:addPool(PoolExampleObject, 5)
+
+poolExampleObjectAnother = objectManager:grab(PoolExampleObject)
+poolExampleObjectAndAnother = objectManager:grab(PoolExampleObject)
+
+objectManager:put(PoolExampleObject, poolExampleObjectAnother)
+
+poolExampleObjectAndAgainAnother = objectManager:grab(PoolExampleObject)
+--]]
+
 
 local player
 include("player.lua");
