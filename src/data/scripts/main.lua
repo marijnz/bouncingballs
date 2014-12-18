@@ -3,7 +3,7 @@ logMessage("using main.lua")
 -- Options
 local options = {
     freecamera = false,
-    debugDrawing = false
+    debugDrawing = true
 }	
 
 PhysicsSystem:setDebugDrawingEnabled(options.debugDrawing)
@@ -32,6 +32,7 @@ level:setPosition(Vec3(0, 0, 0))
 include("objectManager.lua")
 include("poolobject.lua")
 include("bullet.lua")
+objectManager:addPool(Bullet, 10)
 
 --[[ Example usage of the PoolExampleObject
 include("poolexampleobject.lua")

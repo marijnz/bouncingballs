@@ -16,6 +16,8 @@ setmetatable(ObjectManager, {
 function ObjectManager:_initialize(baseType)
 	self.poolObjects = {}
 	
+	self.totalCount = 0
+	
 	Events.Update:registerListener(self.update)
 end
 
@@ -31,9 +33,11 @@ function ObjectManager:addPool(baseType, amount)
 		newPoolObject = baseType()
 		
 		-- Unique identifier doesn't say anything about position in array later on!
-		newPoolObject.uniqueIdentifier = i
+		newPoolObject.uniqueIdentifier = self.totalCount
 		
 		newPoolObject:create()
+		
+		self.totalCount = self.totalCount + 1
 		
 		self.poolObjects[baseType]["passive"][i] = newPoolObject
 		
@@ -42,11 +46,11 @@ end
 
 function ObjectManager:update()
 	self = objectManager -- self is not properly set because update is called from engine
-	logMessage("Updating")
+	
 	for k1, pool in pairs(self.poolObjects) do
 		for k2, poolObject in pairs(pool["active"]) do
 			if(poolObject ~= nil) then
-				poolObject:update()
+				poolObject:update(poolObject)
 			end
 		end
 	end
@@ -56,12 +60,10 @@ end
 
 function ObjectManager:grab(baseType)
 	count = self.poolObjects[baseType]["count"]-1
+		
 	poolObject = nil
-	logMessage(count)
 	-- Grab from passive pool
 	for i=0,count do
-	
-	logMessage("OK")
 		poolObject = self.poolObjects[baseType]["passive"][i]
 		if(poolObject ~= nil) then
 			self.poolObjects[baseType]["passive"][i] = nil
@@ -91,13 +93,14 @@ function ObjectManager:put(baseType, poolObject)
 	count = self.poolObjects[baseType]["count"]-1
 	poolObject:dispose()
 	
-	-- Grab from active pool
+	-- Remove from active pool
 	for i=0,count do
 		tempPoolObject = self.poolObjects[baseType]["active"][i]
 		if( tempPoolObject ~= nil and 
 			tempPoolObject.uniqueIdentifier == poolObject.uniqueIdentifier) then
 			
 			self.poolObjects[baseType]["active"][i] = nil
+			break
 		end
 	end
 	
@@ -106,6 +109,7 @@ function ObjectManager:put(baseType, poolObject)
 		tempPoolObject = self.poolObjects[baseType]["passive"][i]
 		if(tempPoolObject == nil) then
 			self.poolObjects[baseType]["passive"][i] = poolObject
+			break
 		end
 	end
 end

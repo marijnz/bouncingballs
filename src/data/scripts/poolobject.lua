@@ -13,7 +13,7 @@ setmetatable(PoolObject, {
 
 -- Here you want to create the gameobject and components, as this won't be possible during runtime :(
 -- i.e.:
--- go = GameObjectManager:createGameObject("enemy")
+-- go = GameObjectManager:createGameObject("enemy" .. self.uniqueIdentifier)
 -- go.render = go:createRenderComponent()
 -- self.go = go
 function PoolObject:create()
