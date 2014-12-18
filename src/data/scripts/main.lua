@@ -2,7 +2,7 @@ logMessage("using main.lua")
 
 -- Options
 local options = {
-    freecamera = false,
+    freecamera = true,
     debugDrawing = false
 }	
 
@@ -43,12 +43,12 @@ include("player.lua");
 
 -- Create the floor and walls of the cube level
 do
-    local floor = GameObjectManager:createGameObject("floor")
+    floor = GameObjectManager:createGameObject("floor")
     floor.pc = floor:createPhysicsComponent()
     local cinfo = RigidBodyCInfo()
     cinfo.shape = PhysicsFactory:createBox(Vec3(5, 5, 0.1))
     cinfo.motionType = MotionType.Fixed
-    floor.pc:createRigidBody(cinfo)
+    floor.rb = floor.pc:createRigidBody(cinfo)
 
     local wallIndex = 0
     local createWall = function (width, angle, position)
@@ -71,13 +71,24 @@ end
 
 include("ball.lua")
 --balls(name, hp, startpos, startvel)
-balls("ball1", 3, Vec3(0.0, 0.0, 5.0), Vec3(1.0, 2.0, 0.0))
-balls("ball2", 3, Vec3(3.0, 0.0, 5.0), Vec3(2.0, 1.0, 0.0))
+ballInitialize("ball1", 3, Vec3(0.0, 0.0, 5.0), Vec3(1.0, 2.0, 0.0))
+ballInitialize("ball2", 3, Vec3(3.0, 0.0, 5.0), Vec3(2.0, 1.0, 0.0))
 
 
 -- Default update function
 function update(deltaTime)
 	
+		for k, v in pairs(balls) do
+		
+		if (v.hitFloor) then
+		
+		v.rb:applyLinearImpulse(Vec3(0, 0, 10))
+		
+		v.hitFloor = false
+		
+		end
+		
+	end
 
 	return EventResult.Handled
 end
