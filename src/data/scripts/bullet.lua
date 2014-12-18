@@ -4,19 +4,19 @@ Bullet = {}
 Bullet.__index = Bullet
 
 setmetatable(Bullet, {
-	__call = function (cls, ...)
-		return cls.new(...)
-	end,
+  __index = PoolObject, -- this is what makes the inheritance work
+  __call = function (cls, ...)
+    self = setmetatable({}, cls)
+    return self
+  end,
 })
 
-function Bullet.new(startPosition)
-    self = setmetatable({}, Bullet)
-	self.startPosition = startPosition
-	go = GameObjectManager:createGameObject("bullet")
+function Bullet:create()
+	go = GameObjectManager:createGameObject("bullet" .. self.uniqueIdentifier)
 	
 	-- Render
-	go.render = go:createRenderComponent()
-	go.render:setPath("data/models/ball.thmodel")
+	--go.render = go:createRenderComponent()
+	--go.render:setPath("data/models/ball.thmodel")
 	
 	-- Physics
 	go.pc = go:createPhysicsComponent()
@@ -25,30 +25,33 @@ function Bullet.new(startPosition)
 	cinfo.motionType = MotionType.Dynamic
 	cinfo.mass = 0.00001
 	cinfo.restitution = 0
-	cinfo.position = startPosition
+	cinfo.position = Vec3(0,0,0)
 	cinfo.maxLinearVelocity = 10
 	go.rb = go.pc:createRigidBody(cinfo)
-	
-	-- Register update
-	go.sc = go:createScriptComponent()
-	go.sc:setUpdateFunction(self.update)
 	
 	go.rb:setLinearVelocity(Vec3(0,0,10))
 	--self.go.rb:applyLinearImpulse(Vec3(0,0,10000))
 	
-	go:setPosition(startPosition)
+	go:setPosition(Vec3(100,100,0))
 	
 	self.go = go
-	
-	return self
 end
 
-function Bullet:getStartPosition()
-	return self.startPosition
+function Bullet:initialize()
+	 
 end
 
-function Bullet:update(deltaTime)
-	logMessage("guid : " .. self)
-	-- logMessage(self.ok)
-	--self.rb:setLinearVelocity(Vec3(0,0,10))
+function Bullet:dispose()
+	self.go:setPosition(Vec3(100,100,0))
+end
+
+function Bullet:update()
+	self.go.rb:setLinearVelocity(Vec3(0,0,10))
+	if(self.go:getPosition().z > 5) then
+		objectManager:put(Bullet, self)
+	end
+end
+
+function Bullet:setPosition(position)
+	self.go:setPosition(position)
 end

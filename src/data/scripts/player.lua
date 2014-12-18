@@ -19,9 +19,10 @@ player.pc:createRigidBody(cinfo)
 
 player.speed = 5
 
+bulletCooldown = 0.2
 
 --local bullet = Bullet(player:getPosition() + Vec3(0,0,0))
-player.update = function (deltaTime)
+player.update = function (guid, deltaTime)
     -- The direction the player is going to walk this frame
     local direction = Vec3(0.0, 0.0, 0.0)
     if (InputHandler:isPressed(Key.Up)) then
@@ -38,8 +39,15 @@ player.update = function (deltaTime)
     end
 	
 	-- space press
-	if (InputHandler:isPressed(32)) then
-        bullet.go.rrender = go:createRenderComponent()
+	if(bulletCooldown ~= 0.2) then
+		bulletCooldown = bulletCooldown - deltaTime
+		if(bulletCooldown < 0) then
+			bulletCooldown = 0.2
+		end
+	elseif (InputHandler:isPressed(32)) then
+		bullet = objectManager:grab(Bullet)
+		bullet:setPosition(player:getPosition() + Vec3(0,0,1.5))
+		bulletCooldown = bulletCooldown - deltaTime
     end
 
     -- If a direction is set, walk 
