@@ -29,6 +29,13 @@ local render = ball:createRenderComponent()
 render:setPath("data/models/balls/mediumBall.thModel")
 
 ball.hp = hp
+
+-- Shadow of the ball
+shadow = GameObjectManager:createGameObject(name .. "-shadow")
+shadow.render = shadow:createRenderComponent()
+shadow.render:setPath("data/models/shadow.thModel")
+shadow:setPosition(ball:getPosition())
+ball.shadow = shadow
 	
 rawset(balls, name, ball)
 
