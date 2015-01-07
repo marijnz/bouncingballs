@@ -47,7 +47,7 @@ namespace gep
             LUA_BIND_FUNCTION(rumbleRightFor)
         LUA_BIND_REFERENCE_TYPE_END;
     };
-    
+
     class IInputHandler : public ISubsystem
     {
     public:
@@ -78,9 +78,14 @@ namespace gep
             return getMouseDelta(unused);
         }
 
+        virtual bool isAnyPressed() const = 0;
+        virtual bool wasAnyTriggered() const = 0;
+
         LUA_BIND_REFERENCE_TYPE_BEGIN
             LUA_BIND_FUNCTION(isPressed)
+            LUA_BIND_FUNCTION(isAnyPressed)
             LUA_BIND_FUNCTION(wasTriggered)
+            LUA_BIND_FUNCTION(wasAnyTriggered)
             LUA_BIND_FUNCTION_PTR(static_cast<vec3(IInputHandler::*)()>(&getMouseDelta), "getMouseDelta")
             LUA_BIND_FUNCTION(hasMouseDelta)
             LUA_BIND_FUNCTION(getMouseNormalizedScreenPosition)

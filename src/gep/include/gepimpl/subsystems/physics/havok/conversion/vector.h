@@ -16,10 +16,9 @@ namespace hk {
 
     inline hkVector4 to(const vec3& vec)
     {
-        return hkVector4(
-            vec.x,
-            vec.y,
-            vec.z);
+        hkVector4 result;
+        result.set(vec.x, vec.y, vec.z);
+        return result;
     }
 
     inline void from(const hkVector4& hkVec, vec3& vec)

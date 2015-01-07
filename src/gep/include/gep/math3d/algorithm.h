@@ -303,6 +303,20 @@ namespace gep
         return CalcEpsilonCompare<T>::epsilonCompare(lh, rh);
     }
 
+    ///generic check if lh is zero
+    template <class T>
+    inline bool isZero(const T& lh)
+    {
+        return CalcEpsilonCompare<T>::epsilonCompare(lh, (T)0);
+    }
+
+    ///generic check if lh is not zero
+    template <class T>
+    inline bool isNonZero(const T& lh)
+    {
+        return !isZero(lh);
+    }
+
     ///generic sin function
     template <class T>
     inline const typename CalcSin<T>::result_t sin(const T& value)

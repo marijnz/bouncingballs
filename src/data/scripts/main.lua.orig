@@ -2,8 +2,13 @@ logMessage("using main.lua")
 
 -- Options 
 local options = {
+<<<<<<< HEAD
+    freecamera = true,
+    debugDrawing = false
+=======
     freecamera = false,
     debugDrawing = false 
+>>>>>>> 37575a74cf194f7979b000f2fe8aa878c4fba202
 }	
 
 PhysicsSystem:setDebugDrawingEnabled(options.debugDrawing)

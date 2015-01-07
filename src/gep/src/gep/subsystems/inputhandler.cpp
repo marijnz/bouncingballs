@@ -153,6 +153,8 @@ gep::InputHandler::InputHandler()
     : m_mouseSensitivity(0.5f, 0.5f, 1.0f / 120.0f),
     m_mouseDelta(0.0f),
     m_currentFrame(1)
+    , m_isAnyPressed(false)
+    , m_wasAnyTriggered(false)
 {
 }
 
@@ -177,6 +179,7 @@ void gep::InputHandler::destroy()
 void gep::InputHandler::update(float elapsedTime)
 {
     m_mouseDelta = vec3(0.0f, 0.0f, 0.0f);
+    m_wasAnyTriggered = false;
     m_currentFrame++;
     MSG msg = {0};
     while( PeekMessage(&msg,NULL,0,0,PM_REMOVE) )
@@ -188,6 +191,7 @@ void gep::InputHandler::update(float elapsedTime)
             break;
         case WM_KEYDOWN: //Handle keyboard key down messages
             {
+                m_wasAnyTriggered = true;
                 //uint8 keyCode = (msg.lParam >> 16) & 0xFF;
                 uint8 keyCode = uint8(msg.wParam);
                 auto& info = m_keyMap[keyCode];
@@ -264,7 +268,7 @@ void gep::InputHandler::update(float elapsedTime)
                             break;
                         }
                     }
-                    
+
                 }
             }
             break;
@@ -279,6 +283,15 @@ void gep::InputHandler::update(float elapsedTime)
     for (DWORD dwUserIndex=0; dwUserIndex<XUSER_MAX_COUNT; ++dwUserIndex)
     {
         m_pXInputGamepads[dwUserIndex].update(elapsedTime/1000.f, dwUserIndex);
+    }
+
+    for (auto& keyInfo : m_keyMap)
+    {
+        if (keyInfo.isPressed)
+        {
+            m_isAnyPressed = true;
+            break;
+        }
     }
 }
 

@@ -976,12 +976,28 @@ void gep::DebugRenderer::drawArrow(const vec3& start, const vec3& end, Color col
     auto arrowEnd = start + (dir * 0.9f);
     if( vec3(0,0,1).dot(dir) < 0.01f )
     {
+        // FIXME TODO causes crash when rendering skeletons
+		// BEGIN HOTFIX
+		if (isZero(dir.cross(vec3(1,0,0)).length())) return;
+		// END HOTFIX
         x = dir.cross(vec3(1,0,0)).normalized();
-        y = dir.cross(x).normalized();
+        // FIXME TODO causes crash when rendering skeletons
+		// BEGIN HOTFIX
+		if (isZero(dir.cross(x).length())) return;
+		// END HOTFIX
+		y = dir.cross(x).normalized();
     }
     else
     {
+        // FIXME TODO causes crash when rendering skeletons
+		// BEGIN HOTFIX
+		if (isZero(dir.cross(vec3(0,0,1)).length())) return;
+		// END HOTFIX
         x = dir.cross(vec3(0,0,1)).normalized();
+        // FIXME TODO causes crash when rendering skeletons
+		// BEGIN HOTFIX
+		if (isZero(dir.cross(x).length())) return;
+		// END HOTFIX
         y = dir.cross(x).normalized();
     }
 

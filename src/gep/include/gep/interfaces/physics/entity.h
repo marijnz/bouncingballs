@@ -216,7 +216,7 @@ namespace gep
 
         virtual Quaternion getRotation() const = 0;
         virtual void setRotation(const Quaternion& value) = 0;
-        
+
         virtual void setInitialTransform(const ITransform* transform) = 0;
 
         virtual float getFriction() const = 0;
@@ -274,14 +274,16 @@ namespace gep
         virtual void reset() = 0;
 
         LUA_BIND_REFERENCE_TYPE_BEGIN
-            
-			LUA_BIND_FUNCTION(getCollisionFilterInfo)
-			LUA_BIND_FUNCTION(setCollisionFilterInfo)
 
-			LUA_BIND_FUNCTION(getLinearVelocity)
+            LUA_BIND_FUNCTION(getCollisionFilterInfo)
+            LUA_BIND_FUNCTION(setCollisionFilterInfo)
+
+            LUA_BIND_FUNCTION(getLinearVelocity)
             LUA_BIND_FUNCTION(setLinearVelocity)
             LUA_BIND_FUNCTION(getAngularVelocity)
             LUA_BIND_FUNCTION(setAngularVelocity)
+            LUA_BIND_FUNCTION(getPosition)
+            LUA_BIND_FUNCTION(setPosition)
             LUA_BIND_FUNCTION(getRotation)
             LUA_BIND_FUNCTION(setRotation)
             LUA_BIND_FUNCTION(getTimeFactor)
@@ -302,11 +304,11 @@ namespace gep
             LUA_BIND_FUNCTION(convertToTriggerVolume)
             LUA_BIND_FUNCTION(isTriggerVolume)
             LUA_BIND_FUNCTION(getTriggerEvent)
-            
+
             LUA_BIND_FUNCTION(applyForce)
             LUA_BIND_FUNCTION(applyForceAt)
             LUA_BIND_FUNCTION(applyTorque)
-            
+
             LUA_BIND_FUNCTION(applyLinearImpulse)
             LUA_BIND_FUNCTION(applyAngularImpulse)
             LUA_BIND_FUNCTION(applyPointImpulse)

@@ -4,6 +4,7 @@ Events = {}
 
 -- Global update event
 Events.Update = _EventManager:getUpdateEvent()
+Events.PostInitialization = _EventManager:getPostInitializationEvent()
 
 function Events.create()
 	print("Creating generic event")
