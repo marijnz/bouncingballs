@@ -29,6 +29,7 @@
 
 #include "gpp/gameComponents/cameraComponent.h"
 #include "gep/interfaces/memoryManager.h"
+#include "gep/interfaces/events.h"
 
 namespace
 {
@@ -106,8 +107,10 @@ void gpp::Game::initialize()
                "You need to create a proper physics world or include \"defaults/physicsWorld.lua\"!");
     gep::IWorld::ScopedLock physicsWorldLock(pPhysicsWorld);
 
-    m_pStateMachine->run();
     g_gameObjectManager.initialize();
+    m_pStateMachine->run();
+
+    g_globalManager.getEventManager()->getPostInitializationEvent()->trigger(nullptr);
 }
 
 void gpp::Game::destroy()
