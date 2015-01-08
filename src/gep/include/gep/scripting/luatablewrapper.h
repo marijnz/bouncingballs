@@ -63,6 +63,15 @@ namespace lua
         inline bool isValid() { return m_tableReference != s_invalidReference; }
 
         template<typename T_Key, typename T_Value>
+        inline void get(const T_Key& key, T_Value& out_value)
+        {
+            if(!tryGet(key, out_value))
+            {
+                GEP_ASSERT(false, "Failed to get value from table.", key);
+            }
+        }
+
+        template<typename T_Key, typename T_Value>
         inline bool tryGet(const T_Key& key, T_Value& out_value)
         {
             utils::StackCleaner cleaner(m_L, 0);
@@ -75,6 +84,8 @@ namespace lua
             out_value = lua::pop<T_Value>(m_L, valueIndex);
             return true;
         }
+
+        inline lua_State* getState() { return m_L; }
 
     private:
         static const char* refCountIndex() { return "__refCount"; }

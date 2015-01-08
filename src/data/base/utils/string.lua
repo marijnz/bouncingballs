@@ -1,5 +1,9 @@
 
 function tostring(anything, typeOverride)
+	if typeOverride == nil then
+		return __builtins.tostring(anything)
+	end
+
 	if typeOverride == "vec3" then
 		return "{"
 			.. tostring(anything.x) .. ", "
@@ -7,5 +11,4 @@ function tostring(anything, typeOverride)
 			.. tostring(anything.z)
 			.. "}"
 	end
-	return __builtins.tostring(anything)
 end

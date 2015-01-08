@@ -49,7 +49,7 @@ namespace gep
         float			m_rightMotorIntensity;
         float			m_rightMotorTimer;
     };
-    
+
     class InputHandler : public IInputHandler
     {
     private:
@@ -69,6 +69,9 @@ namespace gep
         KeyInfo m_keyMap[MAX_NUM_KEYS];
 
         XInputGamepad m_pXInputGamepads[XUSER_MAX_COUNT];
+
+        bool m_isAnyPressed;    ///< Whether any key is pressed down at the moment.
+        bool m_wasAnyTriggered; ///< Whether any key was triggered this frame.
 
     public:
         InputHandler();
@@ -90,5 +93,8 @@ namespace gep
 
         /// \return the gamepad connected to the given user index
         virtual IGamepad* gamepad(int userIndex) override;
+
+        virtual bool isAnyPressed() const override { return m_isAnyPressed; }
+        virtual bool wasAnyTriggered() const override { return m_wasAnyTriggered; }
     };
 }

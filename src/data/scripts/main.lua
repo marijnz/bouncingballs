@@ -1,6 +1,6 @@
 logMessage("using main.lua")
 
--- Options
+-- Options 
 local options = {
     freecamera = false,
     debugDrawing = false 
@@ -48,6 +48,7 @@ poolExampleObjectAndAgainAnother = objectManager:grab(PoolExampleObject)
 --]]
 
 
+
 local player
 include("player.lua");
 
@@ -69,38 +70,42 @@ do
         cinfo.motionType = MotionType.Fixed
         cinfo.position = position
         cinfo.rotation = Quaternion(Vec3(0, 0, 1), angle)
-        wall.pc:createRigidBody(cinfo)
+        wall.rb = wall.pc:createRigidBody(cinfo)
         wallIndex = wallIndex + 1
+		
+		return wall
     end
 
-    createWall(5, 90, Vec3(4.9, 0.0, 2.5))
-    createWall(5, 90, Vec3(-4.9, 0.0, 2.5))
-    createWall(5, 0, Vec3(0.0, 4.9, 2.5))
-    createWall(5, 0, Vec3(0.0, -4.9, 2.5))
+    wall1=createWall(5, 90, Vec3(4.9, 0.0, 2.5))
+    wall2=createWall(5, 90, Vec3(-4.9, 0.0, 2.5))
+    wall3=createWall(5, 0, Vec3(0.0, 4.9, 2.5))
+    wall4=createWall(5, 0, Vec3(0.0, -4.9, 2.5))
 end
 
+--global bounciness
+
+floorBounciness=9
+wallBounciness=5
+
 include("ball.lua")
---balls(name, hp, startpos, startvel)
-ballInitialize("ball1", 3, Vec3(0.0, 0.0, 5.0), Vec3(1.0, 2.0, 0.0))
-ballInitialize("ball2", 3, Vec3(3.0, 0.0, 5.0), Vec3(2.0, 1.0, 0.0))
+
+--ball initialization
+do
+
+	objectManager:addPool(ball, 2)
+	ball1 = objectManager:grab(ball)
+	ball1:setInitialMovement(Vec3(0.0, 0.0, 5.0), Vec3(2.0, 2.0, 0.0))
+	ball2 = objectManager:grab(ball)
+	ball2:setInitialMovement(Vec3(3.0, 0.0, 5.0), Vec3(-2.0, -2.0, 0.0))
+	
+end
 
 
 -- Default update function
 function update(deltaTime)
 	
-		for k, v in pairs(balls) do
-		
-		if (v.hitFloor) then
-		
-		v.rb:applyLinearImpulse(Vec3(0, 0, 10))
-		
-		v.hitFloor = false
-		
-		end
-		
-	end
-
 	return EventResult.Handled
+	
 end
 
 -- Register the default update function

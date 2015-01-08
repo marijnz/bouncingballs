@@ -519,6 +519,9 @@
     <ClInclude Include="include\gepimpl\subsystems\physics\havok\havokPhysicsShape.h">
       <Filter>Header Files\gepimpl\subsystems\physics\havok</Filter>
     </ClInclude>
+    <ClInclude Include="include\gep\interfaces\physics\constraints.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
@@ -705,6 +708,18 @@
   <ItemGroup>
     <None Include="include\gep\memory\newdelete.inl">
       <Filter>Header Files\gep\memory</Filter>
+    </None>
+    <None Include="src\gep\subsystems\physics\havok\factory_BallAndSocketConstraint.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="src\gep\subsystems\physics\havok\factory_HingeConstraint.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="src\gep\subsystems\physics\havok\factory_PrismaticConstraint.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="src\gep\subsystems\physics\havok\factory_PointToPlaneConstraint.inl">
+      <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

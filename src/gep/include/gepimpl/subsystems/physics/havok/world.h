@@ -53,7 +53,7 @@ namespace gep
         // The base collision filtering logic - all the other function calls will forward to this one
         hkBool isCollisionEnabled(hkUint32 infoA, hkUint32 infoB) const;
     };
-    
+
 
     class HavokWorld : public IWorld, public IContactListener
     {
@@ -103,5 +103,8 @@ namespace gep
 
         virtual void lock() override;
         virtual void unlock() override;
+
+        virtual void addConstraint(Constraint constraint) override;
+        virtual void removeConstraint(Constraint constraint) override;
     };
 }

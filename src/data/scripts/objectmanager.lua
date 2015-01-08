@@ -49,8 +49,8 @@ function ObjectManager:update()
 	
 	for k1, pool in pairs(self.poolObjects) do
 		for k2, poolObject in pairs(pool["active"]) do
-			if(poolObject ~= nil) then
-				poolObject:update(poolObject)
+			if(poolObject ~= nil) then 
+				poolObject:update()
 			end
 		end
 	end

@@ -217,7 +217,9 @@ namespace gep
         /// \brief returns a normalized version of this vector
         inline const vec3_t<T> normalized() const
         {
-            return (*this) / this->length();
+            auto len = this->length();
+            GEP_ASSERT(isNonZero(len), "Cannot normalize a zero-length vec3!");
+            return (*this) / len;
         }
 
         LUA_BIND_VALUE_TYPE_BEGIN

@@ -95,6 +95,7 @@
     <ClInclude Include="include\gep\interfaces\memoryManager.h" />
     <ClInclude Include="include\gep\interfaces\physics\characterController.h" />
     <ClInclude Include="include\gep\interfaces\physics\contact.h" />
+    <ClInclude Include="include\gep\interfaces\physics\constraints.h" />
     <ClInclude Include="include\gep\interfaces\physics\entity.h" />
     <ClInclude Include="include\gep\interfaces\physics\factory.h" />
     <ClInclude Include="include\gep\interfaces\physics\rayCast.h" />
@@ -223,6 +224,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="include\gep\memory\newdelete.inl" />
+    <None Include="src\gep\subsystems\physics\havok\factory_BallAndSocketConstraint.inl" />
+    <None Include="src\gep\subsystems\physics\havok\factory_HingeConstraint.inl" />
+    <None Include="src\gep\subsystems\physics\havok\factory_PointToPlaneConstraint.inl" />
+    <None Include="src\gep\subsystems\physics\havok\factory_PrismaticConstraint.inl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="include\gepimpl\subsystems\physics\havok\conversion\notes.txt" />
@@ -319,6 +324,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
+      <AdditionalOptions>/we4715 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -343,6 +349,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
+      <AdditionalOptions>/we4715 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -369,6 +376,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
+      <AdditionalOptions>/we4715 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -396,6 +404,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
+      <AdditionalOptions>/we4715 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -8,6 +8,26 @@ namespace lua
         struct typeHandling {};
 
         template <>
+        struct typeHandling<nullptr_t>
+        {
+            static int push(lua_State* L)
+            {
+                lua_pushnil(L);
+                return 1;
+            }
+            static int push(lua_State* L, nullptr_t)
+            {
+                lua_pushnil(L);
+                return 1;
+            }
+            static nullptr_t pop(lua_State* L, int idx)
+            {
+                utils::typeCheck(L, LUA_TNIL, idx, "nil");
+                return nullptr;
+            }
+        };
+
+        template <>
         struct typeHandling<gep::int8>
         {
             static int push(lua_State* L, gep::int8 value)

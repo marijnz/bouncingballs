@@ -145,6 +145,7 @@ void gpp::Game::bindOther()
 
     // Events
     scripting->bind<gep::Event<float> >("_UpdateEvent");
+    scripting->bind<gep::Event<nullptr_t> >("_PostInitializationEvent");
     scripting->bind<gep::Event<gep::ContactPointArgs*> >("_ContactPointEvent");
     scripting->bind<gep::Event<gep::ScriptTableWrapper> >("_GenericEvent");
     scripting->bind<gep::Event<gep::ITriggerEventArgs*> >("_TriggerEvent");
@@ -170,6 +171,13 @@ void gpp::Game::bindEnums()
                         "EnteredAndLeft",  gep::ITriggerEventArgs::Type::EnteredAndLeft,
                         "TriggerBodyLeft", gep::ITriggerEventArgs::Type::TriggerBodyLeft,
                         0);
+    scripting->bindEnum("ConstraintType",
+                        "BallAndSocket", gep::ConstraintType::BallAndSocket,
+                        "Hinge", gep::ConstraintType::Hinge,
+                        "PointToPlane", gep::ConstraintType::PointToPlane,
+                        "Prismatic", gep::ConstraintType::Prismatic,
+                        0);
+    static_assert(gep::ConstraintType::COUNT == 4, "You forgot to update the enum bindings above.");
 
     scripting->bindEnum("StateUpdateStepBehavior",
         "Continue",                   gpp::sm::UpdateStepBehavior::Continue,

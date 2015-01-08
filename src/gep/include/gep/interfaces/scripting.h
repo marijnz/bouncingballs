@@ -316,4 +316,11 @@ namespace gep
     public:
         static const bool value = true;
     };
+
+    template<>
+    class IsBoundToScript<nullptr_t>
+    {
+    public:
+        static const bool value = true;
+    };
 }

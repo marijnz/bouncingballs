@@ -287,3 +287,13 @@ void gep::HavokWorld::unlock()
 {
     m_pWorld->unlock();
 }
+
+void gep::HavokWorld::addConstraint(Constraint constraint)
+{
+    m_pWorld->addConstraint(reinterpret_cast<hkpConstraintInstance*>(constraint.pData));
+}
+
+void gep::HavokWorld::removeConstraint(Constraint constraint)
+{
+    m_pWorld->removeConstraint(reinterpret_cast<hkpConstraintInstance*>(constraint.pData));
+}
