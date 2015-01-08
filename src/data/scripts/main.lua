@@ -47,8 +47,6 @@ objectManager:put(PoolExampleObject, poolExampleObjectAnother)
 poolExampleObjectAndAgainAnother = objectManager:grab(PoolExampleObject)
 --]]
 
-
-
 local player
 include("player.lua");
 
@@ -82,30 +80,25 @@ do
     wall4=createWall(5, 0, Vec3(0.0, -4.9, 2.5))
 end
 
---global bounciness
-
+-- Global bounciness
 floorBounciness=9
 wallBounciness=5
 
 include("ball.lua")
 
---ball initialization
+-- Ball initialization
 do
-
 	objectManager:addPool(ball, 2)
 	ball1 = objectManager:grab(ball)
 	ball1:setInitialPositionAndMovement(Vec3(0.0, 0.0, 5.0), Vec3(2.0, 2.0, 0.0))
 	ball2 = objectManager:grab(ball)
 	ball2:setInitialPositionAndMovement(Vec3(3.0, 0.0, 5.0), Vec3(-2.0, -2.0, 0.0))
-	
 end
 
 
 -- Default update function
 function update(deltaTime)
-	
 	return EventResult.Handled
-	
 end
 
 -- Register the default update function
