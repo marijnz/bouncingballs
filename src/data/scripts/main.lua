@@ -94,9 +94,9 @@ do
 
 	objectManager:addPool(ball, 2)
 	ball1 = objectManager:grab(ball)
-	ball1:setInitialMovement(Vec3(0.0, 0.0, 5.0), Vec3(2.0, 2.0, 0.0))
+	ball1:setInitialPositionAndMovement(Vec3(0.0, 0.0, 5.0), Vec3(2.0, 2.0, 0.0))
 	ball2 = objectManager:grab(ball)
-	ball2:setInitialMovement(Vec3(3.0, 0.0, 5.0), Vec3(-2.0, -2.0, 0.0))
+	ball2:setInitialPositionAndMovement(Vec3(3.0, 0.0, 5.0), Vec3(-2.0, -2.0, 0.0))
 	
 end
 

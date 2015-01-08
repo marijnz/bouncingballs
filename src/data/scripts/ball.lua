@@ -43,11 +43,11 @@ function ball:create()
 	self.go = go
 
     -- Shadow of the ball
-    shadow = GameObjectManager:createGameObject(name .. "-shadow")
+    shadow = GameObjectManager:createGameObject("ball" .. self.uniqueIdentifier .. "-shadow")
     shadow.render = shadow:createRenderComponent()
     shadow.render:setPath("data/models/shadow.thModel")
-    shadow:setPosition(ball:getPosition())
-    ball.shadow = shadow
+    shadow.render:setScale(Vec3(0.55, 0.55, 0.55))
+    self.shadow = shadow
 	
 	rawset(balls, "ball" .. self.uniqueIdentifier, self)
 	
@@ -104,16 +104,29 @@ function ball.ballCollision(event)
 	
 end
 
-function ball:setInitialMovement(position, LinearVelocity)
+function ball:setInitialPositionAndMovement(position, LinearVelocity)
 	 self:setPosition(position)
 	 self:setLinearVelocity(LinearVelocity)
+     self.shadow:setPosition(position)
 end
 
 function ball:dispose()
 	self.go:setPosition(Vec3(100,100,0))
 end
 
+FLOOR_Z = 0.19
+CEILING_Z = 4.6 
+BALL_MEDIUM_SHADOW_SIZE = 0.55
 function ball:update()
+
+        local position = self.go:getPosition()
+
+        -- Put the shadow on the same position
+        self.shadow:setPosition(Vec3(position.x, position.y, FLOOR_Z))
+
+        -- Calculate the shadow size of the ball based on how far the ball is from the floor and ceiling
+        local shadowScale = BALL_MEDIUM_SHADOW_SIZE * (1 - (position.z / ((CEILING_Z - FLOOR_Z) * 1.75)));
+        self.shadow.render:setScale(Vec3(shadowScale, shadowScale, shadowScale))
 	
 		if (self.hitBullet) then
 		
