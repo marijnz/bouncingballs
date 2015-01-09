@@ -1,5 +1,9 @@
 logMessage("using ball.lua")
 
+FLOOR_Z = 0.19
+CEILING_Z = 4.6 
+BALL_MEDIUM_SHADOW_SIZE = 0.55
+
 ball = {}
 ball.__index = ball
 
@@ -43,6 +47,13 @@ function ball:create()
 	go:setComponentStates(ComponentState.Inactive)
 	
 	self.go = go
+
+    -- Shadow of the ball
+    shadow = GameObjectManager:createGameObject("ball" .. self.uniqueIdentifier .. "-shadow")
+    shadow.render = shadow:createRenderComponent()
+    shadow.render:setPath("data/models/shadow.thModel")
+    shadow.render:setScale(Vec3(0.55, 0.55, 0.55))
+    self.shadow = shadow
 	
 	rawset(balls, "ball" .. self.uniqueIdentifier, self)
 	
@@ -57,46 +68,26 @@ function ball:initialize()
 end
 
 function ball.ballCollision(event)
-
-	
-
 	local self = event:getBody(CollisionArgsCallbackSource.A)
 	local other = event:getBody(CollisionArgsCallbackSource.B)
 	
-	for k, v in pairs(balls) do
-		
-		if (self:equals(v.go.rb)) then
-		
-			if (other:equals(floor.rb)) then
-		
-				v.hitFloor = true
-		
-			end
-	
-			if (other:equals(wall1.rb)) then
-	
-				v.hitWall1 = true
-	
-			end
-	
-			if (other:equals(wall2.rb)) then
-	
-				v.hitWall2 = true
-				
-			end
-	
-			if (other:equals(wall3.rb)) then
-	
-				v.hitWall3 = true
-		
-			end
-	
-			if (other:equals(wall4.rb)) then
-			
-				v.hitWall4 = true
-	
-			end
-			
+    for k, v in pairs(balls) do
+        if (self:equals(v.go.rb)) then
+            if (other:equals(floor.rb)) then
+                v.hitFloor = true
+            end
+            if (other:equals(wall1.rb)) then
+                v.hitWall1 = true
+            end
+            if (other:equals(wall2.rb)) then
+                v.hitWall2 = true
+            end
+            if (other:equals(wall3.rb)) then
+                v.hitWall3 = true
+            end
+            if (other:equals(wall4.rb)) then
+                v.hitWall4 = true
+            end
 				for keys, value in pairs(bullets) do
 				
 					if (other:equals(value.go.rb)) then
@@ -109,74 +100,64 @@ function ball.ballCollision(event)
 					
 				end
 			
-			break
-		
-		end
-		
-	end
-	
+            break
+        end
+    end
+
 end
 
-function ball:setInitialMovement(position, LinearVelocity)
+function ball:setInitialPositionAndMovement(position, LinearVelocity)
 	 self:setPosition(position)
 	 self:setLinearVelocity(LinearVelocity)
+     self.shadow:setPosition(position)
 end
 
 function ball:dispose()
 	self.go:setPosition(Vec3(100,100,0))
 end
 
+
 function ball:update()
-	
-		if (self.hitBullet) then
-		
-		self.hitBullet = false
-		
-		--todo: get smaller balls here
-		
-		objectManager:put(ball, self)
-				
-		end
-	
-		if (self.hitFloor) then
-		
-		self.go.rb:applyLinearImpulse(Vec3(0, 0, floorBounciness))
-		
-		self.hitFloor = false
-		
-		end
-		
-		if (self.hitWall1) then
-		
-		self.go.rb:applyLinearImpulse(Vec3(-wallBounciness, 0, 0))
-		
-		self.hitWall1 = false
-		
-		end
-		
-		if (self.hitWall2) then
-		
-		self.go.rb:applyLinearImpulse(Vec3(wallBounciness, 0 , 0))
-		
-		self.hitWall2 = false
-		
-		end
-		
-		if (self.hitWall3) then
-		
-		self.go.rb:applyLinearImpulse(Vec3(0, -wallBounciness, 0))
-		
-		self.hitWall3 = false
-		
-		end
-		
-		if (self.hitWall4) then
-		
-		self.go.rb:applyLinearImpulse(Vec3(0, wallBounciness, 0))
-		
-		self.hitWall4 = false
-		
-		end
+
+    local position = self.go:getPosition()
+
+    -- Put the shadow on the same position
+    self.shadow:setPosition(Vec3(position.x, position.y, FLOOR_Z))
+
+    -- Calculate the shadow size of the ball based on how far the ball is from the floor and ceiling
+    local shadowScale = BALL_MEDIUM_SHADOW_SIZE * (1 - (position.z / ((CEILING_Z - FLOOR_Z) * 1.75)));
+    self.shadow.render:setScale(Vec3(shadowScale, shadowScale, shadowScale))
+
+    if (self.hitBullet) then
+        self.hitBullet = false
+        --todo: get smaller balls here
+        objectManager:put(ball, self)
+    end
+
+    if (self.hitFloor) then
+        self.go.rb:applyLinearImpulse(Vec3(0, 0, floorBounciness))
+        self.hitFloor = false
+    end
+    
+    if (self.hitWall1) then
+        self.go.rb:applyLinearImpulse(Vec3(-wallBounciness, 0, 0))
+        self.hitWall1 = false
+    end
+    
+    if (self.hitWall2) then
+        self.go.rb:applyLinearImpulse(Vec3(wallBounciness, 0 , 0))
+        self.hitWall2 = false
+    end
+    
+    if (self.hitWall3) then
+        self.go.rb:applyLinearImpulse(Vec3(0, -wallBounciness, 0))
+        self.hitWall3 = false
+    end
+    
+    if (self.hitWall4) then
+        self.go.rb:applyLinearImpulse(Vec3(0, wallBounciness, 0))
+        self.hitWall4 = false
+    end
 	
 end
 
