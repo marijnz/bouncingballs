@@ -3,8 +3,8 @@ logMessage("using main.lua")
 -- Options 
 local options = {
     freecamera = false,
-    debugDrawing = false 
-}	
+    debugDrawing = true
+	}	
 
 PhysicsSystem:setDebugDrawingEnabled(options.debugDrawing)
 
@@ -88,14 +88,16 @@ floorBounciness=9
 wallBounciness=5
 
 include("ball.lua")
+include("mediumBall.lua")
+include("smallBall.lua")
 
 --ball initialization
 do
 
-	objectManager:addPool(ball, 2)
-	ball1 = objectManager:grab(ball)
+	objectManager:addPool(MediumBall, 2)
+	local ball1 = objectManager:grab(MediumBall)
 	ball1:setInitialMovement(Vec3(0.0, 0.0, 5.0), Vec3(2.0, 2.0, 0.0))
-	ball2 = objectManager:grab(ball)
+	local ball2 = objectManager:grab(MediumBall)
 	ball2:setInitialMovement(Vec3(3.0, 0.0, 5.0), Vec3(-2.0, -2.0, 0.0))
 	
 end

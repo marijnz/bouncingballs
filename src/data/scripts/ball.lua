@@ -40,13 +40,21 @@ function ball:create()
 	
 	go:setPosition(Vec3(100,100,0))
 	
+	go:setComponentStates(ComponentState.Inactive)
+	
 	self.go = go
 	
 	rawset(balls, "ball" .. self.uniqueIdentifier, self)
 	
 end
 
---toDo: fix this function to make it work for every ball inidvidually
+function ball:initialize()
+	 
+	 self.go:setComponentStates(ComponentState.Active)
+	 
+	 logMessage(self.go:getGuid().."initialized")
+	 
+end
 
 function ball.ballCollision(event)
 
@@ -89,6 +97,18 @@ function ball.ballCollision(event)
 	
 			end
 			
+				for keys, value in pairs(bullets) do
+				
+					if (other:equals(value.go.rb)) then
+					
+					v.hitBullet = true
+					
+					logMessage(v.go:getGuid().."hit Bullet")
+					
+					end
+					
+				end
+			
 			break
 		
 		end
@@ -127,8 +147,6 @@ function ball:update()
 		end
 		
 		if (self.hitWall1) then
-		
-		logMessage("LinearImpulse applied")
 		
 		self.go.rb:applyLinearImpulse(Vec3(-wallBounciness, 0, 0))
 		
