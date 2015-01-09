@@ -23,6 +23,8 @@ player.speed = 5
 
 bulletCooldown = 0.2
 
+
+
 --local bullet = Bullet(player:getPosition() + Vec3(0,0,0))
 player.update = function (guid, deltaTime) 	
     -- The direction the player is going to walk this frame

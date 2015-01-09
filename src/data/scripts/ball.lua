@@ -2,7 +2,6 @@ logMessage("using ball.lua")
 
 FLOOR_Z = 0.19
 CEILING_Z = 4.6 
-BALL_MEDIUM_SHADOW_SIZE = 0.55
 
 ball = {}
 ball.__index = ball
@@ -17,17 +16,19 @@ setmetatable(ball, {
   end,
 })
 
-function ball:create()
-	go = GameObjectManager:createGameObject("ball" .. self.uniqueIdentifier)
+function ball:create(model, size)
+
+		go = GameObjectManager:createGameObject(model .. "-" .. self.uniqueIdentifier)
 	
 	-- Render
 	go.render = go:createRenderComponent()
-	go.render:setPath("data/models/balls/mediumBall.thModel")
+	go.render:setPath("data/models/balls/" .. model .. ".thModel")
+	go.render:setScale(Vec3(0.1*size, 0.1*size, 0.1*size))
 	
 	-- Physics
 	go.pc = go:createPhysicsComponent()
 	cinfo = RigidBodyCInfo()
-	cinfo.shape = PhysicsFactory:createSphere(0.5)
+	cinfo.shape = PhysicsFactory:createSphere(size)
 	cinfo.motionType = MotionType.Dynamic
 	cinfo.mass = 1.0
 	cinfo.friction = 0.0
@@ -35,14 +36,11 @@ function ball:create()
 	cinfo.linearDamping = 0.0
 	cinfo.restitution = 0.0
 	cinfo.position = Vec3(0,0,0)
-	
-	go.pc:getContactPointEvent():registerListener(self.ballCollision)
-	
 	go.rb = go.pc:createRigidBody(cinfo)
 	
-	go.rb:setLinearVelocity(Vec3(0,0,10))
-	
-	go:setPosition(Vec3(100,100,0))
+	go.pc:getContactPointEvent():registerListener(self.ballCollision)
+
+	go:setComponentStates(ComponentState.Inactive)
 	
 	self.go = go
 
@@ -50,14 +48,26 @@ function ball:create()
     shadow = GameObjectManager:createGameObject("ball" .. self.uniqueIdentifier .. "-shadow")
     shadow.render = shadow:createRenderComponent()
     shadow.render:setPath("data/models/shadow.thModel")
+	shadow.size = 1.1 * size
     shadow.render:setScale(Vec3(0.55, 0.55, 0.55))
     self.shadow = shadow
+	self.shadow:setComponentStates(ComponentState.Inactive)
 	
 	rawset(balls, "ball" .. self.uniqueIdentifier, self)
 	
+	logMessage(go:getGuid().." created")
+	
 end
 
---toDo: fix this function to make it work for every ball inidvidually
+function ball:initialize()
+	 
+	 self.go:setComponentStates(ComponentState.Active)
+	 
+	 logMessage(self.go:getGuid().."initialized")
+	 
+	 self.shadow:setComponentStates(ComponentState.Active)
+	 
+end
 
 function ball.ballCollision(event)
 	local self = event:getBody(CollisionArgsCallbackSource.A)
@@ -80,6 +90,18 @@ function ball.ballCollision(event)
             if (other:equals(wall4.rb)) then
                 v.hitWall4 = true
             end
+				for keys, value in pairs(objectManager:getActiveFromPool(Bullet)) do
+				logMessage("value: ")
+				logMessage(value:getRigidBody())
+				logMessage("other: ")
+				logMessage(other)
+					if (value ~= nil and other:equals(value:getRigidBody())) then
+						v.hitBullet = true
+						
+						logMessage(v.go:getGuid().."hit Bullet")
+					end
+				end
+			
             break
         end
     end
@@ -94,6 +116,10 @@ end
 
 function ball:dispose()
 	self.go:setPosition(Vec3(100,100,0))
+	self.go:setComponentStates(ComponentState.Inactive)
+	
+	self.shadow:setComponentStates(ComponentState.Inactive)
+	
 end
 
 
@@ -101,18 +127,12 @@ function ball:update()
 
     local position = self.go:getPosition()
 
-    -- Put the shadow on the same position
+	-- Put the shadow on the same position
     self.shadow:setPosition(Vec3(position.x, position.y, FLOOR_Z))
 
     -- Calculate the shadow size of the ball based on how far the ball is from the floor and ceiling
-    local shadowScale = BALL_MEDIUM_SHADOW_SIZE * (1 - (position.z / ((CEILING_Z - FLOOR_Z) * 1.75)));
+    local shadowScale = self.shadow.size * (1 - (position.z / ((CEILING_Z - FLOOR_Z) * 1.75)));
     self.shadow.render:setScale(Vec3(shadowScale, shadowScale, shadowScale))
-
-    if (self.hitBullet) then
-        self.hitBullet = false
-        --todo: get smaller balls here
-        objectManager:put(ball, self)
-    end
 
     if (self.hitFloor) then
         self.go.rb:applyLinearImpulse(Vec3(0, 0, floorBounciness))

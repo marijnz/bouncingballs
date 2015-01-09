@@ -3,8 +3,6 @@ logMessage("using main.lua")
 -- Options 
 local options = {
     freecamera = false,
-    debugDrawing = true 
-}	
 
 --function BIT(x)
 --	return bit32.blshift(1, x)
@@ -95,14 +93,19 @@ floorBounciness=9
 wallBounciness=5
 
 include("ball.lua")
+include("mediumBall.lua")
+include("smallBall.lua")
 
 -- Ball initialization
 do
-	objectManager:addPool(ball, 2)
-	ball1 = objectManager:grab(ball)
+	objectManager:addPool(MediumBall, 2)
+	local ball1 = objectManager:grab(MediumBall)
 	ball1:setInitialPositionAndMovement(Vec3(0.0, 0.0, 5.0), Vec3(2.0, 2.0, 0.0))
-	ball2 = objectManager:grab(ball)
+	local ball2 = objectManager:grab(MediumBall)
 	ball2:setInitialPositionAndMovement(Vec3(3.0, 0.0, 5.0), Vec3(-2.0, -2.0, 0.0))
+
+	objectManager:addPool(SmallBall, 4)
+	
 end
 
 

@@ -25,8 +25,14 @@ function ObjectManager:_initialize(baseType)
 	self.go = go
 end
 
+
+function ObjectManager:getActiveFromPool(baseType)
+	return self.poolObjects[baseType]["active"]
+end
+
+
 function ObjectManager:addPool(baseType, amount)
-	logMessage("Adding pool to PoolSystem!")
+	logMessage("Adding pool to PoolSystem! "..amount)
 	self.poolObjects[baseType] = {}
 	self.poolObjects[baseType]["count"] = amount
 	

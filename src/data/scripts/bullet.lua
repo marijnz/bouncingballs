@@ -5,6 +5,7 @@ Bullet.__index = Bullet
 
 BULLET_SPEED = 13
 
+
 setmetatable(Bullet, {
   __index = PoolObject, -- this is what makes the inheritance work
   __call = function (cls, ...)
@@ -12,6 +13,11 @@ setmetatable(Bullet, {
     return self
   end,
 })
+
+
+function Bullet:getRigidBody()
+	return self.goCollision.rb
+end
 
 function Bullet:create()
 
