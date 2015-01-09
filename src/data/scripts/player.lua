@@ -1,5 +1,7 @@
 logMessage("using player.lua")
 
+BULLET_RECOIL_TIME = 0.5
+
 player = GameObjectManager:createGameObject("player")
 player.render = player:createRenderComponent()
 player.render:setPath("data/models/player.thModel")
@@ -39,14 +41,14 @@ player.update = function (guid, deltaTime)
     end
 	
 	-- space press
-	if(bulletCooldown ~= 0.2) then
+	if(bulletCooldown ~= BULLET_RECOIL_TIME) then
 		bulletCooldown = bulletCooldown - deltaTime
 		if(bulletCooldown < 0) then
-			bulletCooldown = 0.2
+			bulletCooldown = BULLET_RECOIL_TIME
 		end
 	elseif (InputHandler:isPressed(32)) then
 		bullet = objectManager:grab(Bullet)
-		bullet:setPosition(player:getPosition() + Vec3(0,0,1.5))
+		bullet:setInitialPosition(player:getPosition() + Vec3(0,0,1))
 		bulletCooldown = bulletCooldown - deltaTime
     end
 

@@ -32,7 +32,7 @@ level:setPosition(Vec3(0, 0, 0))
 include("objectManager.lua")
 include("poolobject.lua")
 include("bullet.lua")
-objectManager:addPool(Bullet, 10)
+objectManager:addPool(Bullet, 5)
 
 --[[ Example usage of the PoolExampleObject
 include("poolexampleobject.lua")
