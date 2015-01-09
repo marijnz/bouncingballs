@@ -3,7 +3,7 @@ logMessage("using main.lua")
 -- Options 
 local options = {
     freecamera = false,
-    debugDrawing = true
+    debugDrawing = false
 	}	
 
 PhysicsSystem:setDebugDrawingEnabled(options.debugDrawing)
@@ -95,6 +95,9 @@ do
 	ball1:setInitialPositionAndMovement(Vec3(0.0, 0.0, 5.0), Vec3(2.0, 2.0, 0.0))
 	local ball2 = objectManager:grab(MediumBall)
 	ball2:setInitialPositionAndMovement(Vec3(3.0, 0.0, 5.0), Vec3(-2.0, -2.0, 0.0))
+
+	objectManager:addPool(SmallBall, 4)
+	
 end
 
 

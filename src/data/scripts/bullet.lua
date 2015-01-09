@@ -3,6 +3,8 @@ logMessage("using bullet.lua")
 Bullet = {}
 Bullet.__index = Bullet
 
+bullets={}
+
 setmetatable(Bullet, {
   __index = PoolObject, -- this is what makes the inheritance work
   __call = function (cls, ...)
@@ -16,7 +18,7 @@ function Bullet:create()
 	
 	-- Render
 	--go.render = go:createRenderComponent()
-	--go.render:setPath("data/models/ball.thmodel")
+	--go.render:setPath("data/models/bullet.thmodel")
 	
 	-- Physics
 	go.pc = go:createPhysicsComponent()
@@ -35,6 +37,11 @@ function Bullet:create()
 	go:setPosition(Vec3(100,100,0))
 	
 	self.go = go
+	
+	rawset(bullets, "Bullet" .. self.uniqueIdentifier, self)
+	
+	logMessage(go:getGuid().." created")
+	
 end
 
 function Bullet:initialize()
