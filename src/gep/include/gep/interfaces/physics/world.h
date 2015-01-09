@@ -4,6 +4,7 @@
 
 #include "gep/interfaces/events.h"
 #include "gep/interfaces/scripting.h"
+#include "gep/interfaces/physics/constraints.h"
 
 namespace gep
 {
@@ -112,12 +113,19 @@ namespace gep
         virtual void   lock() = 0;
         virtual void unlock() = 0;
 
+        // Constraints
+
+        virtual void addConstraint(Constraint constraint) = 0;
+        virtual void removeConstraint(Constraint constraint) = 0;
+
         LUA_BIND_REFERENCE_TYPE_BEGIN
             LUA_BIND_FUNCTION_PTR(static_cast<RayCastOutput(IWorld::*)(const RayCastInput&)>(&castRay), "castRay")
             LUA_BIND_FUNCTION(setCollisionFilter)
             LUA_BIND_FUNCTION(getContactPointEvent)
             LUA_BIND_FUNCTION(getCollisionAddedEvent)
             LUA_BIND_FUNCTION(getCollisionRemovedEvent)
+            LUA_BIND_FUNCTION(addConstraint)
+            LUA_BIND_FUNCTION(removeConstraint)
         LUA_BIND_REFERENCE_TYPE_END
 
     private:

@@ -52,10 +52,7 @@ function ObjectManager:update(deltaTime)
 	
 	for k1, pool in pairs(self.poolObjects) do
 		for k2, poolObject in pairs(pool["active"]) do
-			if(poolObject ~= nil) then
-				logMessage("OK"..deltaTime)
 				poolObject:update(deltaTime)
-			end
 		end
 	end
 	return EventResult.Handled

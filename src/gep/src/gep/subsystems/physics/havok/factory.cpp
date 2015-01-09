@@ -4,6 +4,7 @@
 #include "gep/memory/allocator.h"
 #include "gepimpl/subsystems/havok.h"
 #include "gep/interfaces/MemoryManager.h"
+#include "gepimpl/subsystems/physics/havok/entity.h"
 
 
 gep::CollisionMesh::CollisionMesh() :
@@ -261,6 +262,7 @@ void gep::HavokPhysicsFactory::initialize()
 
 void gep::HavokPhysicsFactory::destroy()
 {
+    collectGarbage();
     g_globalManager.getMemoryManager()->deregisterAllocator(m_pAllocator);
 }
 
@@ -272,6 +274,16 @@ gep::IAllocatorStatistics* gep::HavokPhysicsFactory::getAllocator()
 void gep::HavokPhysicsFactory::setAllocator(IAllocatorStatistics* allocator)
 {
     m_pAllocator = allocator;
+}
+
+void gep::HavokPhysicsFactory::collectGarbage()
+{
+    for(auto c : m_constraints)
+    {
+        auto pConstraint = reinterpret_cast<hkpConstraintInstance*>(c.pData);
+        if (pConstraint->getReferenceCount() == 1) // Only we still have a reference
+            pConstraint->removeReference();
+    }
 }
 
 gep::IWorld* gep::HavokPhysicsFactory::createWorld(const WorldCInfo& cinfo) const
@@ -370,4 +382,138 @@ gep::ICollisionFilter* gep::HavokPhysicsFactory::createCollisionFilter_Simple()
     auto pFilterWrapper = GEP_NEW(m_pAllocator, HavokCollisionFilterWrapper)(pHkFilter);
     pHkFilter->removeReference();
     return pFilterWrapper;
+}
+
+using namespace gep;
+
+static hkVector4 getVec4(ScriptTableWrapper& scriptTable, const char* szName)
+{
+    vec3 vec(DO_NOT_INITIALIZE);
+    if (!scriptTable.tryGet(szName, vec))
+    {
+        luaL_error(scriptTable.getState(), "Missing table member '%s' (should be a vec3)", szName);
+    }
+    return conversion::hk::to(vec);
+}
+
+static hkpRigidBody* getRigidBody(ScriptTableWrapper& scriptTable,
+                                  const char* szName,
+                                  bool useFixedRigidBodyAsFallback = false)
+{
+    auto L = scriptTable.getState();
+    ScriptTableWrapper rigidBodyTable;
+    if (!scriptTable.tryGet(szName, rigidBodyTable))
+    {
+        if (useFixedRigidBodyAsFallback)
+        {
+            hkpWorld* pHkpWorld = static_cast<HavokWorld*>(g_globalManager.getPhysicsSystem()->getWorld())->getHkpWorld();
+            return pHkpWorld->getFixedRigidBody();
+        }
+
+        luaL_error(L, "Missing table member '%s' (should be a rigid body)", szName);
+    }
+
+    ScriptFunctionWrapper dummy;
+    if (!rigidBodyTable.tryGet("isTriggerVolume", dummy))
+    {
+        luaL_error(L, "Table member '%s' is NOT a rigid body! (which it must be)", szName);
+    }
+
+    rigidBodyTable.push();
+    auto pRigidBody = lua::pop<IRigidBody*>(L, -1);
+    return static_cast<HavokRigidBody*>(pRigidBody)->getHkpRigidBody();
+}
+
+static void extractCommonConstraintData(ScriptTableWrapper& scriptTable, hkpConstraintData* pData)
+{
+    auto L = scriptTable.getState();
+    std::string temp;
+
+    // Solving Method (optional)
+    if (scriptTable.tryGet("solvingMethod", temp))
+    {
+        if (temp == "stable")
+        {
+            pData->setSolvingMethod(hkpConstraintAtom::METHOD_STABILIZED);
+        }
+        else if(temp != "default")
+        {
+            luaL_error(L, "Optional constraint cinfo member 'solvingMethod' "
+                       "must be either \"default\" or \"stable\" (got \"%s\")",
+                       temp.c_str());
+        }
+    }
+
+    // Max Linear Impulse (optional)
+    {
+        hkReal maxLinearImpulse;
+        if(scriptTable.tryGet("maxLinearImpulse", maxLinearImpulse))
+        {
+            pData->setMaximumLinearImpulse(maxLinearImpulse);
+        }
+    }
+
+    // Max Angular Impulse (optional)
+    {
+        hkReal maxAngularImpulse;
+        if(scriptTable.tryGet("maxAngularImpulse", maxAngularImpulse))
+        {
+            pData->setMaximumAngularImpulse(maxAngularImpulse);
+        }
+    }
+
+    // Breach Impulse (optional)
+    {
+        hkReal breachImpulse;
+        if(scriptTable.tryGet("breachImpulse", breachImpulse))
+        {
+            pData->setBreachImpulse(breachImpulse);
+        }
+    }
+
+    // Inertia Stabilization Factor (optional)
+    {
+        hkReal inertiaStabilizationFactor;
+        if(scriptTable.tryGet("inertiaStabilizationFactor", inertiaStabilizationFactor))
+        {
+            pData->setInertiaStabilizationFactor(inertiaStabilizationFactor);
+        }
+    }
+}
+
+#include "factory_BallAndSocketConstraint.inl"
+#include "factory_HingeConstraint.inl"
+#include "factory_PointToPlaneConstraint.inl"
+#include "factory_PrismaticConstraint.inl"
+
+gep::Constraint gep::HavokPhysicsFactory::createConstraint(ScriptTableWrapper& scriptTable)
+{
+    hkpConstraintInstance* pConstraint = nullptr;
+
+    ConstraintType::Enum type;
+    scriptTable.get("type", type);
+    switch(type)
+    {
+    case ConstraintType::BallAndSocket:
+        pConstraint = createBallAndSocket(scriptTable);
+        break;
+    case ConstraintType::Hinge:
+        pConstraint = createHinge(scriptTable);
+        break;
+    case ConstraintType::PointToPlane:
+        pConstraint = createPointToPlane(scriptTable);
+        break;
+    case ConstraintType::Prismatic:
+        pConstraint = createPrismatic(scriptTable);
+        break;
+    default:
+        GEP_ASSERT(false, "Unsupported constraint type");
+        break;
+    }
+
+    GEP_ASSERT(pConstraint);
+
+    Constraint c = { pConstraint };
+    m_constraints.append(c);
+    return c;
 }

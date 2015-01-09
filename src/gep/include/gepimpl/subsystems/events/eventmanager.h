@@ -11,10 +11,12 @@ namespace gep
     class GlobalEventManager : public IEventManager
     {
         Event<float> m_update;
+        Event<nullptr_t> m_postInit;
         Hashmap<EventId, Event<ScriptTableWrapper>*> m_scriptEvents;
     public:
         GlobalEventManager() :
             m_update(),
+            m_postInit(),
             m_scriptEvents()
         {
         }
@@ -35,6 +37,11 @@ namespace gep
         virtual Event<float>* getUpdateEvent() override
         {
             return &m_update;
+        }
+
+        virtual Event<nullptr_t>* getPostInitializationEvent() override
+        {
+            return &m_postInit;
         }
 
         virtual void update(float elapsedTime) override

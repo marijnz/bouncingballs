@@ -1,10 +1,20 @@
 logMessage("using main.lua")
 
--- Options
+-- Options 
 local options = {
     freecamera = false,
-    debugDrawing = true
+    debugDrawing = true 
 }	
+
+--function BIT(x)
+--	return bit32.blshift(1, x)
+--end
+--
+--COL_NOTHING = 0 -- <Collide with nothing
+--COL_PLAYER = BIT(0) -- <Collide with player
+--COL_BALL = BIT(1) -- <Collide with balls
+--COL_LEVEL = BIT(2) -- <Collide with level
+--COL_BULLET = BIT(3) -- <Collide with bullets
 
 PhysicsSystem:setDebugDrawingEnabled(options.debugDrawing)
 
@@ -47,18 +57,17 @@ objectManager:put(PoolExampleObject, poolExampleObjectAnother)
 poolExampleObjectAndAgainAnother = objectManager:grab(PoolExampleObject)
 --]]
 
-
 local player
 include("player.lua");
 
 -- Create the floor and walls of the cube level
 do
-    local floor = GameObjectManager:createGameObject("floor")
+    floor = GameObjectManager:createGameObject("floor")
     floor.pc = floor:createPhysicsComponent()
     local cinfo = RigidBodyCInfo()
     cinfo.shape = PhysicsFactory:createBox(Vec3(5, 5, 0.1))
     cinfo.motionType = MotionType.Fixed
-    floor.pc:createRigidBody(cinfo)
+    floor.rb = floor.pc:createRigidBody(cinfo)
 
     local wallIndex = 0
     local createWall = function (width, angle, position)
@@ -69,26 +78,36 @@ do
         cinfo.motionType = MotionType.Fixed
         cinfo.position = position
         cinfo.rotation = Quaternion(Vec3(0, 0, 1), angle)
-        wall.pc:createRigidBody(cinfo)
+        wall.rb = wall.pc:createRigidBody(cinfo)
         wallIndex = wallIndex + 1
+		
+		return wall
     end
 
-    createWall(5, 90, Vec3(4.9, 0.0, 2.5))
-    createWall(5, 90, Vec3(-4.9, 0.0, 2.5))
-    createWall(5, 0, Vec3(0.0, 4.9, 2.5))
-    createWall(5, 0, Vec3(0.0, -4.9, 2.5))
+    wall1=createWall(5, 90, Vec3(4.9, 0.0, 2.5))
+    wall2=createWall(5, 90, Vec3(-4.9, 0.0, 2.5))
+    wall3=createWall(5, 0, Vec3(0.0, 4.9, 2.5))
+    wall4=createWall(5, 0, Vec3(0.0, -4.9, 2.5))
 end
 
+-- Global bounciness
+floorBounciness=9
+wallBounciness=5
+
 include("ball.lua")
---balls(name, hp, startpos, startvel)
-balls("ball1", 3, Vec3(0.0, 0.0, 5.0), Vec3(1.0, 2.0, 0.0))
-balls("ball2", 3, Vec3(3.0, 0.0, 5.0), Vec3(2.0, 1.0, 0.0))
+
+-- Ball initialization
+do
+	objectManager:addPool(ball, 2)
+	ball1 = objectManager:grab(ball)
+	ball1:setInitialPositionAndMovement(Vec3(0.0, 0.0, 5.0), Vec3(2.0, 2.0, 0.0))
+	ball2 = objectManager:grab(ball)
+	ball2:setInitialPositionAndMovement(Vec3(3.0, 0.0, 5.0), Vec3(-2.0, -2.0, 0.0))
+end
 
 
 -- Default update function
 function update(deltaTime)
-	
-
 	return EventResult.Handled
 end
 

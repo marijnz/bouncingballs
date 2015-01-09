@@ -30,7 +30,7 @@ scene.sponza.rc = scene.sponza:createRenderComponent()
 scene.sponza.rc:setPath("data/sponza/sponza.thModel")
 scene.sponza.rc:setScale(Vec3(5.5, 5.5, 5.5))
 scene.ground = createCollisionBox("ground", Vec3(1750.0, 1000.0, 15.0), Vec3(0.0, 0.0, 0.0))
-scene.ground = createCollisionBox("wallRight", Vec3(1000.0, 40.0, 200.0), Vec3(-60.0, 280.0, 200.0))
+scene.wall = createCollisionBox("wallRight", Vec3(1000.0, 40.0, 200.0), Vec3(-60.0, 280.0, 200.0))
 
 function createDefaultCam(guid)
 	local cam = GameObjectManager:createGameObject(guid)
@@ -51,11 +51,6 @@ function debugCamEnter(enterData)
 end
 
 function debugCamUpdate(updateData)
-
--- FIXME TODO this call should be unnecessary
-debugCam:setComponentStates(ComponentState.Active)
-
-
 	DebugRenderer:printText(Vec2(-0.9, 0.75), "debugCamUpdate")
 
 	local mouseDelta = InputHandler:getMouseDelta()

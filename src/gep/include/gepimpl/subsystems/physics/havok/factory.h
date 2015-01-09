@@ -16,7 +16,7 @@ namespace gep
     class CollisionMesh : public ICollisionMesh
     {
         friend class CollisionMeshFileLoader;
-        
+
         IShape* m_pShape;
         Transform* m_pTransform;
         CollisionMeshFileLoader* m_pCollisionMeshFileLoader;
@@ -46,7 +46,7 @@ namespace gep
         virtual const IShape* getShape() const override;
 
     private:
-        
+
         void setShape(IShape* shape);
         void setTransform(Transform* transform);
 
@@ -114,6 +114,7 @@ namespace gep
     class HavokPhysicsFactory : public IPhysicsFactory
     {
         IAllocatorStatistics* m_pAllocator;
+        DynamicArray<Constraint> m_constraints;
     public:
 
         HavokPhysicsFactory(IAllocatorStatistics* allocator);
@@ -124,6 +125,8 @@ namespace gep
 
         virtual IAllocatorStatistics* getAllocator() override;
         virtual void setAllocator(IAllocatorStatistics* allocator) override;
+
+        void collectGarbage();
 
         virtual IWorld* createWorld(const WorldCInfo& cinfo) const override;
         virtual IRigidBody* createRigidBody(const RigidBodyCInfo& cinfo) const override;
@@ -143,6 +146,8 @@ namespace gep
         virtual IPhantomCallbackShape* createPhantomCallbackShape() override;
 
         virtual ICollisionFilter* createCollisionFilter_Simple() override;
+
+        virtual Constraint createConstraint(ScriptTableWrapper& scriptTable) override;
 
     private:
         template<typename T_Shape>

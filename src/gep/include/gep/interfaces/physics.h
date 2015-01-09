@@ -8,3 +8,4 @@
 #include "gep/interfaces/physics/shape.h"
 #include "gep/interfaces/physics/system.h"
 #include "gep/interfaces/physics/world.h"
+#include "gep/interfaces/physics/constraints.h"

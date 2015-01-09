@@ -29,7 +29,7 @@ gpp::GameObject* gpp::GameObjectManager::createGameObject(const std::string& gui
     GEP_ASSERT(m_state == State::PreInitialization, "You are not allowed to create game objects after the initialization process.");
 
     GameObject* pGameObject = nullptr;
-    GEP_ASSERT(!m_gameObjects.tryGet(guid, pGameObject), "GameObject %s already exists!", guid.c_str());
+    GEP_ASSERT(!m_gameObjects.tryGet(guid, pGameObject), "GameObject already exists!", guid);
     pGameObject = new GameObject();
     pGameObject->m_guid = guid;
     m_gameObjects[guid] = pGameObject;

@@ -1,6 +1,7 @@
 #pragma once
 #include "gep/interfaces/resourceManager.h"
 #include "gep/interfaces/physics/shape.h"
+#include "gep/interfaces/physics/constraints.h"
 
 namespace gep
 {
@@ -54,6 +55,8 @@ namespace gep
         virtual IBoundingVolumeShape* createBoundingVolumeShape(IShape* pBounding, IShape* pChild) = 0;
         virtual IPhantomCallbackShape* createPhantomCallbackShape() = 0;
 
+        virtual Constraint createConstraint(ScriptTableWrapper& scriptTable) = 0;
+
         LUA_BIND_REFERENCE_TYPE_BEGIN
             LUA_BIND_FUNCTION(createWorld)
             LUA_BIND_FUNCTION(createRigidBody)
@@ -67,6 +70,7 @@ namespace gep
             LUA_BIND_FUNCTION(createBoundingVolumeShape)
             LUA_BIND_FUNCTION(createPhantomCallbackShape)
             LUA_BIND_FUNCTION_NAMED(loadCollisionMeshFromLua, "loadCollisionMesh")
+            LUA_BIND_FUNCTION_NAMED(createConstraint, "_createConstraint")
         LUA_BIND_REFERENCE_TYPE_END
     };
 
