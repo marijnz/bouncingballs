@@ -17,7 +17,9 @@ cinfo.angularDamping = 0.0
 cinfo.restitution = 1.0
 cinfo.position = Vec3(0.0, 0.0, 0.0)
 cinfo.maxAngularVelocity = 0.0
-player.pc:createRigidBody(cinfo)
+player.rb = player.pc:createRigidBody(cinfo)
+
+player.rb.collisionFilterInfo = COL_NOTHING
 
 player.speed = 5
 
