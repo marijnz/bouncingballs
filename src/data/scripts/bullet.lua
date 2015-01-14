@@ -44,6 +44,12 @@ function Bullet:create()
 	
 end
 
+function Bullet:getRigidBody()
+
+	return self.go.rb
+
+end
+
 function Bullet:initialize()
 	 
 end
