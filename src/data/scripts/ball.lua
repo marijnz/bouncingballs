@@ -1,8 +1,5 @@
 logMessage("using ball.lua")
 
-FLOOR_Z = 0.19
-CEILING_Z = 4.6 
-
 ball = {}
 ball.__index = ball
 

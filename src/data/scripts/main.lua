@@ -1,9 +1,12 @@
 logMessage("using main.lua")
 
+FLOOR_Z = 0.19
+CEILING_Z = 4.6 
+
 -- Options 
 local options = {
     freecamera = false,
-	debugDrawing = true
+	debugDrawing = false
 }
 
 function BIT(x)
@@ -37,6 +40,9 @@ level = GameObjectManager:createGameObject("level")
 level.render = level:createRenderComponent()
 level.render:setPath("data/models/cube-level.thModel")
 level:setPosition(Vec3(0, 0, 0))
+
+-- Some mathematical functions
+include("util.lua")
 
 -- Classes
 include("objectManager.lua")
