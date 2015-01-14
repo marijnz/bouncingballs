@@ -38,6 +38,9 @@ function Bullet:create()
 	cinfo.restitution = 0
 	cinfo.position = Vec3(0,0,0)
 	cinfo.maxLinearVelocity = 10
+	
+	cinfo.isTriggerVolume = true
+	
 	goCollision.rb = goCollision.pc:createRigidBody(cinfo)
 	
 	self.goVisual = goVisual
@@ -45,6 +48,7 @@ function Bullet:create()
 
 	-- Set initial position
 	self:setPosition(Vec3(100,100,0))
+	
 	
 end
 

@@ -35,7 +35,7 @@ function ball:create(model, size)
 	cinfo.position = Vec3(0,0,0)
 	go.rb = go.pc:createRigidBody(cinfo)
 	
-	go.rb.collisionFilterInfo = COL_NOTHING
+	
 	
 	go.pc:getContactPointEvent():registerListener(self.ballCollision)
 
