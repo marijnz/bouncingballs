@@ -4,7 +4,7 @@ SmallBall = {}
 SmallBall.__index = SmallBall
 
 setmetatable(SmallBall, {
-  __index = ball, -- this is what makes the inheritance work
+  __index = Ball, -- this is what makes the inheritance work
   __call = function (cls, ...)
     self = setmetatable({}, cls)
     return self
@@ -13,7 +13,7 @@ setmetatable(SmallBall, {
 
 function SmallBall:create()
 
-	ball.create(self, "blueBall", 0.25)
+	Ball.create(self, "blueBall", 0.25)
 	
 end
 
@@ -26,5 +26,5 @@ function SmallBall:update()
 		objectManager:put(SmallBall, self)
 	end
 	
-	ball.update(self)
+	Ball.update(self)
 end

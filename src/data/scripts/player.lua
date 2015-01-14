@@ -17,6 +17,7 @@ cinfo.position = Vec3(0.0, 0.0, 0.0)
 cinfo.maxAngularVelocity = 0.0
 player.pc:createRigidBody(cinfo)
 
+
 player.speed = 5
 
 bulletCooldown = 0.2
@@ -62,6 +63,20 @@ player.update = function (guid, deltaTime)
         player.pc:getRigidBody():setLinearVelocity(Vec3(0.0, 0.0, 0.0))
     end
 end
+
+player.collision = function(event)
+	local self = event:getBody(CollisionArgsCallbackSource.A)
+	local other = event:getBody(CollisionArgsCallbackSource.B)
+--checks for collision with ball, if ball hits player, gameOver is set true
+	for k, v in pairs(balls) do				
+		if (self:equals(v:getRigidBody())) then		
+			logMessage("player hit ball")
+			gameOverBool=true
+		end					
+	end	
+end
+
 player.sc = player:createScriptComponent()
 player.sc:setUpdateFunction(player.update)
+player.pc:getContactPointEvent():registerListener(player.collision)
 
