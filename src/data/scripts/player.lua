@@ -1,6 +1,7 @@
 logMessage("using player.lua")
 
 ROBOT_CAMERA_OFFSET = Vec3(0.5, 0, 0.55);
+BULLET_RECOIL_TIME = 0.5
 
 -- Player/robot model
 player = GameObjectManager:createGameObject("player")
@@ -90,7 +91,7 @@ player.update = function (guid, deltaTime)
 		end
 	elseif (InputHandler:isPressed(32)) then
 		bullet = objectManager:grab(Bullet)
-		bullet:setPosition(player:getPosition() + Vec3(0,0,1.5))
+		bullet:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
 		bulletCooldown = bulletCooldown - deltaTime
     end
 
@@ -111,4 +112,3 @@ end
 player.sc = player:createScriptComponent()
 player.sc:setUpdateFunction(player.update)
 player.pc:getContactPointEvent():registerListener(player.collision)
-

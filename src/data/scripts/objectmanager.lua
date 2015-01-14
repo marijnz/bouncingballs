@@ -18,11 +18,21 @@ function ObjectManager:_initialize(baseType)
 	
 	self.totalCount = 0
 	
-	Events.Update:registerListener(self.update)
+	go = GameObjectManager:createGameObject("objectManager")
+	
+	go.sc = go:createScriptComponent()
+	go.sc:setUpdateFunction(self.update)
+	self.go = go
 end
 
+
+function ObjectManager:getActiveFromPool(baseType)
+	return self.poolObjects[baseType]["active"]
+end
+
+
 function ObjectManager:addPool(baseType, amount)
-	logMessage("Adding pool to PoolSystem!")
+	logMessage("Adding pool to PoolSystem! "..amount)
 	self.poolObjects[baseType] = {}
 	self.poolObjects[baseType]["count"] = amount
 	
@@ -32,7 +42,6 @@ function ObjectManager:addPool(baseType, amount)
 	for i=0,amount do
 		newPoolObject = baseType()
 		
-		-- Unique identifier doesn't say anything about position in array later on!
 		newPoolObject.uniqueIdentifier = self.totalCount
 		
 		newPoolObject:create()
@@ -44,14 +53,12 @@ function ObjectManager:addPool(baseType, amount)
 	end
 end
 
-function ObjectManager:update()
+function ObjectManager:update(deltaTime)
 	self = objectManager -- self is not properly set because update is called from engine
 	
 	for k1, pool in pairs(self.poolObjects) do
 		for k2, poolObject in pairs(pool["active"]) do
-			if(poolObject ~= nil) then 
-				poolObject:update()
-			end
+				poolObject:update(deltaTime)
 		end
 	end
 	return EventResult.Handled

@@ -35,7 +35,8 @@ function Ball:create(model, size)
 	cinfo.position = Vec3(0,0,0)
 	go.rb = go.pc:createRigidBody(cinfo)
 	
-	go.pc:getContactPointEvent():registerListener(self.BallCollision)
+	go.rb.collisionFilterInfo = COL_NOTHING
+	
 
 	go:setComponentStates(ComponentState.Inactive)
 	
@@ -93,9 +94,15 @@ function Ball.BallCollision(event)
             if (other:equals(wall4.rb)) then
                 v.hitWall4 = true
             end
-				for keys, value in pairs(bullets) do			
-					if (other:equals(value:getRigidBody())) then
+				for keys, value in pairs(objectManager:getActiveFromPool(Bullet)) do
+				logMessage("value: ")
+				logMessage(value:getRigidBody())
+				logMessage("other: ")
+				logMessage(other)
+					if (value ~= nil and other:equals(value:getRigidBody())) then
 						v.hitBullet = true
+						
+						logMessage(v.go:getGuid().."hit Bullet")
 					end					
 				end				
 				for keys, value in pairs(balls) do				
