@@ -84,16 +84,23 @@ player.update = function (guid, deltaTime)
 
     -- If a direction is set, walk & rotate
     if (direction:length() ~= 0) then
-	logMessage(direction:length())
+	logMessage("direction"..direction:length())
 		if(direction:length() == 2) then
 			player.lastDirection = direction
 			player.lastDirectionTimer = 0
+			player.updateMovement(direction)
+			logMessage("0")
+		else
+			if(player.lastDirectionTimer < 0.03) then
+				player.updateMovement(player.lastDirection)
+				logMessage("1")
+			else
+				player.updateMovement(direction)
+				logMessage("2")
+			end
 		end
-		player.updateMovement(direction)
     else 
-		if(player.lastDirectionTimer < 0.2) then
-			player.updateMovement(player.lastDirection)
-		end
+		
         player.pc:getRigidBody():setLinearVelocity(Vec3(0.0, 0.0, 0.0))
     end
 
