@@ -21,11 +21,11 @@ function MediumBall:update()
 	
 	local position = self.go:getPosition()
 	
-	if (self.hitBullet) then
+	if (self.hitHookshot) then
 		
-		logMessage(self.go:getGuid().."dealing with hitBullet")
+		logMessage(self.go:getGuid().."dealing with hitHookshot")
 		
-		self.hitBullet = false
+		self.hitHookshot = false
 		
 		objectManager:put(MediumBall, self)
 		

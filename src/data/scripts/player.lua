@@ -31,7 +31,7 @@ player.robotCameraRotation = 0
 player.robotCameraRotationDirection = 1
 player.robotCamera:setPosition(player:getPosition() + ROBOT_CAMERA_OFFSET)
 
-bulletCooldown = 0.2
+hookshotCooldown = 0.2
 
 player.lastDirection = nil
 player.lastDirectionTimer = 10
@@ -84,19 +84,15 @@ player.update = function (guid, deltaTime)
 
     -- If a direction is set, walk & rotate
     if (direction:length() ~= 0) then
-	logMessage("direction"..direction:length())
 		if(direction:length() == 2) then
 			player.lastDirection = direction
 			player.lastDirectionTimer = 0
 			player.updateMovement(direction)
-			logMessage("0")
 		else
 			if(player.lastDirectionTimer < 0.03) then
 				player.updateMovement(player.lastDirection)
-				logMessage("1")
 			else
 				player.updateMovement(direction)
-				logMessage("2")
 			end
 		end
     else 
@@ -108,15 +104,15 @@ player.update = function (guid, deltaTime)
     updateRobotCameraRotation(player:getRotation())
 	
 	-- space press
-	if(bulletCooldown ~= 0.2) then
-		bulletCooldown = bulletCooldown - deltaTime
-		if(bulletCooldown < 0) then
-			bulletCooldown = 0.2
+	if(hookshotCooldown ~= 0.2) then
+		hookshotCooldown = hookshotCooldown - deltaTime
+		if(hookshotCooldown < 0) then
+			hookshotCooldown = 0.2
 		end
 	elseif (InputHandler:isPressed(32)) then
-		bullet = objectManager:grab(Bullet)
-		bullet:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
-		bulletCooldown = bulletCooldown - deltaTime
+		hookshot = objectManager:grab(Hookshot)
+		hookshot:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
+		hookshotCooldown = hookshotCooldown - deltaTime
     end
 
 end

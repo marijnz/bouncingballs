@@ -89,15 +89,15 @@ function ball.ballCollision(event)
             if (other:equals(wall4.rb)) then
                 v.hitWall4 = true
             end
-				for keys, value in pairs(objectManager:getActiveFromPool(Bullet)) do
+				for keys, value in pairs(objectManager:getActiveFromPool(Hookshot)) do
 				logMessage("value: ")
 				logMessage(value:getRigidBody())
 				logMessage("other: ")
 				logMessage(other)
 					if (value ~= nil and other:equals(value:getRigidBody())) then
-						v.hitBullet = true
+						v.hitHookshot = true
 						
-						logMessage(v.go:getGuid().."hit Bullet")
+						logMessage(v.go:getGuid().."hit Hookshot")
 					end
 				end
 			

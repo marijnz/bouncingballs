@@ -17,7 +17,7 @@ COL_NOTHING = 0 -- <Collide with nothing
 COL_PLAYER = BIT(0) -- <Collide with player
 COL_BALL = BIT(1) -- <Collide with balls
 COL_LEVEL = BIT(2) -- <Collide with level
-COL_BULLET = BIT(3) -- <Collide with bullets
+COL_BULLET = BIT(3) -- <Collide with hookshots
 
 PhysicsSystem:setDebugDrawingEnabled(options.debugDrawing)
 
@@ -47,8 +47,8 @@ include("util.lua")
 -- Classes
 include("objectManager.lua")
 include("poolobject.lua")
-include("bullet.lua")
-objectManager:addPool(Bullet, 5)
+include("hookshot.lua")
+objectManager:addPool(Hookshot, 5)
 
 --[[ Example usage of the PoolExampleObject
 include("poolexampleobject.lua")
