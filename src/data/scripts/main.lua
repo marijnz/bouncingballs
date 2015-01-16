@@ -9,16 +9,6 @@ local options = {
 	debugDrawing = false
 }
 
-function BIT(x)
-	return bit32.lshift(1, x)
-end
-
-COL_NOTHING = 0 -- <Collide with nothing
-COL_PLAYER = BIT(0) -- <Collide with player
-COL_BALL = BIT(1) -- <Collide with balls
-COL_LEVEL = BIT(2) -- <Collide with level
-COL_BULLET = BIT(3) -- <Collide with hookshots
-
 PhysicsSystem:setDebugDrawingEnabled(options.debugDrawing)
 
 -- Default state machine.
@@ -49,19 +39,6 @@ include("objectManager.lua")
 include("poolobject.lua")
 include("hookshot.lua")
 objectManager:addPool(Hookshot, 5)
-
---[[ Example usage of the PoolExampleObject
-include("poolexampleobject.lua")
-
-objectManager:addPool(PoolExampleObject, 5)
-
-poolExampleObjectAnother = objectManager:grab(PoolExampleObject)
-poolExampleObjectAndAnother = objectManager:grab(PoolExampleObject)
-
-objectManager:put(PoolExampleObject, poolExampleObjectAnother)
-
-poolExampleObjectAndAgainAnother = objectManager:grab(PoolExampleObject)
---]]
 
 local player
 include("player.lua");
