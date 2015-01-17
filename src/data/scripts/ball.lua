@@ -26,6 +26,7 @@ function ball:create(model, size)
 	go.pc = go:createPhysicsComponent()
 	cinfo = RigidBodyCInfo()
 	cinfo.shape = PhysicsFactory:createSphere(size)
+	--cinfo.shape = PhysicsFactory:loadCollisionMesh("data/collision/level1test.hkx")
 	cinfo.motionType = MotionType.Dynamic
 	cinfo.mass = 1.0
 	cinfo.friction = 0.0

@@ -13,7 +13,7 @@ setmetatable(ObjectManager, {
   end,
 })
 
-function ObjectManager:_initialize(baseType)
+function ObjectManager:_initialize()
 	self.poolObjects = {}
 	
 	self.totalCount = 0
@@ -39,7 +39,7 @@ function ObjectManager:addPool(baseType, amount)
 	self.poolObjects[baseType]["passive"] = {}
 	self.poolObjects[baseType]["active"] = {}
 	
-	for i=0,amount do
+	for i=1,amount do
 		newPoolObject = baseType()
 		
 		newPoolObject.uniqueIdentifier = self.totalCount
@@ -66,7 +66,7 @@ end
 
 
 function ObjectManager:grab(baseType)
-	count = self.poolObjects[baseType]["count"]-1
+	count = self.poolObjects[baseType]["count"]
 		
 	poolObject = nil
 	-- Grab from passive pool
@@ -97,7 +97,7 @@ function ObjectManager:grab(baseType)
 end
 
 function ObjectManager:put(baseType, poolObject)
-	count = self.poolObjects[baseType]["count"]-1
+	count = self.poolObjects[baseType]["count"]
 	poolObject:dispose()
 	
 	-- Remove from active pool
