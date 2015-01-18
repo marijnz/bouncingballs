@@ -78,8 +78,6 @@ function ObjectManager:grab(baseType)
 		end
 	end
 	
-	logMessage("grabbed" .. poolObject.go:getGuid())
-	
 	if(poolObject == nil) then
 		logMessage("Error: ObjectManager depleted!")
 		return
