@@ -1,12 +1,12 @@
-logMessage("using bullet.lua")
+logMessage("using hookshot.lua")
 
-Bullet = {}
-Bullet.__index = Bullet
+Hookshot = {}
+Hookshot.__index = Hookshot
 
 BULLET_SPEED = 13
 
 
-setmetatable(Bullet, {
+setmetatable(Hookshot, {
   __index = PoolObject, -- this is what makes the inheritance work
   __call = function (cls, ...)
     self = setmetatable({}, cls)
@@ -15,20 +15,20 @@ setmetatable(Bullet, {
 })
 
 
-function Bullet:getRigidBody()
+function Hookshot:getRigidBody()
 	return self.goCollision.rb
 end
 
-function Bullet:create()
+function Hookshot:create()
 
 	-- Render
-	goVisual = GameObjectManager:createGameObject("bullet_visual" .. self.uniqueIdentifier)
+	goVisual = GameObjectManager:createGameObject("hookshot_visual" .. self.uniqueIdentifier)
 	
 	goVisual.render = goVisual:createRenderComponent()
 	goVisual.render:setPath("data/models/hook-shot.thmodel")
 
 	-- Physics
-	goCollision = GameObjectManager:createGameObject("bullet_collision" .. self.uniqueIdentifier)
+	goCollision = GameObjectManager:createGameObject("hookshot_collision" .. self.uniqueIdentifier)
 	
 	goCollision.pc = goCollision:createPhysicsComponent()
 	cinfo = RigidBodyCInfo()
@@ -38,6 +38,9 @@ function Bullet:create()
 	cinfo.restitution = 0
 	cinfo.position = Vec3(0,0,0)
 	cinfo.maxLinearVelocity = 10
+	
+	cinfo.isTriggerVolume = true
+	
 	goCollision.rb = goCollision.pc:createRigidBody(cinfo)
 	
 	self.goVisual = goVisual
@@ -45,6 +48,7 @@ function Bullet:create()
 
 	-- Set initial position
 	self:setPosition(Vec3(100,100,0))
+	
 	
 end
 
@@ -54,16 +58,15 @@ function Bullet:getRigidBody()
 
 end
 
-function Bullet:initialize()
 	 
 end
 
-function Bullet:dispose()
+function Hookshot:dispose()
 	self:setPosition(Vec3(100,100,0))
 	self.goVisual.render:setScale(Vec3(1,1,1))
 end
 
-function Bullet:update(deltaTime)
+function Hookshot:update(deltaTime)
 	--toPositionVisual = self.goVisual:getPosition()
 	--toPositionVisual.z  = toPositionVisual.z + (deltaTime * BULLET_SPEED/2)
 	--self.goVisual:setPosition(toPositionVisual)
@@ -74,7 +77,7 @@ function Bullet:update(deltaTime)
 	
 	
 	if(self.goCollision:getPosition().z > -3) then
-		objectManager:put(Bullet, self)
+		objectManager:put(Hookshot, self)
 	end
 	
 	
@@ -83,12 +86,12 @@ function Bullet:update(deltaTime)
 	self.goVisual.render:setScale(toScale) -- Distorted in X direction
 end
 
-function Bullet:setPosition(position)
+function Hookshot:setPosition(position)
 	self.goVisual:setPosition(position)
 	self.goCollision:setPosition(position)
 end
 
-function Bullet:setInitialPosition(position)
+function Hookshot:setInitialPosition(position)
 	position.z  = FLOOR_Z
 	self.goVisual:setPosition(position)
 	position.z  = position.z + (1) - 11

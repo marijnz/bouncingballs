@@ -19,8 +19,8 @@ cinfo.angularDamping = 0.0
 cinfo.restitution = 1.0
 cinfo.position = Vec3(0.0, 0.0, FLOOR_Z + 0.25)
 cinfo.maxAngularVelocity = 0.0
-player.pc:createRigidBody(cinfo)
 
+player.rb = player.pc:createRigidBody(cinfo)
 player.speed = 5
 
 -- Robot camera model
@@ -31,7 +31,10 @@ player.robotCameraRotation = 0
 player.robotCameraRotationDirection = 1
 player.robotCamera:setPosition(player:getPosition() + ROBOT_CAMERA_OFFSET)
 
-bulletCooldown = 0.2
+hookshotCooldown = 0.2
+
+player.lastDirection = nil
+player.lastDirectionTimer = 10
 
 -- Rotates the camera of the robot slowly and takes the player rotation in account to
 -- calculate the right rotation
@@ -45,7 +48,25 @@ updateRobotCameraRotation = function (playerRotation)
     player.robotCamera:setRotation(rotation * playerRotation)
 end
 
+player.updateMovement = function (direction)
+	-- Normalize the direction for when two buttons are pressed at the same time
+	local normalized = direction:normalized()
+
+	-- Multiply speed by the direction to walk
+	player.pc:getRigidBody():setLinearVelocity(Vec3(normalized.x * player.speed, normalized.y * player.speed, 0.0))
+
+	-- Set the rotation of the player/robot based on the direction it is moving
+	local angle = toDegrees(vec2Angle(normalized))
+	player:setRotation(Quaternion(Vec3(0, 0, 1), angle))
+
+	-- Put the camera of the robot on the right place after the player moved, based on the ROBOT_CAMERA_OFFSET
+	local offset = vec2Rotate(ROBOT_CAMERA_OFFSET, angle)
+	player.robotCamera:setPosition(player:getPosition() + offset)
+end
+
 player.update = function (guid, deltaTime) 	
+	player.lastDirectionTimer = player.lastDirectionTimer + deltaTime
+
     -- The direction the player is going to walk this frame
     local direction = Vec3(0.0, 0.0, 0.0)
     if (InputHandler:isPressed(Key.Up)) then
@@ -62,21 +83,20 @@ player.update = function (guid, deltaTime)
     end
 
     -- If a direction is set, walk & rotate
-    if (direction.x ~= 0 or direction.y ~= 0) then
-        -- Normalize the direction for when two buttons are pressed at the same time
-        local normalized = direction:normalized()
-
-        -- Multiply speed by the direction to walk
-        player.pc:getRigidBody():setLinearVelocity(Vec3(normalized.x * player.speed, normalized.y * player.speed, 0.0))
-
-        -- Set the rotation of the player/robot based on the direction it is moving
-        local angle = toDegrees(vec2Angle(normalized))
-        player:setRotation(Quaternion(Vec3(0, 0, 1), angle))
-
-        -- Put the camera of the robot on the right place after the player moved, based on the ROBOT_CAMERA_OFFSET
-        local offset = vec2Rotate(ROBOT_CAMERA_OFFSET, angle)
-        player.robotCamera:setPosition(player:getPosition() + offset)
+    if (direction:length() ~= 0) then
+		if(direction:length() == 2) then
+			player.lastDirection = direction
+			player.lastDirectionTimer = 0
+			player.updateMovement(direction)
+		else
+			if(player.lastDirectionTimer < 0.03) then
+				player.updateMovement(player.lastDirection)
+			else
+				player.updateMovement(direction)
+			end
+		end
     else 
+		
         player.pc:getRigidBody():setLinearVelocity(Vec3(0.0, 0.0, 0.0))
     end
 
@@ -84,15 +104,15 @@ player.update = function (guid, deltaTime)
     updateRobotCameraRotation(player:getRotation())
 	
 	-- space press
-	if(bulletCooldown ~= 0.2) then
-		bulletCooldown = bulletCooldown - deltaTime
-		if(bulletCooldown < 0) then
-			bulletCooldown = 0.2
+	if(hookshotCooldown ~= 0.2) then
+		hookshotCooldown = hookshotCooldown - deltaTime
+		if(hookshotCooldown < 0) then
+			hookshotCooldown = 0.2
 		end
 	elseif (InputHandler:isPressed(32)) then
-		bullet = objectManager:grab(Bullet)
-		bullet:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
-		bulletCooldown = bulletCooldown - deltaTime
+		hookshot = objectManager:grab(Hookshot)
+		hookshot:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
+		hookshotCooldown = hookshotCooldown - deltaTime
     end
 
 end

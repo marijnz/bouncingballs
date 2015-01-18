@@ -26,6 +26,7 @@ function Ball:create(model, size)
 	go.pc = go:createPhysicsComponent()
 	cinfo = RigidBodyCInfo()
 	cinfo.shape = PhysicsFactory:createSphere(size)
+	--cinfo.shape = PhysicsFactory:loadCollisionMesh("data/collision/level1test.hkx")
 	cinfo.motionType = MotionType.Dynamic
 	cinfo.mass = 1.0
 	cinfo.friction = 0.0
@@ -35,7 +36,7 @@ function Ball:create(model, size)
 	cinfo.position = Vec3(0,0,0)
 	go.rb = go.pc:createRigidBody(cinfo)
 	
-	go.rb.collisionFilterInfo = COL_NOTHING
+	
 	
 
 	go:setComponentStates(ComponentState.Inactive)
@@ -94,15 +95,15 @@ function Ball.BallCollision(event)
             if (other:equals(wall4.rb)) then
                 v.hitWall4 = true
             end
-				for keys, value in pairs(objectManager:getActiveFromPool(Bullet)) do
+				for keys, value in pairs(objectManager:getActiveFromPool(Hookshot)) do
 				logMessage("value: ")
 				logMessage(value:getRigidBody())
 				logMessage("other: ")
 				logMessage(other)
 					if (value ~= nil and other:equals(value:getRigidBody())) then
-						v.hitBullet = true
+						v.hitHookshot = true
 						
-						logMessage(v.go:getGuid().."hit Bullet")
+						logMessage(v.go:getGuid().."hit Hookshot")
 					end					
 				end				
 				for keys, value in pairs(balls) do				

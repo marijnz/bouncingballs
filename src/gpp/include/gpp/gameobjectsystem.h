@@ -201,7 +201,7 @@ namespace gpp
             LUA_BIND_FUNCTION_NAMED(createComponent<AnimationComponent>, "createAnimationComponent")
             LUA_BIND_FUNCTION_NAMED(createComponent<CharacterComponent>, "createCharacterComponent")
             LUA_BIND_FUNCTION_NAMED(createComponent<AudioComponent>, "createAudioComponent")
-            LUA_BIND_FUNCTION_NAMED(getComponent<CameraComponent>, "getCameraComponent")
+            LUA_BIND_FUNCTION_NAMED(getComponent<CameraComponent>, "getCameraComponent")	
             LUA_BIND_FUNCTION_NAMED(getComponent<RenderComponent>, "getRenderComponent")
             LUA_BIND_FUNCTION_NAMED(getComponent<PhysicsComponent>, "getPhysicsComponent")
             LUA_BIND_FUNCTION_NAMED(getComponent<ScriptComponent>, "getScriptComponent")
