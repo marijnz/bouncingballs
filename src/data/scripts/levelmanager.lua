@@ -67,7 +67,6 @@ function LevelManager:loadLevel(levelId)
 	self.currentLevelId = levelId
 	logMessage("id..: "..self.currentLevelId)
 	level = self.levels[self.currentLevelId]
-	logMessage(level.center)
 	-- Spawn balls
 	
 	level.go:setPosition(Vec3(-15,8,0))
