@@ -30,6 +30,9 @@ State{
 		leave = {
 			disposeEverything
 		},
+		update = {
+			gameOverUpdate
+		}
     }
 }
 

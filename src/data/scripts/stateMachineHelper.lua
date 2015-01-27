@@ -25,3 +25,10 @@ function disposeEverything()
 		objectManager:put(Hookshot,v)
 	end
 end
+
+-- Update function for the game Over state
+function gameOverUpdate(updateData)
+	DebugRenderer:printText(Vec2(-0.2, 0.6), "GAME OVER")
+	DebugRenderer:printText(Vec2(-0.2, 0.4), "Press R to restart the Game!")
+	return EventResult.Handled
+end
