@@ -15,7 +15,7 @@ setmetatable(Ball, {
 
 function Ball:create(model, size)
 
-		go = GameObjectManager:createGameObject(model .. "-" .. self.uniqueIdentifier)
+	go = GameObjectManager:createGameObject(model .. "-" .. self.uniqueIdentifier)
 	
 	-- Render
 	go.render = go:createRenderComponent()
@@ -26,18 +26,17 @@ function Ball:create(model, size)
 	go.pc = go:createPhysicsComponent()
 	cinfo = RigidBodyCInfo()
 	cinfo.shape = PhysicsFactory:createSphere(size)
-	--cinfo.shape = PhysicsFactory:loadCollisionMesh("data/collision/level1test.hkx")
 	cinfo.motionType = MotionType.Dynamic
 	cinfo.mass = 1.0
 	cinfo.friction = 0.0
 	cinfo.angularDamping = 0.0
 	cinfo.linearDamping = 0.0
-	cinfo.restitution = 0.0
+	cinfo.restitution = 1.0
 	cinfo.position = Vec3(0,0,0)
 	go.rb = go.pc:createRigidBody(cinfo)
+    go.rb:setUserData({type = USERDATA_TYPE_BALL})
 	
-	
-	
+	go.pc:getContactPointEvent():registerListener(self.BallCollision)
 
 	go:setComponentStates(ComponentState.Inactive)
 	
@@ -55,7 +54,9 @@ function Ball:create(model, size)
 	rawset(balls, "Ball" .. self.uniqueIdentifier, self)
 	
 	logMessage(go:getGuid().." created")
-	
+
+    -- We have to set a default value otherwise there is a crash as soon as you 'get the data'
+    self.go.rb:setUserData({})
 end
 
 function Ball:getRigidBody()
@@ -71,58 +72,45 @@ function Ball:initialize()
 	 logMessage(self.go:getGuid().."initialized")
 	 
 	 self.shadow:setComponentStates(ComponentState.Active)
-	 
 end
 
 function Ball.BallCollision(event)
 	local self = event:getBody(CollisionArgsCallbackSource.A)
 	local other = event:getBody(CollisionArgsCallbackSource.B)
-	
-    for k, v in pairs(balls) do
-        if (self:equals(v.go.rb)) then
-            if (other:equals(floor.rb)) then
-                v.hitFloor = true
-            end
-            if (other:equals(wall1.rb)) then
-                v.hitWall1 = true
-            end
-            if (other:equals(wall2.rb)) then
-                v.hitWall2 = true
-            end
-            if (other:equals(wall3.rb)) then
-                v.hitWall3 = true
-            end
-            if (other:equals(wall4.rb)) then
-                v.hitWall4 = true
-            end
-				for keys, value in pairs(objectManager:getActiveFromPool(Hookshot)) do
-				logMessage("value: ")
-				logMessage(value:getRigidBody())
-				logMessage("other: ")
-				logMessage(other)
-					if (value ~= nil and other:equals(value:getRigidBody())) then
-						v.hitHookshot = true
-						
-						logMessage(v.go:getGuid().."hit Hookshot")
-					end					
-				end				
-				for keys, value in pairs(balls) do				
-					if (other:equals(value:getRigidBody())) then					
-						v.hitBall = true					
-						logMessage(v.go:getGuid().."hit Ball")	
-						v.newVel = value:getRigidBody():getLinearVelocity()
-					end					
-				end	
-            break
-        end
+
+    local otherCollisionData = other:getUserData()
+    local newBallCollisionData = {type = USERDATA_TYPE_BALL}
+
+    -- Fix speed of ball when bouncing on floor by giving an impulse
+    if (otherCollisionData.type == USERDATA_TYPE_FLOOR) then
+        local velocity = self:getLinearVelocity()
+        local direction = velocity
+        local impulse = Vec3(0, 0, direction.z * 0.276)
+        event:accessVelocities(CollisionArgsCallbackSource.A)
+        self:applyLinearImpulse(impulse)
+        event:updateVelocities(CollisionArgsCallbackSource.A)
     end
 
+    -- If boucing against a ball or a wall, reset the velocity next frame
+    newBallCollisionData.resetVelocity = otherCollisionData.type == USERDATA_TYPE_WALL or otherCollisionData.type == USERDATA_TYPE_BALL
+
+    -- Save data in the rigid body
+    self:setUserData(newBallCollisionData)
+
+    for keys, value in pairs(objectManager:getActiveFromPool(Hookshot)) do
+        if (value ~= nil and other:equals(value:getRigidBody())) then
+            v.hitHookshot = true
+        end					
+    end				
+
+    return EventResult.Handled
 end
 
 function Ball:setInitialPositionAndMovement(position, LinearVelocity)
-	 self:setPosition(position)
-	 self:setLinearVelocity(LinearVelocity)
-     self.shadow:setPosition(position)
+	self:setPosition(position)
+	self:setLinearVelocity(LinearVelocity)
+    self.speed = vec2Length(LinearVelocity)
+    self.shadow:setPosition(position)
 end
 
 function Ball:dispose()
@@ -130,7 +118,6 @@ function Ball:dispose()
 	self.go:setComponentStates(ComponentState.Inactive)
 	
 	self.shadow:setComponentStates(ComponentState.Inactive)
-	
 end
 
 function Ball:freeze()
@@ -148,36 +135,17 @@ function Ball:update()
     local shadowScale = self.shadow.size * (1 - (position.z / ((CEILING_Z - FLOOR_Z) * 1.75)));
     self.shadow.render:setScale(Vec3(shadowScale, shadowScale, shadowScale))
 
-    if (self.hitFloor) then
-        self.go.rb:applyLinearImpulse(Vec3(0, 0, floorBounciness))
-        self.hitFloor = false
+    local lastCollisionData = self.go.rb:getUserData()
+    local newCollisionData = {type = USERDATA_TYPE_BALL}
+
+    if (lastCollisionData ~= nil and lastCollisionData.resetVelocity) then
+        local velocity = self.go.rb:getLinearVelocity()
+        local velocityNormalized = vec2Normalize(velocity)
+        velocity = Vec3(velocityNormalized.x * self.speed, velocityNormalized.y * self.speed, velocity.z)
+        self.go.rb:setLinearVelocity(velocity)
     end
-	
-	if (self.hitBall) then
-		self.go.rb:setLinearVelocity(self.newVel)
-		self.hitBall = false
-	end
-    
-    if (self.hitWall1) then
-        self.go.rb:applyLinearImpulse(Vec3(-wallBounciness, 0, 0))
-        self.hitWall1 = false
-    end
-    
-    if (self.hitWall2) then
-        self.go.rb:applyLinearImpulse(Vec3(wallBounciness, 0 , 0))
-        self.hitWall2 = false
-    end
-    
-    if (self.hitWall3) then
-        self.go.rb:applyLinearImpulse(Vec3(0, -wallBounciness, 0))
-        self.hitWall3 = false
-    end
-    
-    if (self.hitWall4) then
-        self.go.rb:applyLinearImpulse(Vec3(0, wallBounciness, 0))
-        self.hitWall4 = false
-    end
-	
+
+    self.go.rb:setUserData(newCollisionData)
 end
 
 function Ball:setPosition(position)
@@ -186,4 +154,5 @@ end
 
 function Ball:setLinearVelocity(linearVelocity)
 	self.go.rb:setLinearVelocity(linearVelocity)
+    self.speed = vec2Length(linearVelocity)
 end

@@ -3,9 +3,14 @@ logMessage("using main.lua")
 FLOOR_Z = 0.19
 CEILING_Z = 4.6 
 
+USERDATA_TYPE_FLOOR = 1
+USERDATA_TYPE_WALL = 2 
+USERDATA_TYPE_BALL = 3
+USERDATA_TYPE_PLAYER = 4
+
 -- Options 
 local options = {
-    freecamera = true,
+    freecamera = false,
 	debugDrawing = false
 }
 
@@ -29,9 +34,6 @@ else
     include("camera.lua")
 end
 
--- Player
-local player
-
 -- Some mathematical functions
 include("util.lua")
 
@@ -52,14 +54,8 @@ objectManager:addPool(Hookshot, 5)
 objectManager:addPool(LevelManager, 1)
 levelManager = objectManager:grab(LevelManager)
 
--- Global bounciness
-floorBounciness=9
-wallBounciness=5
-
 objectManager:addPool(MediumBall, 2)
-objectManager:addPool(SmallBall, 2*2)
-
-
+objectManager:addPool(SmallBall, 2 * 2)
 
 levels = {}
 levels[0] = Level1()

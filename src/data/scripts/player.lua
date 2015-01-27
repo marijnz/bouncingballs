@@ -1,7 +1,8 @@
 logMessage("using player.lua")
 
-ROBOT_CAMERA_OFFSET = Vec3(0.5, 0, 0.55);
+ROBOT_CAMERA_OFFSET = Vec3(0.5, 0, 0.55)
 BULLET_RECOIL_TIME = 0.5
+player = nil
 
 -- Player/robot model
 player = GameObjectManager:createGameObject("player")
@@ -21,6 +22,7 @@ cinfo.position = Vec3(0.0, 0.0, FLOOR_Z + 0.25)
 cinfo.maxAngularVelocity = 0.0
 
 player.rb = player.pc:createRigidBody(cinfo)
+player.rb:setUserData({type = USERDATA_TYPE_BALL})
 player.speed = 5
 
 -- Robot camera model

@@ -22,6 +22,7 @@ function Level1:createLevel(center, id)
     cinfo.shape = PhysicsFactory:createBox(Vec3(5, 5, 0.1))
     cinfo.motionType = MotionType.Fixed
     floor.rb = floor.pc:createRigidBody(cinfo)
+    floor.rb:setUserData({type = USERDATA_TYPE_FLOOR})
 
     local wallIndex = 0
     local createWall = function (width, angle, position)
@@ -33,6 +34,7 @@ function Level1:createLevel(center, id)
         cinfo.position = center + position
         cinfo.rotation = Quaternion(Vec3(0, 0, 1), angle)
         wall.rb = wall.pc:createRigidBody(cinfo)
+        wall.rb:setUserData({type = USERDATA_TYPE_WALL})
         wallIndex = wallIndex + 1
 		
 		return wall
