@@ -50,7 +50,6 @@ function Ball:create(model, size)
     self.shadow = shadow
 	self.shadow:setComponentStates(ComponentState.Inactive)
 	
-	levelManager:addBall(self)	
 	logMessage(go:getGuid().." created")
 
     -- We have to set a default value otherwise there is a crash as soon as you 'get the data'
@@ -65,11 +64,14 @@ end
 
 function Ball:initialize()
 	 
-	 self.go:setComponentStates(ComponentState.Active)
+	self.go:setComponentStates(ComponentState.Active)
+	
+	logMessage(self.go:getGuid().."initialized")
+	
+	self.shadow:setComponentStates(ComponentState.Active)
 	 
-	 logMessage(self.go:getGuid().."initialized")
 	 
-	 self.shadow:setComponentStates(ComponentState.Active)
+	levelManager:addBall(self)	
 end
 
 function Ball.BallCollision(event)

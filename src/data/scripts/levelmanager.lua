@@ -111,12 +111,13 @@ function LevelManager:dispose()
 end
 
 function LevelManager:checkAndRespondIfLevelIsDone()
-count = 0
+	count = 0
 	for k, v in pairs(self.balls) do
-		count = count + 15
+		count = count + 1
 	end
+	logMessage("COUNT: "..count)
 	if(count == 0) then
-		-- Move camera to next level
+		self:goNextLevel()
 	end
 end
 
