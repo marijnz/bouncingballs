@@ -1,8 +1,9 @@
 logMessage("using player.lua")
 
-ROBOT_CAMERA_OFFSET = Vec3(0.5, 0, 0.55);
+ROBOT_CAMERA_OFFSET = Vec3(0.5, 0, 0.55)
 BULLET_RECOIL_TIME = 0.5
 PLAYER_SPEED = 5
+player = nil
 
 -- Player/robot model
 player = GameObjectManager:createGameObject("player")
@@ -22,6 +23,7 @@ cinfo.position = Vec3(0.0, 0.0, FLOOR_Z + 0.25)
 cinfo.maxAngularVelocity = 0.0
 
 player.rb = player.pc:createRigidBody(cinfo)
+player.rb:setUserData({type = USERDATA_TYPE_BALL})
 player.speed = PLAYER_SPEED
 
 -- Robot camera model
@@ -77,6 +79,20 @@ end
 player.update = function (guid, deltaTime) 	
 	player.lastDirectionTimer = player.lastDirectionTimer + deltaTime
 
+    -- The direction the player is going to walk this frame
+    local direction = Vec3(0.0, 0.0, 0.0)
+    if (InputHandler:isPressed(Key.Up)) then
+        direction = direction + Vec3(-1, -1, 0)
+    end
+    if (InputHandler:isPressed(Key.Down)) then
+        direction = direction + Vec3(1, 1, 0)
+    end
+    if (InputHandler:isPressed(Key.Left)) then
+        direction = direction + Vec3(1, -1, 0)
+    end
+    if (InputHandler:isPressed(Key.Right)) then
+        direction = direction + Vec3(-1, 1, 0)
+    end
 	-- virtual analog stick (WASD)
 	local virtualStick = Vec2(0, 0)
 	if (InputHandler:isPressed(Key.Left)) then virtualStick.x = virtualStick.x - 1 end
@@ -85,6 +101,20 @@ player.update = function (guid, deltaTime)
 	if (InputHandler:isPressed(Key.Down)) then virtualStick.y = virtualStick.y - 1 end
 	virtualStick = virtualStick:normalized()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    -- If a direction is set, walk & rotate
 	-- gamepad input
 	local gamepad = InputHandler:gamepad(0)
 	local leftStick = gamepad:leftStick()
@@ -123,6 +153,7 @@ player.update = function (guid, deltaTime)
 		if(hookshotCooldown < 0) then
 			hookshotCooldown = 0.2
 		end
+	elseif (InputHandler:isPressed(32)) then
 	elseif (InputHandler:isPressed(32) or bit32.btest(InputHandler:gamepad(0):buttonsTriggered(), Button.A)) then
 		hookshot = objectManager:grab(Hookshot)
 		hookshot:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
@@ -150,7 +181,7 @@ player.collision = function(event)
 	local self = event:getBody(CollisionArgsCallbackSource.A)
 	local other = event:getBody(CollisionArgsCallbackSource.B)
 --checks for collision with ball, if ball hits player, gameOver is set true
-	for k, v in pairs(balls) do				
+	for k, v in pairs(levelManager.balls) do				
 		if (self:equals(v:getRigidBody())) then		
 			logMessage("player hit ball")
 			gameOverBool=true
