@@ -65,7 +65,6 @@ function LevelManager:loadLevel(levelId)
 	self = levelManager
 	self.currentLevelId = levelId
 	logMessage("id..: "..self.currentLevelId)
-	level = self.levels[self.currentLevelId]
 	logMessage(level.center)
 	-- Spawn balls
 	
@@ -129,4 +128,9 @@ function LevelManager:update(deltaTime)
 			self.loadLevelAfterTime = 0
 		end
 	end
+end
+
+--needed to restart current level
+function LevelManager:getCurrentLevelId()
+	return self.currentLevelId
 end
