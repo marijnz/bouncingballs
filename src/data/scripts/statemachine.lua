@@ -1,5 +1,6 @@
 logMessage("using defaults/stateMachine.lua")
 include("stateMachineHelper.lua")
+include("screens.lua")
 
 State{
 	name = "default",
@@ -25,13 +26,15 @@ State{
 	
 	eventListeners = {
 		enter = {
+			toggleScreen(gameOverScreen),
 			freezeEverything
 		},
 		leave = {
+			toggleScreen(gameOverScreen),
 			disposeEverything
 		},
 		update = {
-			gameOverUpdate
+			--gameOverUpdate
 		}
     }
 }
@@ -42,10 +45,12 @@ State{
 	
 	eventListeners = {
 		enter = {
-			freezeEverything
+			freezeEverything,
+			toggleScreen(pauseScreen)
 		},
 		leave = {
-			unfreezeEverything
+			unfreezeEverything,
+			toggleScreen(pauseScreen)
 		},
     }
 }
