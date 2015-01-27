@@ -48,10 +48,13 @@ include("levelbuilderhelper.lua")
 include("poolobject.lua")
 include("hookshot.lua")
 include("ball.lua")
+include("bigBall.lua")
 include("mediumBall.lua")
 include("smallBall.lua")
 include("player.lua");
 include("levels/level1.lua")
+include("levels/level2.lua")
+include("levels/level3.lua")
 
 -- Player
 player:setPosition(0,0, 20)
@@ -73,17 +76,18 @@ objectManager:addPool(Tweener, 20)
 objectManager:addPool(LevelManager, 1)
 levelManager = objectManager:grab(LevelManager)
 
-objectManager:addPool(MediumBall, 2)
-objectManager:addPool(SmallBall, 2 * 2)
+objectManager:addPool(BigBall, 1)
+objectManager:addPool(MediumBall, 4)
+objectManager:addPool(SmallBall, 4 * 2)
 
-objectManager:addPool(Level1, 6)
+objectManager:addPool(Level1, 1)
+objectManager:addPool(Level2, 1)
+objectManager:addPool(Level3, 1)
 levels = {}
-levels[0] = objectManager:grab(Level1)
+levels[0] = nil --Yea, this should be solved
 levels[1] = objectManager:grab(Level1)
-levels[2] = objectManager:grab(Level1)
-levels[3] = objectManager:grab(Level1)
-levels[4] = objectManager:grab(Level1)
-logMessage(levels[0])
+levels[2] = objectManager:grab(Level2)
+levels[3] = objectManager:grab(Level3)
 levelManager:initializeLevels(levels)
 
 -- Default update function

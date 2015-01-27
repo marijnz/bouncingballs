@@ -15,10 +15,6 @@ function BigBall:create()
 	Ball.create(self, "yellowBall", 0.75)
 end
 
-function BigBall.BallCollision(event)
-    if (otherCollisionData.type == USERDATA_TYPE_FLOOR) then
-end
-
 function BigBall:update()
 
 	local position = self.go:getPosition()
