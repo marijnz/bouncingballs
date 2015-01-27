@@ -29,7 +29,7 @@ function Level1:createLevel(center, id)
     floor.pc = floor:createPhysicsComponent()
     local cinfo = RigidBodyCInfo()
     cinfo.shape = PhysicsFactory:createBox(Vec3(5, 5, 0.1))
-    cinfo.motionType = MotionType.Fixed
+    cinfo.motionType = MotionType.Keyframed
     floor.rb = floor.pc:createRigidBody(cinfo)
     floor.rb:setUserData({type = USERDATA_TYPE_FLOOR})
 
@@ -40,7 +40,7 @@ function Level1:createLevel(center, id)
         wall.pc = wall:createPhysicsComponent()
         local cinfo = RigidBodyCInfo()
         cinfo.shape = PhysicsFactory:createBox(Vec3(width, 0.1, 2.5))
-        cinfo.motionType = MotionType.Fixed
+        cinfo.motionType = MotionType.Keyframed
         cinfo.position = center + position
         cinfo.rotation = Quaternion(Vec3(0, 0, 1), angle)
         wall.rb = wall.pc:createRigidBody(cinfo)

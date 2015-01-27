@@ -59,7 +59,7 @@ include("player.lua");
 include("levels/level1.lua")
 
 -- Player
-	player:setPosition(0,0, 10)
+	player:setPosition(0,0, 20)
 	--player:freeze()
 
 -- Camera
