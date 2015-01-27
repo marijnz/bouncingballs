@@ -42,14 +42,14 @@ if(self.isGoingNextLevel) then return end
 	disposeEverything()
 	playerTweener = objectManager:grab(Tweener)
 	
-	playerTweener:startTween(easing.inOutSine, player, player:getPosition() + Vec3(0,0,20), 1, self.onPlayerDisplaced)
+	playerTweener:startTween(easing.inSine, player, player:getPosition() + Vec3(0,0,20), 1, self.onPlayerDisplaced)
 end
 
 function LevelManager:onPlayerDisplaced()
 	logMessage("onPlayerDisplaced")
 	self = levelManager
 	levelTweener = objectManager:grab(Tweener)
-	levelTweener:startTween(easing.inOutSine, level.go, Vec3(15,-8,20), 1, self.onLevelUnloaded)
+	levelTweener:startTween(easing.inBack, level.go, Vec3(15,-8,20), 1, self.onLevelUnloaded)
 end
 
 function LevelManager:onLevelUnloaded()
@@ -73,7 +73,7 @@ function LevelManager:loadLevel(levelId)
 
 	tweener = objectManager:grab(Tweener)
 	
-	tweener:startTween(easing.inOutSine, level.go, Vec3(0,0,0), 1, self.onLevelLoaded)
+	tweener:startTween(easing.outBack, level.go, Vec3(0,0,0), 1, self.onLevelLoaded)
 	
 end
 
@@ -83,7 +83,7 @@ function LevelManager:onLevelLoaded()
 	player:setPosition(0,0, 20)
 	player:freeze()
 	tweener2 = objectManager:grab(Tweener)
-	tweener2:startTween(easing.inOutSine, player, Vec3(0,0,FLOOR_Z + 0.25), 1, self.onPlayerPlaced)
+	tweener2:startTween(easing.outSine, player, Vec3(0,0,FLOOR_Z + 0.25), 1, self.onPlayerPlaced)
 end
 
 function LevelManager:onPlayerPlaced()
@@ -115,7 +115,6 @@ function LevelManager:checkAndRespondIfLevelIsDone()
 	for k, v in pairs(self.balls) do
 		count = count + 1
 	end
-	logMessage("COUNT: "..count)
 	if(count == 0) then
 		self:goNextLevel()
 	end
