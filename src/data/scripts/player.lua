@@ -2,6 +2,7 @@ logMessage("using player.lua")
 
 ROBOT_CAMERA_OFFSET = Vec3(0.5, 0, 0.55);
 BULLET_RECOIL_TIME = 0.5
+PLAYER_SPEED = 5
 
 -- Player/robot model
 player = GameObjectManager:createGameObject("player")
@@ -14,14 +15,14 @@ cinfo = RigidBodyCInfo()
 cinfo.shape = PhysicsFactory:createBox(Vec3(0.5, 0.5, 0.25))
 cinfo.motionType = MotionType.Dynamic
 cinfo.mass = 1.0
-cinfo.friction = 1.0
+cinfo.friction = 0
 cinfo.angularDamping = 0.0
-cinfo.restitution = 1.0
+cinfo.restitution = 0
 cinfo.position = Vec3(0.0, 0.0, FLOOR_Z + 0.25)
 cinfo.maxAngularVelocity = 0.0
 
 player.rb = player.pc:createRigidBody(cinfo)
-player.speed = 5
+player.speed = PLAYER_SPEED
 
 -- Robot camera model
 player.robotCamera = GameObjectManager:createGameObject("robotCamera")
@@ -48,9 +49,14 @@ updateRobotCameraRotation = function (playerRotation)
     player.robotCamera:setRotation(rotation * playerRotation)
 end
 
+function updateRobotCameraPosition(angle)
+	local offset = vec2Rotate(ROBOT_CAMERA_OFFSET, angle)
+	player.robotCamera:setPosition(player:getPosition() + offset)
+end
+
 player.updateMovement = function (direction)
 	-- Normalize the direction for when two buttons are pressed at the same time
-	local normalized = direction:normalized()
+	local normalized = direction --testchange: direction should already be normalized after my changes
 
 	-- Multiply speed by the direction to walk
 	player.pc:getRigidBody():setLinearVelocity(Vec3(normalized.x * player.speed, normalized.y * player.speed, 0.0))
@@ -58,10 +64,14 @@ player.updateMovement = function (direction)
 	-- Set the rotation of the player/robot based on the direction it is moving
 	local angle = toDegrees(vec2Angle(normalized))
 	player:setRotation(Quaternion(Vec3(0, 0, 1), angle))
+	
+	--keep him on ground level (he likes to climb up walls for a unknown reason
 
+	local position = player.pc:getRigidBody():getPosition()
+	player.pc:getRigidBody():setPosition(Vec3(position.x,position.y, FLOOR_Z + 0.25)) 
+	
 	-- Put the camera of the robot on the right place after the player moved, based on the ROBOT_CAMERA_OFFSET
-	local offset = vec2Rotate(ROBOT_CAMERA_OFFSET, angle)
-	player.robotCamera:setPosition(player:getPosition() + offset)
+	updateRobotCameraPosition(angle)
 end
 
 player.update = function (guid, deltaTime) 	
@@ -118,7 +128,22 @@ player.update = function (guid, deltaTime)
 		hookshot:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
 		hookshotCooldown = hookshotCooldown - deltaTime
     end
+	
 
+end
+
+function player:reset()
+	player:unfreeze()
+	self.rb:setPosition(Vec3(0,0,FLOOR_Z + 0.25))
+	gameOverBool=false
+end
+
+function player:freeze()
+	self.sc:setState(ComponentState.Inactive)
+end
+
+function player:unfreeze()
+	self.sc:setState(ComponentState.Active)
 end
 
 player.collision = function(event)

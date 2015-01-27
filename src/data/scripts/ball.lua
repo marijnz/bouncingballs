@@ -32,7 +32,7 @@ function Ball:create(model, size)
 	cinfo.friction = 0.0
 	cinfo.angularDamping = 0.0
 	cinfo.linearDamping = 0.0
-	cinfo.restitution = 0.0
+	cinfo.restitution = 1
 	cinfo.position = Vec3(0,0,0)
 	go.rb = go.pc:createRigidBody(cinfo)
 	
@@ -126,7 +126,7 @@ function Ball:setInitialPositionAndMovement(position, LinearVelocity)
 end
 
 function Ball:dispose()
-	self.go:setPosition(Vec3(100,100,0))
+	self.go.rb:setPosition(Vec3(100,100,0))
 	self.go:setComponentStates(ComponentState.Inactive)
 	
 	self.shadow:setComponentStates(ComponentState.Inactive)
@@ -135,6 +135,10 @@ end
 
 function Ball:freeze()
 	self.go.pc:setState(ComponentState.Inactive)
+end
+
+function Ball:unfreeze()
+	self.go.pc:setState(ComponentState.Active)
 end
 
 function Ball:update()

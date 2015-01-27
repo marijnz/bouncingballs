@@ -6,7 +6,7 @@ CEILING_Z = 4.6
 -- Options 
 local options = {
     freecamera = true,
-	debugDrawing = false
+	debugDrawing = true
 }
 
 PhysicsSystem:setDebugDrawingEnabled(options.debugDrawing)
@@ -68,9 +68,6 @@ levels[2] = Level1()
 logMessage(levels[0])
 levelManager:initializeLevels(levels)
 
-
-
-
 -- Default update function
 function update(deltaTime)
 	return EventResult.Handled
@@ -80,8 +77,6 @@ end
 function gameOverupdate(deltaTime)
 	return EventResult.Handled
 end
-
-
 
 -- Register the default update function
 Events.Update:registerListener(update)

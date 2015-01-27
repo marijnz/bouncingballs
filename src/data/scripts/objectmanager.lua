@@ -26,8 +26,16 @@ function ObjectManager:_initialize()
 end
 
 
-function ObjectManager:getActiveFromPool(baseType)
-	return self.poolObjects[baseType]["active"]
+function ObjectManager:getActiveFromPool(baseTypeArray) 
+ local activeObjects={}
+	for i, baseType in pairs(baseTypeArray) do
+		for k, activeObject in pairs(self.poolObjects[baseType]["active"]) do
+			if activeObject~=nil then 
+				activeObjects[k] = activeObject 
+			end
+		end
+	end
+return activeObjects
 end
 
 
@@ -103,9 +111,8 @@ function ObjectManager:put(baseType, poolObject)
 	-- Remove from active pool
 	for i=0,count do
 		tempPoolObject = self.poolObjects[baseType]["active"][i]
-		if( tempPoolObject ~= nil and 
-			tempPoolObject.uniqueIdentifier == poolObject.uniqueIdentifier) then
-			
+		local foundObject = tempPoolObject ~= nil and tempPoolObject.uniqueIdentifier == poolObject.uniqueIdentifier
+		if(foundObject) then
 			self.poolObjects[baseType]["active"][i] = nil
 			break
 		end
