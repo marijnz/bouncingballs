@@ -23,7 +23,7 @@ cinfo.position = Vec3(0.0, 0.0, FLOOR_Z + 0.25)
 cinfo.maxAngularVelocity = 0.0
 
 player.rb = player.pc:createRigidBody(cinfo)
-player.rb:setUserData({type = USERDATA_TYPE_BALL})
+player.rb:setUserData({type = USERDATA_TYPE_PLAYER})
 player.speed = PLAYER_SPEED
 
 -- Robot camera model
@@ -120,10 +120,14 @@ player.update = function (guid, deltaTime)
 			hookshotCooldown = 0.2
 		end
 	elseif (InputHandler:isPressed(32) or bit32.btest(InputHandler:gamepad(0):buttonsTriggered(), Button.A)) then
+		
+		
 		hookshot = objectManager:grab(Hookshot)
 		hookshot:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
 		hookshotCooldown = hookshotCooldown - deltaTime
-    end
+    elseif (InputHandler:isPressed(78)) then
+		levelManager:goNextLevel()
+	end
 end
 
 function player:reset()
@@ -144,9 +148,10 @@ player.collision = function(event)
 	local self = event:getBody(CollisionArgsCallbackSource.A)
 	local other = event:getBody(CollisionArgsCallbackSource.B)
 
-    local data = other:getUserData()
+    -- NO CLUE why we have to get user data from self, should be 'other'
+    local data = self:getUserData()
     if (data.type == USERDATA_TYPE_BALL) then
-        gameOverBool=true
+        gameOverBool = true
     end
 end
 

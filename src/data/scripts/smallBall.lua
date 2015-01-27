@@ -12,17 +12,16 @@ setmetatable(SmallBall, {
 })
 
 function SmallBall:create()
-
 	Ball.create(self, "blueBall", 0.25)
-	
 end
 
 function SmallBall:update()
 
 	local position = self.go:getPosition()
 
-	if (self.hitBullet) then
-		self.hitBullet = false
+    local lastCollisionData = self.go.rb:getUserData()
+	
+	if (lastCollisionData.gotHit) then
 		objectManager:put(SmallBall, self)
 	end
 	

@@ -20,44 +20,51 @@ function LevelManager:create()
 end
 
 function LevelManager:initializeLevels(levels)
-	logMessage(levels[0])
 	self.levels = levels
 	
 	currentPos = Vec3(0,0,0)
 	
 	for key, level in ipairs(levels) do
-		self.levels[key-1].go = level:createLevel(currentPos, key)
-		self.levels[key-1].center = Vec3(currentPos)
+	logMessage(key)
+		self.levels[key].go = level:createLevel(currentPos, key)
+		self.levels[key].center = Vec3(0,0,0)
 		currentPos.y = currentPos.y - 15
 		currentPos.x = currentPos.x + 15
 	end
+	
 	self.levelProgress = 0
 	self.loadLevelAfterTime = 0.1
 end
 
 function LevelManager:goNextLevel()
+if(self.isGoingNextLevel) then return end
+	self.isGoingNextLevel = true
+	disposeEverything()
+	playerTweener = objectManager:grab(Tweener)
 	
-	tweener = objectManager:grab(Tweener)
-	
-	tweener:startTween(easing.inOutSine, player, Vec3(0,0,20), 1, self.onPlayerDisplaced)
+	playerTweener:startTween(easing.inOutSine, player, player:getPosition() + Vec3(0,0,20), 1, self.onPlayerDisplaced)
 end
 
 function LevelManager:onPlayerDisplaced()
+	logMessage("onPlayerDisplaced")
 	self = levelManager
-	tweener:startTween(easing.inOutSine, level.go, Vec3(15,-8,20), 1, self.onLevelUnloaded)
-
+	levelTweener = objectManager:grab(Tweener)
+	levelTweener:startTween(easing.inOutSine, level.go, Vec3(15,-8,20), 1, self.onLevelUnloaded)
 end
 
 function LevelManager:onLevelUnloaded()
+	logMessage("onLevelUnloaded")
 	self = levelManager
 	level = self.levels[self.currentLevelId]
-	objectManager:put(level)
-	loadLevel(self.currentLevelId + 1)
+	objectManager:put(Level1, level)
+	self:loadLevel(self.currentLevelId + 1)
 end
 
 function LevelManager:loadLevel(levelId)
+	self.isGoingNextLevel = true
+	self = levelManager
 	self.currentLevelId = levelId
-	
+	logMessage("id..: "..self.currentLevelId)
 	level = self.levels[self.currentLevelId]
 	logMessage(level.center)
 	-- Spawn balls
@@ -73,6 +80,7 @@ end
 function LevelManager:onLevelLoaded()
 	self = levelManager
 	
+	player:setPosition(0,0, 20)
 	player:freeze()
 	tweener2 = objectManager:grab(Tweener)
 	tweener2:startTween(easing.inOutSine, player, Vec3(0,0,FLOOR_Z + 0.25), 1, self.onPlayerPlaced)
@@ -85,6 +93,7 @@ function LevelManager:onPlayerPlaced()
 	level:startLevel(level.center, self.currentLevelId)
 	player:unfreeze()
 	logMessage("UNFREEZE PLAYER")
+	self.isGoingNextLevel = false
 end
 
 function LevelManager:addBall(ball)
@@ -102,20 +111,22 @@ function LevelManager:dispose()
 end
 
 function LevelManager:checkAndRespondIfLevelIsDone()
-count = 0
+	count = 0
 	for k, v in pairs(self.balls) do
-		count = count + 15
+		count = count + 1
 	end
+	logMessage("COUNT: "..count)
 	if(count == 0) then
-		-- Move camera to next level
+		self:goNextLevel()
 	end
 end
 
 function LevelManager:update(deltaTime)
 	if(self.loadLevelAfterTime ~= 0) then
 		self.loadLevelAfterTime = self.loadLevelAfterTime + deltaTime
-		if(self.loadLevelAfterTime > 2) then		
-			self:loadLevel(0)
+		if(self.loadLevelAfterTime > 5) then
+			self.currentLevelId = 1		
+			self:loadLevel(self.currentLevelId)
 			self.loadLevelAfterTime = 0
 		end
 	end

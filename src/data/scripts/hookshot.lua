@@ -5,7 +5,6 @@ Hookshot.__index = Hookshot
 
 BULLET_SPEED = 13
 
-
 setmetatable(Hookshot, {
   __index = PoolObject, -- this is what makes the inheritance work
   __call = function (cls, ...)
@@ -14,22 +13,21 @@ setmetatable(Hookshot, {
   end,
 })
 
-
 function Hookshot:getRigidBody()
 	return self.goCollision.rb
 end
 
 function Hookshot:create()
 	logMessage("HOOKSHOT CREATED")
-	-- Render
+
 	goVisual = GameObjectManager:createGameObject("hookshot_visual" .. self.uniqueIdentifier)
 	
+	-- Render
 	goVisual.render = goVisual:createRenderComponent()
 	goVisual.render:setPath("data/models/hook-shot.thmodel")
 
 	-- Physics
 	goCollision = GameObjectManager:createGameObject("hookshot_collision" .. self.uniqueIdentifier)
-	
 	goCollision.pc = goCollision:createPhysicsComponent()
 	cinfo = RigidBodyCInfo()
 	cinfo.shape = PhysicsFactory:createBox(0.1, 0.1, 10)
@@ -38,26 +36,16 @@ function Hookshot:create()
 	cinfo.restitution = 0
 	cinfo.position = Vec3(0,0,0)
 	cinfo.maxLinearVelocity = 10
-	
 	cinfo.isTriggerVolume = true
-	
 	goCollision.rb = goCollision.pc:createRigidBody(cinfo)
+    goCollision.rb:setUserData({type = USERDATA_TYPE_HOOKSHOT})
 	
 	self.goVisual = goVisual
 	self.goCollision = goCollision
 
 	-- Set initial position
 	self:setPosition(Vec3(100,100,0))
-	
-	
 end
-
--- function Bullet:getRigidBody()
-
-	-- return self.go.rb
-
--- end
-
 
 function Hookshot:dispose()
 	self:setPosition(Vec3(100,100,0))
@@ -73,11 +61,9 @@ function Hookshot:update(deltaTime)
 	toPositionCollision.z  = toPositionCollision.z + (deltaTime * BULLET_SPEED)
 	self.goCollision:setPosition(toPositionCollision)
 	
-	
 	if(self.goCollision:getPosition().z > -3) then
 		objectManager:put(Hookshot, self)
 	end
-	
 	
 	toScale = self.goVisual.render:getScale()
 	toScale.z = toScale.z + (deltaTime * BULLET_SPEED / 2 * 20)
