@@ -25,10 +25,13 @@ gameStartScreen.render:setState(ComponentState.Inactive)
 gameStartScreen.active=false
 
 function toggleScreen(screen)
+	--logMessage("toggling", screen)
 	if (screen.active) then
+		--logMessage("deactivating",screen)
 		screen.render:setState(ComponentState.Inactive)
 		screen.active=false
 	else
+		--logMessage("activating",screen)
 		screen.render:setState(ComponentState.Active)
 		screen.active=true
 	end

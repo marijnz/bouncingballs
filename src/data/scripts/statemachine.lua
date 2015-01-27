@@ -26,12 +26,16 @@ State{
 	
 	eventListeners = {
 		enter = {
-			toggleScreen(gameOverScreen),
-			freezeEverything
+			function()
+			toggleScreen(gameOverScreen)
+			freezeEverything()
+			end
 		},
 		leave = {
-			toggleScreen(gameOverScreen),
-			disposeEverything
+			function()
+				toggleScreen(gameOverScreen)
+				disposeEverything()
+			end
 		},
 		update = {
 			--gameOverUpdate
@@ -45,12 +49,16 @@ State{
 	
 	eventListeners = {
 		enter = {
-			freezeEverything,
-			toggleScreen(pauseScreen)
+			function()
+				freezeEverything()
+				toggleScreen(pauseScreen)
+			end
 		},
 		leave = {
-			unfreezeEverything,
-			toggleScreen(pauseScreen)
+			function()
+				unfreezeEverything()
+				toggleScreen(pauseScreen)
+			end
 		},
     }
 }
