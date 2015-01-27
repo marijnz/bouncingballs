@@ -84,7 +84,7 @@ function LevelManager:onLevelLoaded()
 	player:setPosition(0,0, 20)
 	player:freeze()
 	tweener2 = objectManager:grab(Tweener)
-	tweener2:startTween(easing.outSine, player, Vec3(0,0,FLOOR_Z + 0.25), 1, self.onPlayerPlaced)
+	tweener2:startTween(easing.outSine, player, Vec3(0,0,FLOOR_Z + 0.28), 1, self.onPlayerPlaced)
 end
 
 function LevelManager:onPlayerPlaced()

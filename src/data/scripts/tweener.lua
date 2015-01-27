@@ -32,11 +32,12 @@ end
 function Tweener:update(deltaTime)
 	if(self.isMoving) then
 		self.timeSinceMoving = self.timeSinceMoving + deltaTime
+		if(self.timeSinceMoving >= self.timeToTake) then self.timeSinceMoving = self.timeToTake end
 		to = easingVec3(self.easeType, self.timeSinceMoving,self.fromPosition,self.toPosition - self.fromPosition, self.timeToTake)
 		
 		self.transform:setPosition(to)
 		
-		if(self.timeSinceMoving > self.timeToTake) then
+		if(self.timeSinceMoving >= self.timeToTake) then
 			self.isMoving = false
 			objectManager:put(Tweener, self)
 			self.onComplete()
