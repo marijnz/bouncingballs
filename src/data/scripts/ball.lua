@@ -3,10 +3,8 @@ logMessage("using Ball.lua")
 Ball = {}
 Ball.__index = Ball
 
-balls = {}
 
-setmetatable(Ball, {
-  __index = PoolObject, -- this is what makes the inheritance work
+setmetatable(Ball, {  __index = PoolObject, -- this is what makes the inheritance work
   __call = function (cls, ...)
     self = setmetatable({}, cls)
     return self
@@ -51,8 +49,7 @@ function Ball:create(model, size)
     self.shadow = shadow
 	self.shadow:setComponentStates(ComponentState.Inactive)
 	
-	rawset(balls, "Ball" .. self.uniqueIdentifier, self)
-	
+	levelManager:addBall(self)	
 	logMessage(go:getGuid().." created")
 
     -- We have to set a default value otherwise there is a crash as soon as you 'get the data'
@@ -83,6 +80,7 @@ function Ball.BallCollision(event)
 
     -- Fix speed of ball when bouncing on floor by giving an impulse
     if (otherCollisionData.type == USERDATA_TYPE_FLOOR) then
+        print("HITFLOOR")
         local velocity = self:getLinearVelocity()
         local direction = velocity
         local impulse = Vec3(0, 0, direction.z * 0.276)
@@ -114,6 +112,8 @@ function Ball:setInitialPositionAndMovement(position, LinearVelocity)
 end
 
 function Ball:dispose()
+	levelManager:removeBall(self)
+	
 	self.go:setPosition(Vec3(100,100,0))
 	self.go:setComponentStates(ComponentState.Inactive)
 	

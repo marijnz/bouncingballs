@@ -26,18 +26,27 @@ include("stateMachine.lua")
 local world
 include("world.lua")
 
--- Camera
-local camera
-if (options.freecamera) then
-    include("freecamera.lua")
-else
-    include("camera.lua")
-end
+
 
 -- Some mathematical functions
 include("util.lua")
 
+-- Global bounciness
+floorBounciness=9
+wallBounciness=5
+
 -- Classes
+easing = require("easing")
+
+function easingVec3(easeMethod, t, b, c, d)
+	result = Vec3()
+	result.x = easeMethod(t ,b.x ,c.x ,d)
+	result.y = easeMethod(t ,b.y ,c.y ,d)
+	result.z = easeMethod(t ,b.z ,c.z ,d)
+	return result
+end
+
+include("tweener.lua")
 include("objectManager.lua")
 include("levelmanager.lua")
 include("levelbuilderhelper.lua")
@@ -49,7 +58,19 @@ include("smallBall.lua")
 include("player.lua");
 include("levels/level1.lua")
 
+-- Camera
+local camera
+if (options.freecamera) then
+    include("freecamera.lua")
+else
+    include("camera.lua")
+	objectManager:addPool(Camera, 1)
+	mainCamera = objectManager:grab(Camera)
+end
+
+
 objectManager:addPool(Hookshot, 5)
+objectManager:addPool(Tweener, 5)
 
 objectManager:addPool(LevelManager, 1)
 levelManager = objectManager:grab(LevelManager)
