@@ -84,10 +84,10 @@ player.update = function (guid, deltaTime)
 
 	-- virtual analog stick (WASD)
 	local virtualStick = Vec2(0, 0)
-	if (InputHandler:isPressed(Key.Left)) then virtualStick.x = virtualStick.x - 1 end
-	if (InputHandler:isPressed(Key.Right)) then virtualStick.x = virtualStick.x + 1 end
-	if (InputHandler:isPressed(Key.Up)) then virtualStick.y = virtualStick.y + 1 end
-	if (InputHandler:isPressed(Key.Down)) then virtualStick.y = virtualStick.y - 1 end
+	if (InputHandler:isPressed(Key.Left) or InputHandler:isPressed(Key.A)) then virtualStick.x = virtualStick.x - 1 end
+	if (InputHandler:isPressed(Key.Right) or InputHandler:isPressed(Key.D)) then virtualStick.x = virtualStick.x + 1 end
+	if (InputHandler:isPressed(Key.Up) or InputHandler:isPressed(Key.W)) then virtualStick.y = virtualStick.y + 1 end
+	if (InputHandler:isPressed(Key.Down) or InputHandler:isPressed(Key.S)) then virtualStick.y = virtualStick.y - 1 end
 	virtualStick = virtualStick:normalized()
 
     -- If a direction is set, walk & rotate
@@ -129,8 +129,8 @@ player.update = function (guid, deltaTime)
 		if(hookshotCooldown < 0) then
 			hookshotCooldown = 0.2
 		end
-	elseif (InputHandler:isPressed(32)) then
-	elseif (InputHandler:isPressed(32) or bit32.btest(InputHandler:gamepad(0):buttonsTriggered(), Button.A)) then
+	elseif (InputHandler:isPressed(Key.Space)) then
+	elseif (InputHandler:isPressed(Key.Space) or bit32.btest(InputHandler:gamepad(0):buttonsTriggered(), Button.A)) then
 		hookshot = objectManager:grab(Hookshot)
 		hookshot:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
 		hookshotCooldown = hookshotCooldown - deltaTime
