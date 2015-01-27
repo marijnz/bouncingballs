@@ -17,6 +17,8 @@ function toDegrees(angle)
 	return angle * (180.0 / math.pi)
 end
 
+-- Redefine Quaternion to support a more Lua-like interface
+local _Quaternion = Quaternion
 local function quatAxisAngle(axis, angle)
 	local quat = _Quaternion()
 
@@ -37,8 +39,6 @@ local function quatAxisAxis(axis1, axis2)
 	return quatAxisAngle(nAxis, toDegrees(theta))
 end
 
--- Redefine Quaternion to support a more Lua-like interface
-local _Quaternion = Quaternion
 function Quaternion(axis, angle)
 	if axis == nil then             return _Quaternion()              end -- Identity quaternion
 	if type(angle) == "number" then return quatAxisAngle(axis, angle) end -- Rotation about given axis by given angle

@@ -1,8 +1,8 @@
 -- Physics World
-include("defaults/physicsWorld.lua")
+include("utils/physicsWorld.lua")
 
 -- Default state machine
-include("defaults/stateMachine.lua")
+include("utils/stateMachine.lua")
 
 -- Include our update functions
 include("asteroids/update_stripped.lua")

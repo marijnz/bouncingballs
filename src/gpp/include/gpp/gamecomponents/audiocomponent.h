@@ -15,7 +15,7 @@ namespace gpp
     public:
         AudioComponent();
         virtual ~AudioComponent();
-        
+
         virtual void initalize();
 
         virtual void update( float elapsedMS );
@@ -23,7 +23,7 @@ namespace gpp
         virtual void destroy();
 
         SoundInstanceWrapper* createSoundInstance(const std::string& soundName, const std::string& path);
-        
+
         SoundInstanceWrapper* getSoundInstance(const std::string& soundName);
 
         LUA_BIND_REFERENCE_TYPE_BEGIN
@@ -36,14 +36,13 @@ namespace gpp
         gep::Hashmap<std::string, gep::ResourcePtr<gep::ISound>, gep::StringHashPolicy> m_sounds;
 
     };
-    
+
     template<>
     struct ComponentMetaInfo<AudioComponent>
     {
         static const char* name(){ return "AudioCComponent"; }
         static const gep::int32 initializationPriority() { return 65; }
         static const gep::int32 updatePriority() { return 42; }
-        static AudioComponent* create(){ return new AudioComponent(); }
     };
 
     class SoundInstanceWrapper
@@ -72,7 +71,7 @@ namespace gpp
         void setOrientation(const gep::Quaternion& orientation){m_pSoundInstance->setOrientation(orientation);}
 
         float getParameter(const char* parameterName)
-        { 
+        {
             float value = 0.0;
             auto result = m_pSoundInstance->getParameter(parameterName).getValue(&value);
             if (result != gep::Result::SUCCESS)

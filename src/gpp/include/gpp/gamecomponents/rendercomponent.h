@@ -36,9 +36,9 @@ namespace gpp
         void getBoneNames(gep::DynamicArray<const char*>& names);
         void setBoneMapping(const gep::DynamicArray<gep::uint32>& boneIds);
         void applyBoneTransformations(const gep::ArrayPtr<gep::mat4>& transformations);
-        
+
         virtual void setState(State::Enum state) override;
-        
+
         gep::vec3 getScale() { return m_scale; };
         void setScale(const gep::vec3& scale) { m_scale = scale; };
 
@@ -69,6 +69,5 @@ namespace gpp
         static const char* name(){ return "RenderComponent"; }
         static const gep::int32 initializationPriority() { return -10; }
         static const gep::int32 updatePriority() { return std::numeric_limits<gep::int32>::max(); }
-        static RenderComponent* create(){return new RenderComponent(); }
     };
 }

@@ -34,7 +34,13 @@ namespace gpp
             };
         };
 
-        GameObject* createGameObject(const std::string& guid);
+        GameObject* createGameObject(const std::string& guid)
+        {
+            GEP_ASSERT(m_state == State::PreInitialization,
+                       "You are not allowed to create game objects after the initialization process.");
+            return doCreateGameObject(guid);
+        }
+        void destroyGameObject(GameObject* pGameObject);
         GameObject* getGameObject(const std::string& guid);
 
         GameObject* getCurrentCameraObject(){return m_pCurrentCameraObject;}
@@ -50,6 +56,8 @@ namespace gpp
 
         LUA_BIND_REFERENCE_TYPE_BEGIN
             LUA_BIND_FUNCTION(createGameObject)
+            LUA_BIND_FUNCTION(createGameObjectUninitialized)
+            LUA_BIND_FUNCTION(destroyGameObject)
             LUA_BIND_FUNCTION(getGameObject)
         LUA_BIND_REFERENCE_TYPE_END;
 
@@ -57,10 +65,20 @@ namespace gpp
         GameObjectManager();
         virtual ~GameObjectManager();
     private:
-       gep::Hashmap<std::string, GameObject*, gep::StringHashPolicy> m_gameObjects;
-       State::Enum m_state;
+        gep::Hashmap<std::string, GameObject*, gep::StringHashPolicy> m_gameObjects;
+        gep::DynamicArray<GameObject*> m_garbage;
+        State::Enum m_state;
         gep::StackAllocator m_tempAllocator;
         GameObject* m_pCurrentCameraObject;
+
+        GameObject* createGameObjectUninitialized(const std::string& guid)
+        {
+            GEP_ASSERT(m_state == State::PostInitialization,
+                       "Can only create uninitialized game objects after the initial initialization phase");
+            return doCreateGameObject(guid);
+        }
+
+        GameObject* doCreateGameObject(const std::string& guid);
     };
 
     class IComponent
@@ -118,7 +136,7 @@ namespace gpp
         virtual void setParentGameObject(GameObject* object) override { m_pParentGameObject = object; }
     };
 
-  
+
     class GameObject : public gep::ITransform
     {
         friend class GameObjectManager;
@@ -147,10 +165,15 @@ namespace gpp
         template<typename T>
         T* createComponent()
         {
-            GEP_ASSERT(GameObjectManager::instance().getState() == GameObjectManager::State::PreInitialization, "You are not allowed to create game components after the initialization process.");
-            T* instance = ComponentMetaInfo<T>::create();
-            addComponent(instance);
-            return instance;
+            GEP_ASSERT(!m_isInitialized, "Cannot create a new component on an initialized game object.");
+            auto pInstance = new T();
+            if(addComponent(pInstance))
+            {
+                return pInstance;
+            }
+            gep::deleteAndNull(pInstance);
+            GEP_ASSERT(false, "Failed to add component. Check the log for more information.");
+            return nullptr;
         }
 
         template<typename T>
@@ -162,7 +185,7 @@ namespace gpp
                 pComponent = static_cast<T*>(wrapper.component);
             });
             return pComponent;
-            }
+        }
 
         virtual void setPosition(const gep::vec3& pos) override;
         virtual void setRotation(const gep::Quaternion& rot) override;
@@ -201,13 +224,14 @@ namespace gpp
             LUA_BIND_FUNCTION_NAMED(createComponent<AnimationComponent>, "createAnimationComponent")
             LUA_BIND_FUNCTION_NAMED(createComponent<CharacterComponent>, "createCharacterComponent")
             LUA_BIND_FUNCTION_NAMED(createComponent<AudioComponent>, "createAudioComponent")
-            LUA_BIND_FUNCTION_NAMED(getComponent<CameraComponent>, "getCameraComponent")	
+            LUA_BIND_FUNCTION_NAMED(getComponent<CameraComponent>, "getCameraComponent")
             LUA_BIND_FUNCTION_NAMED(getComponent<RenderComponent>, "getRenderComponent")
             LUA_BIND_FUNCTION_NAMED(getComponent<PhysicsComponent>, "getPhysicsComponent")
             LUA_BIND_FUNCTION_NAMED(getComponent<ScriptComponent>, "getScriptComponent")
             LUA_BIND_FUNCTION_NAMED(getComponent<AnimationComponent>, "getAnimationComponent")
             LUA_BIND_FUNCTION_NAMED(getComponent<CharacterComponent>, "getCharacterComponent")
             LUA_BIND_FUNCTION_NAMED(getComponent<AudioComponent>, "getAudioComponent")
+            LUA_BIND_FUNCTION_NAMED(initializeManually, "initialize")
             LUA_BIND_FUNCTION(setPosition)
             LUA_BIND_FUNCTION(getPosition)
             LUA_BIND_FUNCTION(getWorldPosition)
@@ -226,18 +250,26 @@ namespace gpp
 
     private:
         std::string m_guid;
+        bool m_isInitialized; ///< Used for checks/asserts.
         bool m_isActive;
         gep::Transform m_defaultTransform;
         gep::ITransform* m_transform;
         gep::Hashmap<const char*, ComponentWrapper> m_components;
         gep::DynamicArray<ComponentWrapper> m_updateQueue;
 
+        void initializeManually()
+        {
+            GEP_ASSERT(GameObjectManager::instance().getState() == GameObjectManager::State::PostInitialization,
+                       "Calling `initialize` manually on a game object "
+                       "is only allowed after the initial initialization phase.");
+            initialize();
+        }
+
         inline std::string getGuidCopy() { return getGuid(); }
 
         template<typename T>
-        void addComponent(T* specializedComponent)
+        bool addComponent(T* specializedComponent)
         {
-            GEP_ASSERT(GameObjectManager::instance().getState() == GameObjectManager::State::PreInitialization, "You are not allowed to create game components after the initialization process.");
             //check weather T is really an ICompontent
             auto component = static_cast<IComponent*>(specializedComponent);
             ComponentWrapper wrapper;
@@ -249,7 +281,8 @@ namespace gpp
             if(m_components[typeName].component != nullptr)
             {
                 GEP_ASSERT(false, "A component of the same type has already been added to this gameObject", typeName, m_guid);
-                throw gep::Exception(gep::format("The component %s has already been added to gameObject %s", typeName, m_guid));
+                g_globalManager.getLogging()->logError("The component %s has already been added to gameObject %s", typeName, m_guid);
+                return false;
             }
             component->setParentGameObject(this);
             m_components[typeName] = wrapper;
@@ -257,7 +290,7 @@ namespace gpp
             if (wrapper.updatePriority == std::numeric_limits<gep::int32>::max())
             {
                 // Component needs no update
-                return;
+                return true;
             }
             //insert into update Queue
             size_t index = 0;
@@ -271,6 +304,7 @@ namespace gpp
                 ++index;
             }
             m_updateQueue.insertAtIndex(index, wrapper);
+            return true;
         }
     };
 
@@ -282,7 +316,7 @@ namespace gpp
             static_assert(false, "Please specialize this template in the specific component class!");
             return nullptr;
         }
-        
+
         /// The smaller this value, the earlier this component type will be initialized.
         static const gep::int32 initializationPriority()
         {
@@ -296,12 +330,6 @@ namespace gpp
         {
             static_assert(false, "Please specialize this template in the specific component class!");
             return std::numeric_limits<gep::int32>::max();
-        }
-        
-        static T* create()
-        {
-            static_assert(false, "Please specialize this template in the specific component class!");
-            return nullptr;
         }
     };
 

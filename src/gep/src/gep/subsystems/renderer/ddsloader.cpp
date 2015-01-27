@@ -119,7 +119,9 @@ void gep::DDSLoader::loadFile(const char* filename)
 
         if(!isPowerOfTwo(m_header.dwWidth) || !isPowerOfTwo(m_header.dwHeight))
         {
-            throw DDSLoadingException(format("The file '%s' is a compressed texture but has a non pot size", filename));
+            throw DDSLoadingException(format("The file '%s' is a compressed texture but its size is not a power of 2! "
+                                             "You should use textures of size 16x16, 32x32, 64x64, etc etc...",
+                                             filename));
         }
 
         size_t mipmapWidth = m_header.dwWidth;

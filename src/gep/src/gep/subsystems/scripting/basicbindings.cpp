@@ -18,7 +18,7 @@ void gep::ScriptingManager::makeBasicBindings()
     scripting->bind<uvec2>("Vec2u");
     scripting->bind<vec2>("Vec2");
     scripting->bind<vec3>("Vec3");
-    scripting->bind<Quaternion>("_Quaternion");
+    //scripting->bind<Quaternion>("_Quaternion");
     scripting->bind<mat3>("Mat3");
     scripting->bind<mat4>("Mat4");
     scripting->bind<Color>("Color");

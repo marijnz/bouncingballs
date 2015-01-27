@@ -48,7 +48,6 @@ namespace gpp
         static const char* name() { return "CharacterComponent"; }
         static const gep::int32 initializationPriority() { return 0; }
         static const gep::int32 updatePriority() { return 20; }
-        static CharacterComponent* create() { return new CharacterComponent(); }
     };
 
 }

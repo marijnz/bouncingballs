@@ -1,8 +1,8 @@
 -- Use the default physics world.
-include("defaults/physicsWorld.lua")
+include("utils/physicsWorld.lua")
 
 -- Use the default state machine.
-include("defaults/stateMachine.lua")
+include("utils/stateMachine.lua")
 
 
 -- Enable wireframe drawing of physics geometry

@@ -30,8 +30,9 @@ void gep::StdAllocator::freeMemory(void* mem)
     ScopedLock<Mutex> lock(m_allocationLock);
     if(mem != nullptr)
     {
+        ++m_numFrees;
         m_bytesAllocated -= _msize(mem);
-        return free(mem);
+        free(mem);
     }
 }
 
