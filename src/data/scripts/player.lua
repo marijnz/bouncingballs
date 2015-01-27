@@ -130,9 +130,10 @@ player.update = function (guid, deltaTime)
 			hookshotCooldown = 0.2
 		end
 	elseif (InputHandler:isPressed(32) or bit32.btest(InputHandler:gamepad(0):buttonsTriggered(), Button.A)) then
-		hookshot = objectManager:grab(Hookshot)
-		hookshot:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
-		hookshotCooldown = hookshotCooldown - deltaTime
+		levelManager:goNextLevel()
+		--hookshot = objectManager:grab(Hookshot)
+		--hookshot:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
+		--hookshotCooldown = hookshotCooldown - deltaTime
     end
 	
 

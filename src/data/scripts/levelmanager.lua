@@ -20,42 +20,44 @@ function LevelManager:create()
 end
 
 function LevelManager:initializeLevels(levels)
-	logMessage(levels[0])
 	self.levels = levels
 	
 	currentPos = Vec3(0,0,0)
 	
 	for key, level in ipairs(levels) do
-		self.levels[key-1].go = level:createLevel(currentPos, key)
-		self.levels[key-1].center = Vec3(currentPos)
+	logMessage(key)
+		self.levels[key].go = level:createLevel(currentPos, key)
+		self.levels[key].center = Vec3(currentPos)
 		currentPos.y = currentPos.y - 15
 		currentPos.x = currentPos.x + 15
 	end
+	
 	self.levelProgress = 0
 	self.loadLevelAfterTime = 0.1
 end
 
 function LevelManager:goNextLevel()
+	disposeEverything()
+	playerTweener = objectManager:grab(Tweener)
 	
-	tweener = objectManager:grab(Tweener)
-	
-	tweener:startTween(easing.inOutSine, player, Vec3(0,0,20), 1, self.onPlayerDisplaced)
+	playerTweener:startTween(easing.inOutSine, player, player:getPosition() + Vec3(0,0,20), 1, self.onPlayerDisplaced)
 end
 
 function LevelManager:onPlayerDisplaced()
 	self = levelManager
-	tweener:startTween(easing.inOutSine, level.go, Vec3(15,-8,20), 1, self.onLevelUnloaded)
-
+	levelTweener = objectManager:grab(Tweener)
+	levelTweener:startTween(easing.inOutSine, level.go, Vec3(15,-8,20), 1, self.onLevelUnloaded)
 end
 
 function LevelManager:onLevelUnloaded()
 	self = levelManager
 	level = self.levels[self.currentLevelId]
-	objectManager:put(level)
-	loadLevel(self.currentLevelId + 1)
+	objectManager:put(Level1, level)
+	self:loadLevel(self.currentLevelId + 1)
 end
 
 function LevelManager:loadLevel(levelId)
+	self = levelManager
 	self.currentLevelId = levelId
 	
 	level = self.levels[self.currentLevelId]
@@ -114,8 +116,9 @@ end
 function LevelManager:update(deltaTime)
 	if(self.loadLevelAfterTime ~= 0) then
 		self.loadLevelAfterTime = self.loadLevelAfterTime + deltaTime
-		if(self.loadLevelAfterTime > 2) then		
-			self:loadLevel(0)
+		if(self.loadLevelAfterTime > 5) then
+			self.currentLevelId = 1		
+			self:loadLevel(self.currentLevelId)
 			self.loadLevelAfterTime = 0
 		end
 	end

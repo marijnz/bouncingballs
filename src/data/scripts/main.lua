@@ -75,7 +75,7 @@ end
 logMessage("OKOKOKOK")
 objectManager:addPool(Hookshot, 5)
 logMessage("OKOKOKOK")
-objectManager:addPool(Tweener, 5)
+objectManager:addPool(Tweener, 20)
 
 objectManager:addPool(LevelManager, 1)
 levelManager = objectManager:grab(LevelManager)
@@ -83,7 +83,7 @@ levelManager = objectManager:grab(LevelManager)
 objectManager:addPool(MediumBall, 2)
 objectManager:addPool(SmallBall, 2 * 2)
 
-objectManager:addPool(Level1, 3)
+objectManager:addPool(Level1, 6)
 levels = {}
 levels[0] = objectManager:grab(Level1)
 levels[1] = objectManager:grab(Level1)
