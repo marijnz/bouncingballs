@@ -20,6 +20,8 @@ cinfo.restitution = 1.0
 cinfo.position = Vec3(0.0, 0.0, FLOOR_Z + 0.25)
 cinfo.maxAngularVelocity = 0.0
 
+player:setPosition(Vec3(0,0,0.2))
+
 player.rb = player.pc:createRigidBody(cinfo)
 player.speed = 5
 
@@ -72,6 +74,12 @@ player.update = function (guid, deltaTime)
     if (InputHandler:isPressed(Key.Up)) then
         direction = direction + Vec3(-1, -1, 0)
     end
+	
+	if (InputHandler:isPressed(Key.Up)) then
+		--mainCamera:moveTo(player:getPosition() + Vec3(10, -17, 0))
+        direction = direction + Vec3(-1, -1, 0)
+    end
+	
     if (InputHandler:isPressed(Key.Down)) then
         direction = direction + Vec3(1, 1, 0)
     end

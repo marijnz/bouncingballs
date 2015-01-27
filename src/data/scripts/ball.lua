@@ -3,7 +3,7 @@ logMessage("using ball.lua")
 ball = {}
 ball.__index = ball
 
-balls = {}
+
 
 setmetatable(ball, {
   __index = PoolObject, -- this is what makes the inheritance work
@@ -53,7 +53,7 @@ function ball:create(model, size)
     self.shadow = shadow
 	self.shadow:setComponentStates(ComponentState.Inactive)
 	
-	rawset(balls, "ball" .. self.uniqueIdentifier, self)
+	levelManager:addBall(self)
 	
 	logMessage(go:getGuid().." created")
 	
@@ -73,7 +73,7 @@ function ball.ballCollision(event)
 	local self = event:getBody(CollisionArgsCallbackSource.A)
 	local other = event:getBody(CollisionArgsCallbackSource.B)
 	
-    for k, v in pairs(balls) do
+    for k, v in pairs(levelManager.balls) do
         if (self:equals(v.go.rb)) then
             if (other:equals(floor.rb)) then
                 v.hitFloor = true
@@ -115,6 +115,8 @@ function ball:setInitialPositionAndMovement(position, LinearVelocity)
 end
 
 function ball:dispose()
+	levelManager:removeBall(self)
+	
 	self.go:setPosition(Vec3(100,100,0))
 	self.go:setComponentStates(ComponentState.Inactive)
 	
