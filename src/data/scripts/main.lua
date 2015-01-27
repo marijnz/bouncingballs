@@ -89,10 +89,5 @@ function update(deltaTime)
 	return EventResult.Handled
 end
 
--- Update function for the game Over state
-function gameOverupdate(deltaTime)
-	return EventResult.Handled
-end
-
 -- Register the default update function
 Events.Update:registerListener(update)
