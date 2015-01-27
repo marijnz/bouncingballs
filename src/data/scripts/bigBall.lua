@@ -26,12 +26,13 @@ function BigBall:update()
     local lastCollisionData = self.go.rb:getUserData()
 
 	if (lastCollisionData.gotHit) then
-		objectManager:put(BigBall, self)
 		
 		local ball1 = objectManager:grab(MediumBall)
 		ball1:setInitialPositionAndMovement(position+Vec3(0,0.76,0), Vec3(0, 2.0, 0.0))
 		local ball2 = objectManager:grab(MediumBall)
 		ball2:setInitialPositionAndMovement(position+Vec3(0,-0.76,0), Vec3(0, -2.0, 0.0))
+		
+		objectManager:put(BigBall, self)
 	end
 	
 	Ball.update(self)
