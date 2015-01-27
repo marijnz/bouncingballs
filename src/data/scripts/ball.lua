@@ -39,6 +39,7 @@ function Ball:create(model, size)
 	go:setComponentStates(ComponentState.Inactive)
 	
 	self.go = go
+    self.speedZ = 9
 
     -- Shadow of the Ball
     shadow = GameObjectManager:createGameObject("Ball" .. self.uniqueIdentifier .. "-shadow")
@@ -79,6 +80,7 @@ function Ball.BallCollision(event)
     local newBallCollisionData = {type = USERDATA_TYPE_BALL}
 
     -- Fix speed of ball when bouncing on floor by giving an impulse
+    --[[
     if (otherCollisionData.type == USERDATA_TYPE_FLOOR) then
         print("HITFLOOR")
         local velocity = self:getLinearVelocity()
@@ -88,9 +90,12 @@ function Ball.BallCollision(event)
         self:applyLinearImpulse(impulse)
         event:updateVelocities(CollisionArgsCallbackSource.A)
     end
+    ]]--
+
+    newBallCollisionData.resetVelocityZ = otherCollisionData.type == USERDATA_TYPE_FLOOR
 
     -- If boucing against a ball or a wall, reset the velocity next frame
-    newBallCollisionData.resetVelocity = otherCollisionData.type == USERDATA_TYPE_WALL or otherCollisionData.type == USERDATA_TYPE_BALL
+    newBallCollisionData.resetVelocityXY = otherCollisionData.type == USERDATA_TYPE_WALL or otherCollisionData.type == USERDATA_TYPE_BALL
 
     -- If a hookshot collides with a ball
     newBallCollisionData.gotHit = otherCollisionData.type == USERDATA_TYPE_HOOKSHOT
@@ -104,7 +109,7 @@ end
 function Ball:setInitialPositionAndMovement(position, LinearVelocity)
 	self:setPosition(position)
 	self:setLinearVelocity(LinearVelocity)
-    self.speed = vec2Length(LinearVelocity)
+    self.speedXY = vec2Length(LinearVelocity)
     self.shadow:setPosition(position)
 end
 
@@ -138,10 +143,17 @@ function Ball:update()
     local lastCollisionData = self.go.rb:getUserData()
     local newCollisionData = {type = USERDATA_TYPE_BALL}
 
-    if (lastCollisionData ~= nil and lastCollisionData.resetVelocity) then
+    if (lastCollisionData.resetVelocityZ) then
+        print("resetVelocityZ")
+        local velocity = self.go.rb:getLinearVelocity()
+        velocity = Vec3(velocity.x, velocity.y, self.speedZ)
+        self.go.rb:setLinearVelocity(velocity)
+    end
+
+    if (lastCollisionData.resetVelocityXY) then
         local velocity = self.go.rb:getLinearVelocity()
         local velocityNormalized = vec2Normalize(velocity)
-        velocity = Vec3(velocityNormalized.x * self.speed, velocityNormalized.y * self.speed, velocity.z)
+        velocity = Vec3(velocityNormalized.x * self.speedXY, velocityNormalized.y * self.speedXY, velocity.z)
         self.go.rb:setLinearVelocity(velocity)
     end
 
@@ -154,5 +166,5 @@ end
 
 function Ball:setLinearVelocity(linearVelocity)
 	self.go.rb:setLinearVelocity(linearVelocity)
-    self.speed = vec2Length(linearVelocity)
+    self.speedXY = vec2Length(linearVelocity)
 end
