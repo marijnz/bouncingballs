@@ -72,8 +72,9 @@ else
 	mainCamera = objectManager:grab(Camera)
 end
 
-
+logMessage("OKOKOKOK")
 objectManager:addPool(Hookshot, 5)
+logMessage("OKOKOKOK")
 objectManager:addPool(Tweener, 5)
 
 objectManager:addPool(LevelManager, 1)

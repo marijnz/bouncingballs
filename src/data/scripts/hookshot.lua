@@ -20,7 +20,7 @@ function Hookshot:getRigidBody()
 end
 
 function Hookshot:create()
-
+	logMessage("HOOKSHOT CREATED")
 	-- Render
 	goVisual = GameObjectManager:createGameObject("hookshot_visual" .. self.uniqueIdentifier)
 	
