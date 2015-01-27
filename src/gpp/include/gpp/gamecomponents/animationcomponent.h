@@ -19,10 +19,8 @@ namespace gpp
         virtual void initalize() override;
 
         virtual void update( float elapsedMS ) override;
-        
+
         virtual void destroy() override;
-        
-        virtual void setState( State::Enum state ) override;
 
         void setSkeletonFile(const char* path);
         void addAnimationFile(const char* animationName, const char* path);
@@ -68,13 +66,10 @@ namespace gpp
             LUA_BIND_FUNCTION(easeIn)
             LUA_BIND_FUNCTION(easeOut)
             LUA_BIND_FUNCTION(getBoneByName)
+            LUA_BIND_FUNCTION(setState)
         LUA_BIND_REFERENCE_TYPE_END
-    
+
     private:
-        void activate();
-
-        void deactivate();
-
         void updateBoneTransformations();
 
         const char* m_skeletonPath;
@@ -88,7 +83,7 @@ namespace gpp
         gep::Hashmap<std::string, gep::IAnimationControl*, gep::StringHashPolicy> m_animationControls;
         gep::ResourcePtr<gep::IAnimationResource> m_skins;
 
-        
+
 
         gep::IAnimatedSkeleton*  m_AnimatedSkeleton;
 
@@ -102,7 +97,6 @@ namespace gpp
         static const char* name(){ return "AnimationComponent"; }
         static const gep::int32 initializationPriority() { return 23; }
         static const gep::int32 updatePriority() { return 1; }
-        static AnimationComponent* create(){ return new AnimationComponent(); }
     };
 
 }

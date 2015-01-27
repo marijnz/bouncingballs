@@ -34,6 +34,8 @@ namespace gep
         static_assert(isPod<AllocatorInfo>::value == false, "AllocatorInfo should be non-pod");
 
         DynamicArray<AllocatorInfo> m_allocators;
+        // Store this member for better performance
+        std::stringstream m_message;
 
     public:
         // ISubsystem interface

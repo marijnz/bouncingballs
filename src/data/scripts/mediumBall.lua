@@ -4,7 +4,7 @@ MediumBall = {}
 MediumBall.__index = MediumBall
 
 setmetatable(MediumBall, {
-  __index = ball, -- this is what makes the inheritance work
+  __index = Ball, -- this is what makes the inheritance work
   __call = function (cls, ...)
     self = setmetatable({}, cls)
     return self
@@ -13,7 +13,7 @@ setmetatable(MediumBall, {
 
 function MediumBall:create()
 
-	ball.create(self, "redBall", 0.5)
+	Ball.create(self, "redBall", 0.5)
 	
 end
 
@@ -36,6 +36,6 @@ function MediumBall:update()
 					
 	end
 
-	ball.update(self)
+	Ball.update(self)
 	
 end

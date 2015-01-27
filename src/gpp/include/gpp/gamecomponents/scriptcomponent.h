@@ -38,6 +38,5 @@ namespace gpp
         static const char* name(){ return "ScriptComponent"; }
         static const gep::int32 initializationPriority() { return 0; }
         static const gep::int32 updatePriority() { return 42; }
-        static ScriptComponent* create(){ return new ScriptComponent(); }
     };
 }

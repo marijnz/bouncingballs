@@ -285,6 +285,7 @@ void gep::InputHandler::update(float elapsedTime)
         m_pXInputGamepads[dwUserIndex].update(elapsedTime/1000.f, dwUserIndex);
     }
 
+    m_isAnyPressed = false;
     for (auto& keyInfo : m_keyMap)
     {
         if (keyInfo.isPressed)

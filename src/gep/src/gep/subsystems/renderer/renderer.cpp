@@ -20,10 +20,10 @@
 struct ID3DUserDefinedAnnotation : public IUnknown
 {
 public:
-    virtual INT STDMETHODCALLTYPE BeginEvent( _In_  LPCWSTR Name) = 0;   
-    virtual INT STDMETHODCALLTYPE EndEvent( void) = 0;    
-    virtual void STDMETHODCALLTYPE SetMarker( _In_  LPCWSTR Name) = 0;  
-    virtual BOOL STDMETHODCALLTYPE GetStatus( void) = 0;   
+    virtual INT STDMETHODCALLTYPE BeginEvent( _In_  LPCWSTR Name) = 0;
+    virtual INT STDMETHODCALLTYPE EndEvent( void) = 0;
+    virtual void STDMETHODCALLTYPE SetMarker( _In_  LPCWSTR Name) = 0;
+    virtual BOOL STDMETHODCALLTYPE GetStatus( void) = 0;
 };
 
 #include "effects11/d3dx11effect.h"
@@ -130,7 +130,7 @@ void gep::Renderer::initialize()
         auto aspectRatio = float(m_settings.screenResolution.x) / float(m_settings.screenResolution.y);
         m_projection = mat4::projectionMatrix(60.0f, aspectRatio, 0.1f, 10000.0f);
     }
-	m_view = mat4::lookAtMatrix(vec3(100, 0, 50), vec3(0, 0, 25), vec3(0,0,1));
+    m_view = mat4::lookAtMatrix(vec3(100, 0, 50), vec3(0, 0, 25), vec3(0,0,1));
 
     {
         Vertexbuffer::DataChannel dataChannels[] =
@@ -596,7 +596,7 @@ void gep::Renderer::executeCommands(RendererExtractor& extractor, CommandBase* c
         case CommandType::RenderModel:
             {
                 auto cmd = RendererExtractor::command_cast<CommandRenderModel>(currentCommand);
-                
+
                 // We have to use different transformations for animated/static models
                 // since havok's combined matrices are in another space...
                 // TODO: Find a better way to process havok's transformations correctly
@@ -611,7 +611,7 @@ void gep::Renderer::executeCommands(RendererExtractor& extractor, CommandBase* c
                 }
             }
             break;
-    
+
         case CommandType::Camera:
             {
                 auto cmd = RendererExtractor::command_cast<CommandCamera>(currentCommand);
@@ -829,7 +829,7 @@ gep::ResourcePtr<gep::IModel> gep::Renderer::loadModel(const char* path)
         return model;
     uint32 matId = 0;
     model->getMaterial(0).setShader(m_pWireframeShader);
-   
+
     return model;
 }
 
@@ -970,34 +970,21 @@ void gep::DebugRenderer::drawLine(const vec2& start, const vec2& end, Color colo
 
 void gep::DebugRenderer::drawArrow(const vec3& start, const vec3& end, Color color)
 {
+    GEP_ASSERT(!start.epsilonCompare(end),
+               "Start and End vector of the arrow must be different!");
     vec3 x,y;
     vec3 dir = end - start;
     float len = dir.length() * 0.1f;
     auto arrowEnd = start + (dir * 0.9f);
-    if( vec3(0,0,1).dot(dir) < 0.01f )
+    auto angle = vec3(0,0,1).dot(dir);
+    if(isNonZero(angle))
     {
-        // FIXME TODO causes crash when rendering skeletons
-		// BEGIN HOTFIX
-		if (isZero(dir.cross(vec3(1,0,0)).length())) return;
-		// END HOTFIX
         x = dir.cross(vec3(1,0,0)).normalized();
-        // FIXME TODO causes crash when rendering skeletons
-		// BEGIN HOTFIX
-		if (isZero(dir.cross(x).length())) return;
-		// END HOTFIX
-		y = dir.cross(x).normalized();
+        y = dir.cross(x).normalized();
     }
     else
     {
-        // FIXME TODO causes crash when rendering skeletons
-		// BEGIN HOTFIX
-		if (isZero(dir.cross(vec3(0,0,1)).length())) return;
-		// END HOTFIX
         x = dir.cross(vec3(0,0,1)).normalized();
-        // FIXME TODO causes crash when rendering skeletons
-		// BEGIN HOTFIX
-		if (isZero(dir.cross(x).length())) return;
-		// END HOTFIX
         y = dir.cross(x).normalized();
     }
 

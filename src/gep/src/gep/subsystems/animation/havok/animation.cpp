@@ -144,9 +144,9 @@ gep::AnimationResource* gep::AnimationFileLoader::loadResource( AnimationResourc
     if (container)
     {
         hkaAnimationContainer* ac = reinterpret_cast<hkaAnimationContainer*>( container->findObjectByType( hkaAnimationContainerClass.getName() ));
-        
+
         GEP_ASSERT(ac != nullptr, "Unable to load animation data!");
-        
+
         // get the skeleton
         if (ac->m_skeletons.getSize() > 0)
         {
@@ -192,7 +192,7 @@ gep::AnimationResource* gep::AnimationFileLoader::loadResource( AnimationResourc
             for (auto binding : ac->m_skins)
             {
                 result->m_skinBinding.append(binding);
-            } 
+            }
         }
         else
         {
@@ -256,7 +256,7 @@ gep::AnimatedSkeleton::~AnimatedSkeleton()
         DELETE_AND_NULL(control);
     }
    GEP_HK_REMOVE_REF_AND_NULL(m_pHkaAnimatedSkeleton);
-   
+
    for (auto& bone : m_bones.values())
    {
        DELETE_AND_NULL(bone);
@@ -270,7 +270,7 @@ gep::IAnimationControl* gep::AnimatedSkeleton::addAnimationControl(ResourcePtr<I
 {
     GEP_ASSERT(dynamic_cast<AnimationResource*>(anim.get()) != nullptr, "Cant't cast provided animationControl parameter")
     auto resource = static_cast<AnimationResource*>(anim.get());
-    
+
     auto control = new AnimationControl( resource->m_bindings[0] ); // only one animation per file!
     m_animationControls.append(control);
     m_pHkaAnimatedSkeleton->addAnimationControl(control->getHkaAnimationControl());
@@ -308,7 +308,7 @@ void gep::AnimatedSkeleton::getBoneTransformations(DynamicArray<mat4>& result)
     {
         hkQsTransform transform = m_pPose->getBoneModelSpace(index);
         //hkQsTransform transform = m_pPose->getBoneLocalSpace(index);
-        
+
         __declspec(align(16)) mat4 trans; //Hack to convert hkMat4 to gep::mat4
 
 
@@ -350,15 +350,17 @@ void gep::AnimatedSkeleton::renderDebug()
        conversion::hk::from(hp2,p2);
        p1 = p1 * m_debugDrawingScale;
        p2 = p2 * m_debugDrawingScale;
-       
+
        p1 = m_pTransform->getWorldRotation().toMat3() * p1;
        p1 = m_pTransform->getWorldPosition() + p1;
-       
+
        p2 = m_pTransform->getWorldRotation().toMat3() * p2;
        p2 = m_pTransform->getWorldPosition() + p2;
 
-
-       renderer->getDebugRenderer().drawArrow(p1, p2); 
+       if (gep::isNonZero((p1 - p2).length() ))
+       {
+           renderer->getDebugRenderer().drawArrow(p1, p2);
+       }
     }
 }
 
@@ -464,7 +466,7 @@ gep::vec3 gep::Bone::getRightDirection() const
     return (conversion::hk::from(m_pBone->getRotation()) * m_baseOrientation).toMat3() * gep::vec3(1,0,0);
 }
 
-gep::mat4 gep::Bone::getWorldTransformationMatrix() const 
+gep::mat4 gep::Bone::getWorldTransformationMatrix() const
 {
     if (m_pParent)
     {
@@ -473,7 +475,7 @@ gep::mat4 gep::Bone::getWorldTransformationMatrix() const
     return gep::mat4::translationMatrix( conversion::hk::from(m_pBone->getTranslation())) * (conversion::hk::from(m_pBone->getRotation())) .toMat4();
 }
 
-gep::vec3 gep::Bone::getWorldPosition() const 
+gep::vec3 gep::Bone::getWorldPosition() const
 {
     if (m_pParent)
     {
@@ -482,7 +484,7 @@ gep::vec3 gep::Bone::getWorldPosition() const
     return conversion::hk::from(m_pBone->getTranslation());
 }
 
-gep::Quaternion gep::Bone::getWorldRotation() const 
+gep::Quaternion gep::Bone::getWorldRotation() const
 {
     if (m_pParent)
     {

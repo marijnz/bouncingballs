@@ -21,19 +21,28 @@ gpp::GameObjectManager::GameObjectManager():
 
 gpp::GameObjectManager::~GameObjectManager()
 {
-
 }
 
-gpp::GameObject* gpp::GameObjectManager::createGameObject(const std::string& guid)
+gpp::GameObject* gpp::GameObjectManager::doCreateGameObject(const std::string& guid)
 {
-    GEP_ASSERT(m_state == State::PreInitialization, "You are not allowed to create game objects after the initialization process.");
-
     GameObject* pGameObject = nullptr;
     GEP_ASSERT(!m_gameObjects.tryGet(guid, pGameObject), "GameObject already exists!", guid);
     pGameObject = new GameObject();
     pGameObject->m_guid = guid;
     m_gameObjects[guid] = pGameObject;
     return pGameObject;
+}
+
+void gpp::GameObjectManager::destroyGameObject(GameObject* pGameObject)
+{
+    GEP_ASSERT(pGameObject, "Invalid input");
+    GEP_ASSERT(m_gameObjects.exists(pGameObject->getGuid()), "Trying to delete non-existant game object!");
+    GEP_ASSERT(m_gameObjects[pGameObject->getGuid()] == pGameObject, "Detected same GUID but different pointers!");
+    g_globalManager.getLogging()->logWarning("Deleting game object '%s' at the end of the frame."
+                                             " All references to this object "
+                                             "(including the ones in your Lua code) will be invalid!",
+                                             pGameObject->getGuid().c_str());
+    m_garbage.append(pGameObject);
 }
 
 gpp::GameObject* gpp::GameObjectManager::getGameObject(const std::string& guid)
@@ -54,24 +63,41 @@ void gpp::GameObjectManager::initialize()
 
 void gpp::GameObjectManager::destroy()
 {
-    for(auto& gameObject : m_gameObjects.values())
+    for(auto pGameObject : m_gameObjects.values())
     {
-        gameObject->destroy();
-        DELETE_AND_NULL(gameObject);
+        if (pGameObject)
+        {
+            pGameObject->destroy();
+            delete pGameObject;
+        }
     }
     m_gameObjects.clear();
 }
 
 void gpp::GameObjectManager::update(float elapsedMs)
 {
-    for(auto gameObject : m_gameObjects.values())
+    for(auto pGameObject : m_gameObjects.values())
     {
-        gameObject->update(elapsedMs);
+        if (pGameObject)
+        {
+            pGameObject->update(elapsedMs);
+        }
     }
+
+    // Collect garbage
+    for (auto pGarbage : m_garbage)
+    {
+        const auto& guid = pGarbage->getGuid();
+        auto result = m_gameObjects.remove(guid);
+        GEP_ASSERT(result == gep::SUCCESS, "Failed to remove game object from list of all game objects?!?!");
+        pGarbage->destroy();
+    }
+    m_garbage.clear();
 }
 
 gpp::GameObject::GameObject() :
     m_guid(),
+    m_isInitialized(false),
     m_isActive(true),
     m_defaultTransform(),
     m_transform(&m_defaultTransform),
@@ -127,7 +153,11 @@ gep::Quaternion gpp::GameObject::getRotation() const
 
 void gpp::GameObject::update(float elapsedMs)
 {
-    for(auto component :  m_updateQueue)
+    GEP_ASSERT(m_isInitialized,
+               "Game object not initialized. "
+               "You have to call :initialize() on game objects created by :createGameObjectUninitialized()");
+
+    for(auto component : m_updateQueue)
     {
         component.component->update(elapsedMs);
     }
@@ -135,6 +165,8 @@ void gpp::GameObject::update(float elapsedMs)
 
 void gpp::GameObject::initialize()
 {
+    GEP_ASSERT(!m_isInitialized, "Cannot initialize a game object twice.");
+
     auto pAllocator = GameObjectManager::instance().getTempAllocator();
 
     auto toInit = gep::DynamicArray<ComponentWrapper*>(pAllocator);
@@ -155,6 +187,8 @@ void gpp::GameObject::initialize()
         GEP_ASSERT(wrapper->component->getState() != IComponent::State::Initial,
             "A game component must set its state within its initialize function!");
     }
+
+    m_isInitialized = true;
 }
 
 void gpp::GameObject::destroy()
@@ -179,7 +213,6 @@ void gpp::GameObject::destroy()
     for(auto wrapper : toDestroy)
     {
         wrapper->component->destroy();
-
     }
 
     // Delete the components.
@@ -190,6 +223,8 @@ void gpp::GameObject::destroy()
 
     m_components.clear();
     m_updateQueue.resize(0);
+
+    m_isInitialized = false;
 }
 
 gep::mat4 gpp::GameObject::getWorldTransformationMatrix() const

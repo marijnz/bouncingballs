@@ -20,8 +20,6 @@ cinfo.restitution = 1.0
 cinfo.position = Vec3(0.0, 0.0, FLOOR_Z + 0.25)
 cinfo.maxAngularVelocity = 0.0
 
-player:setPosition(Vec3(0,0,0.2))
-
 player.rb = player.pc:createRigidBody(cinfo)
 player.speed = 5
 
@@ -74,12 +72,6 @@ player.update = function (guid, deltaTime)
     if (InputHandler:isPressed(Key.Up)) then
         direction = direction + Vec3(-1, -1, 0)
     end
-	
-	if (InputHandler:isPressed(Key.Up)) then
-		--mainCamera:moveTo(player:getPosition() + Vec3(10, -17, 0))
-        direction = direction + Vec3(-1, -1, 0)
-    end
-	
     if (InputHandler:isPressed(Key.Down)) then
         direction = direction + Vec3(1, 1, 0)
     end
@@ -89,8 +81,39 @@ player.update = function (guid, deltaTime)
     if (InputHandler:isPressed(Key.Right)) then
         direction = direction + Vec3(-1, 1, 0)
     end
+	-- virtual analog stick (WASD)
+	local virtualStick = Vec2(0, 0)
+	if (InputHandler:isPressed(Key.Left)) then virtualStick.x = virtualStick.x - 1 end
+	if (InputHandler:isPressed(Key.Right)) then virtualStick.x = virtualStick.x + 1 end
+	if (InputHandler:isPressed(Key.Up)) then virtualStick.y = virtualStick.y + 1 end
+	if (InputHandler:isPressed(Key.Down)) then virtualStick.y = virtualStick.y - 1 end
+	virtualStick = virtualStick:normalized()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     -- If a direction is set, walk & rotate
+	-- gamepad input
+	local gamepad = InputHandler:gamepad(0)
+	local leftStick = gamepad:leftStick()
+	
+	-- combined move vector
+	local moveVector = virtualStick + leftStick
+	
+	--converting it to Vec3
+	local direction = rotateVector(Vec3(moveVector.x, moveVector.y, 0),Vec3(0 ,0 ,1 ), 135)
+	
+	    -- If a direction is set, walk & rotate
     if (direction:length() ~= 0) then
 		if(direction:length() == 2) then
 			player.lastDirection = direction
@@ -107,6 +130,7 @@ player.update = function (guid, deltaTime)
 		
         player.pc:getRigidBody():setLinearVelocity(Vec3(0.0, 0.0, 0.0))
     end
+	
 
     -- Make the camera of the robot rotation slowly
     updateRobotCameraRotation(player:getRotation())
@@ -118,11 +142,34 @@ player.update = function (guid, deltaTime)
 			hookshotCooldown = 0.2
 		end
 	elseif (InputHandler:isPressed(32)) then
+	elseif (InputHandler:isPressed(32) or bit32.btest(InputHandler:gamepad(0):buttonsTriggered(), Button.A)) then
 		hookshot = objectManager:grab(Hookshot)
 		hookshot:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
 		hookshotCooldown = hookshotCooldown - deltaTime
     end
 
 end
+
+player.collision = function(event)
+	local self = event:getBody(CollisionArgsCallbackSource.A)
+	local other = event:getBody(CollisionArgsCallbackSource.B)
+--checks for collision with ball, if ball hits player, gameOver is set true
+	for k, v in pairs(levelManager.balls) do				
+		if (self:equals(v:getRigidBody())) then		
+			logMessage("player hit ball")
+			gameOverBool=true
+		end					
+	end	
+end
+
+function rotateVector(vector, axis, angle)
+	local rotQuat = Quaternion(axis, angle)
+	local rotMat = rotQuat:toMat3()
+	local rotVector = rotMat:mulVec3(vector)
+	return rotVector
+end
+
 player.sc = player:createScriptComponent()
 player.sc:setUpdateFunction(player.update)
+player.sc:setUpdateFunction(player.update)
+player.pc:getContactPointEvent():registerListener(player.collision)

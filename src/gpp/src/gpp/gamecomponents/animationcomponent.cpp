@@ -28,16 +28,6 @@ gpp::AnimationComponent::~AnimationComponent()
 
 }
 
-void gpp::AnimationComponent::activate()
-{
-
-}
-
-void gpp::AnimationComponent::deactivate()
-{
-
-}
-
 void gpp::AnimationComponent::initalize()
 {
     GEP_ASSERT(m_skeletonPath != nullptr, "Can't initialize animation component without skeleton path", m_pParentGameObject->getGuid().c_str());
@@ -51,7 +41,7 @@ void gpp::AnimationComponent::initalize()
 
     m_AnimatedSkeleton = animationFactory->createAnimatedSkeleton(m_skeleton);
 
-    
+
     for(auto kv : m_animationPaths)
     {
        auto anim =   animationFactory->loadAnimation(kv.value.c_str());
@@ -69,24 +59,28 @@ void gpp::AnimationComponent::initalize()
         getBoneMapping(boneNames.toArray(), boneIds);
         rc->setBoneMapping(boneIds);
     }
+
+    if (m_state != State::Initial) { return; } // User already set the state.
     setState(State::Active);
 }
 
-void gpp::AnimationComponent::update( float elapsedSeconds )
+void gpp::AnimationComponent::update(float elapsedSeconds)
 {
-    
+    if (m_state == State::Inactive)
+    {
+        return;
+    }
+
     m_AnimatedSkeleton->update(elapsedSeconds);
-     updateBoneTransformations();
+    updateBoneTransformations();
     RenderComponent* rc = m_pParentGameObject->getComponent<RenderComponent>();
     if (rc != nullptr)
     {
-
         rc->applyBoneTransformations(m_boneTransformations.toArray());
     }
 
     m_AnimatedSkeleton->setBoneDebugDrawingEnabled(m_renderBoneDebugDrawing);
     m_AnimatedSkeleton->setBoneDebugDrawingScale(m_boneDebugDrawingScale);
-
 }
 
 void gpp::AnimationComponent::updateBoneTransformations()
@@ -99,36 +93,6 @@ void gpp::AnimationComponent::updateBoneTransformations()
 void gpp::AnimationComponent::destroy()
 {
 
-}
-
-void gpp::AnimationComponent::setState( State::Enum state )
-{
-    GEP_ASSERT(state != State::Initial);
-
-    auto oldState = m_state;
-
-    if (oldState == state) { return; } // Nothing to do here.
-
-    switch (state)
-    {
-    case State::Active:
-        if (oldState != State::Active)
-        {
-            activate();
-        }
-        break;
-    case State::Inactive:
-        if (oldState == State::Active)
-        {
-            deactivate();
-        }
-        break;
-    default:
-        GEP_ASSERT(false, "Invalid requested state.", oldState, state);
-        break;
-    }
-
-    m_state = state;
 }
 
 void gpp::AnimationComponent::setSkeletonFile(const char* path)
@@ -167,7 +131,7 @@ void gpp::AnimationComponent::setPlaybackSpeed(const std::string& animName, floa
 
 void gpp::AnimationComponent::setBoneDebugDrawingEnabled(const bool enabled)
 {
-  m_renderBoneDebugDrawing = enabled; 
+  m_renderBoneDebugDrawing = enabled;
 }
 
 void gpp::AnimationComponent::setReferencePoseWeightThreshold(const float threshold)

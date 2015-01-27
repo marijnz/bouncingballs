@@ -52,9 +52,12 @@ function Hookshot:create()
 	
 end
 
-function Hookshot:initialize()
-	 
-end
+-- function Bullet:getRigidBody()
+
+	-- return self.go.rb
+
+-- end
+
 
 function Hookshot:dispose()
 	self:setPosition(Vec3(100,100,0))

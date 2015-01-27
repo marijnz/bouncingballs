@@ -104,17 +104,21 @@ void gpp::Game::initialize()
 
     auto pPhysicsWorld = g_globalManager.getPhysicsSystem()->getWorld();
     GEP_ASSERT(pPhysicsWorld != nullptr,
-               "You need to create a proper physics world or include \"defaults/physicsWorld.lua\"!");
+               "You need to create a proper physics world or include \"utils/physicsWorld.lua\"!");
     gep::IWorld::ScopedLock physicsWorldLock(pPhysicsWorld);
 
     g_gameObjectManager.initialize();
     m_pStateMachine->run();
 
     g_globalManager.getEventManager()->getPostInitializationEvent()->trigger(nullptr);
+
+    g_globalManager.getMemoryManager()->registerAllocator("Standard", &g_stdAllocator);
 }
 
 void gpp::Game::destroy()
 {
+    g_globalManager.getMemoryManager()->deregisterAllocator(&g_stdAllocator);
+
     m_pStateMachineFactory->destroy();
     GEP_DELETE(g_stdAllocator, m_pStateMachineFactory);
 

@@ -11,8 +11,11 @@ local options = {
 
 PhysicsSystem:setDebugDrawingEnabled(options.debugDrawing)
 
+--gameOver boolean for the state machine
+gameOverBool = false
+
 -- Default state machine.
-include("defaults/stateMachine.lua")
+include("stateMachine.lua")
 
 -- World
 local world
@@ -87,9 +90,13 @@ levelManager:initializeLevels(levels)
 
 
 
-
 -- Default update function
 function update(deltaTime)
+	return EventResult.Handled
+end
+
+-- Update function for the game Over state
+function gameOverupdate(deltaTime)
 	return EventResult.Handled
 end
 

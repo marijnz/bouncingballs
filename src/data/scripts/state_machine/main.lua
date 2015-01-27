@@ -1,5 +1,5 @@
 -- Physics World
-include("defaults/physicsWorld.lua")
+include("utils/physicsWorld.lua")
 
 -- Enable drawing of physics geometry
 PhysicsSystem:setDebugDrawingEnabled(true)
