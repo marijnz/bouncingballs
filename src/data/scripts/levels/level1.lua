@@ -14,10 +14,6 @@ setmetatable(Level1, {
   end,
 })
 
-function Hookshot:create() end
-function Hookshot:dispose() end
-function Hookshot:update(deltaTime) end
-
 function Level1:createLevel(center, id)
 	level = GameObjectManager:createGameObject("level"..id)
 	level.render = level:createRenderComponent()
@@ -59,6 +55,7 @@ function Level1:createLevel(center, id)
 end
 
 function Level1:startLevel(center, id)
+logMessage("starting level")
 	local ball1 = objectManager:grab(MediumBall)
 	ball1:setInitialPositionAndMovement(center + Vec3(0.0, 0.0, 5.0), Vec3(2.0, 2.0, 0.0))
 	local ball2 = objectManager:grab(MediumBall)

@@ -7,11 +7,12 @@ USERDATA_TYPE_FLOOR = 1
 USERDATA_TYPE_WALL = 2 
 USERDATA_TYPE_BALL = 3
 USERDATA_TYPE_PLAYER = 4
+USERDATA_TYPE_HOOKSHOT = 5
 
 -- Options 
 local options = {
     freecamera = false,
-	debugDrawing = true
+	debugDrawing = false 
 }
 
 PhysicsSystem:setDebugDrawingEnabled(options.debugDrawing)
@@ -26,14 +27,8 @@ include("stateMachine.lua")
 local world
 include("world.lua")
 
-
-
 -- Some mathematical functions
 include("util.lua")
-
--- Global bounciness
-floorBounciness=9
-wallBounciness=5
 
 -- Classes
 easing = require("easing")
@@ -59,8 +54,8 @@ include("player.lua");
 include("levels/level1.lua")
 
 -- Player
-	player:setPosition(0,0, 20)
-	--player:freeze()
+player:setPosition(0,0, 20)
+--player:freeze()
 
 -- Camera
 local camera
@@ -72,9 +67,7 @@ else
 	mainCamera = objectManager:grab(Camera)
 end
 
-logMessage("OKOKOKOK")
 objectManager:addPool(Hookshot, 5)
-logMessage("OKOKOKOK")
 objectManager:addPool(Tweener, 20)
 
 objectManager:addPool(LevelManager, 1)
@@ -88,16 +81,13 @@ levels = {}
 levels[0] = objectManager:grab(Level1)
 levels[1] = objectManager:grab(Level1)
 levels[2] = objectManager:grab(Level1)
+levels[3] = objectManager:grab(Level1)
+levels[4] = objectManager:grab(Level1)
 logMessage(levels[0])
 levelManager:initializeLevels(levels)
 
 -- Default update function
 function update(deltaTime)
-	return EventResult.Handled
-end
-
--- Update function for the game Over state
-function gameOverupdate(deltaTime)
 	return EventResult.Handled
 end
 

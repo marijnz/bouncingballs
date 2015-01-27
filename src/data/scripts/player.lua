@@ -23,7 +23,7 @@ cinfo.position = Vec3(0.0, 0.0, FLOOR_Z + 0.25)
 cinfo.maxAngularVelocity = 0.0
 
 player.rb = player.pc:createRigidBody(cinfo)
-player.rb:setUserData({type = USERDATA_TYPE_BALL})
+player.rb:setUserData({type = USERDATA_TYPE_PLAYER})
 player.speed = PLAYER_SPEED
 
 -- Robot camera model
@@ -32,7 +32,8 @@ player.robotCamera.render = player.robotCamera:createRenderComponent()
 player.robotCamera.render:setPath("data/models/robot-camera.thModel")
 player.robotCameraRotation = 0
 player.robotCameraRotationDirection = 1
-player.robotCamera:setPosition(player:getPosition() + ROBOT_CAMERA_OFFSET)
+player.robotCamera:setPosition(ROBOT_CAMERA_OFFSET)
+player.robotCamera:setParent(player)
 
 hookshotCooldown = 0.2
 
@@ -48,17 +49,12 @@ updateRobotCameraRotation = function (playerRotation)
         player.robotCameraRotationDirection = player.robotCameraRotationDirection * -1
     end
     local rotation = Quaternion(Vec3(0, 0, 1), player.robotCameraRotation)
-    player.robotCamera:setRotation(rotation * playerRotation)
-end
-
-function updateRobotCameraPosition(angle)
-	local offset = vec2Rotate(ROBOT_CAMERA_OFFSET, angle)
-	player.robotCamera:setPosition(player:getPosition() + offset)
+    player.robotCamera:setRotation(rotation)
 end
 
 player.updateMovement = function (direction)
 	-- Normalize the direction for when two buttons are pressed at the same time
-	local normalized = direction --testchange: direction should already be normalized after my changes
+	local normalized = direction
 
 	-- Multiply speed by the direction to walk
 	player.pc:getRigidBody():setLinearVelocity(Vec3(normalized.x * player.speed, normalized.y * player.speed, 0.0))
@@ -68,12 +64,8 @@ player.updateMovement = function (direction)
 	player:setRotation(Quaternion(Vec3(0, 0, 1), angle))
 	
 	--keep him on ground level (he likes to climb up walls for a unknown reason
-
 	local position = player.pc:getRigidBody():getPosition()
-	player.pc:getRigidBody():setPosition(Vec3(position.x,position.y, FLOOR_Z + 0.25)) 
-	
-	-- Put the camera of the robot on the right place after the player moved, based on the ROBOT_CAMERA_OFFSET
-	updateRobotCameraPosition(angle)
+	player.pc:getRigidBody():setPosition(Vec3(position.x, position.y, FLOOR_Z + 0.25)) 
 end
 
 player.update = function (guid, deltaTime) 	
@@ -84,10 +76,10 @@ player.update = function (guid, deltaTime)
 
 	-- virtual analog stick (WASD)
 	local virtualStick = Vec2(0, 0)
-	if (InputHandler:isPressed(Key.Left)) then virtualStick.x = virtualStick.x - 1 end
-	if (InputHandler:isPressed(Key.Right)) then virtualStick.x = virtualStick.x + 1 end
-	if (InputHandler:isPressed(Key.Up)) then virtualStick.y = virtualStick.y + 1 end
-	if (InputHandler:isPressed(Key.Down)) then virtualStick.y = virtualStick.y - 1 end
+	if (InputHandler:isPressed(Key.Left) or InputHandler:isPressed(Key.A)) then virtualStick.x = virtualStick.x - 1 end
+	if (InputHandler:isPressed(Key.Right) or InputHandler:isPressed(Key.D)) then virtualStick.x = virtualStick.x + 1 end
+	if (InputHandler:isPressed(Key.Up) or InputHandler:isPressed(Key.W)) then virtualStick.y = virtualStick.y + 1 end
+	if (InputHandler:isPressed(Key.Down) or InputHandler:isPressed(Key.S)) then virtualStick.y = virtualStick.y - 1 end
 	virtualStick = virtualStick:normalized()
 
     -- If a direction is set, walk & rotate
@@ -115,11 +107,9 @@ player.update = function (guid, deltaTime)
 			end
 		end
     else 
-		
         player.pc:getRigidBody():setLinearVelocity(Vec3(0.0, 0.0, 0.0))
     end
 	
-
     -- Make the camera of the robot rotation slowly
     updateRobotCameraRotation(player:getRotation())
 	
@@ -130,13 +120,14 @@ player.update = function (guid, deltaTime)
 			hookshotCooldown = 0.2
 		end
 	elseif (InputHandler:isPressed(32) or bit32.btest(InputHandler:gamepad(0):buttonsTriggered(), Button.A)) then
+		
+		
+		hookshot = objectManager:grab(Hookshot)
+		hookshot:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
+		hookshotCooldown = hookshotCooldown - deltaTime
+    elseif (InputHandler:isPressed(78)) then
 		levelManager:goNextLevel()
-		--hookshot = objectManager:grab(Hookshot)
-		--hookshot:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
-		--hookshotCooldown = hookshotCooldown - deltaTime
-    end
-	
-
+	end
 end
 
 function player:reset()
@@ -156,13 +147,12 @@ end
 player.collision = function(event)
 	local self = event:getBody(CollisionArgsCallbackSource.A)
 	local other = event:getBody(CollisionArgsCallbackSource.B)
---checks for collision with ball, if ball hits player, gameOver is set true
-	for k, v in pairs(levelManager.balls) do				
-		if (self:equals(v:getRigidBody())) then		
-			logMessage("player hit ball")
-			--gameOverBool=true
-		end					
-	end	
+
+    -- NO CLUE why we have to get user data from self, should be 'other'
+    local data = self:getUserData()
+    if (data.type == USERDATA_TYPE_BALL) then
+        gameOverBool = true
+    end
 end
 
 function rotateVector(vector, axis, angle)
