@@ -58,6 +58,10 @@ include("smallBall.lua")
 include("player.lua");
 include("levels/level1.lua")
 
+-- Player
+	player:setPosition(0,0, 10)
+	--player:freeze()
+
 -- Camera
 local camera
 if (options.freecamera) then

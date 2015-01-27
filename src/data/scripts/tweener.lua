@@ -38,6 +38,7 @@ function Tweener:update(deltaTime)
 		
 		if(self.timeSinceMoving > self.timeToTake) then
 			self.isMoving = false
+			--objectManager:put(Tweener, self)
 			self.onComplete()
 		end
 	end

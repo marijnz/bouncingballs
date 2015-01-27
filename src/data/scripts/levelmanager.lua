@@ -36,7 +36,6 @@ function LevelManager:initializeLevels(levels)
 end
 
 function LevelManager:loadLevel(levelId)
-
 	self.currentLevelId = levelId
 	
 	level = self.levels[self.currentLevelId]
@@ -46,20 +45,30 @@ function LevelManager:loadLevel(levelId)
 	-- Spawn balls
 	
 	level.go:setPosition(Vec3(-15,8,0))
-	
+
 	tweener = objectManager:grab(Tweener)
 	
 	tweener:startTween(easing.inOutSine, level.go, Vec3(0,0,0), 1, self.onLevelLoaded)
 	
-	-- Move camera to level center
+	anotherTweener = objectManager:grab(Tweener)
+		-- Move camera to level center
 	
 end
 
 function LevelManager:onLevelLoaded()
-self = levelManager
+	self = levelManager
 	level = self.levels[self.currentLevelId]
 	level:startLevel(level.center, self.currentLevelId)
-	player:reset()
+	player:freeze()
+	tweener2 = objectManager:grab(Tweener)
+	tweener2:startTween(easing.inOutSine, player, Vec3(0,0,FLOOR_Z + 0.25), 1, self.onPlayerPlaced)
+end
+
+function LevelManager:onPlayerPlaced()
+	self = levelManager
+	
+	player:unfreeze()
+	logMessage("UNFREEZE PLAYER")
 end
 
 function LevelManager:addBall(ball)

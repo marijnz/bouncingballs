@@ -141,7 +141,7 @@ end
 
 function player:reset()
 	player:unfreeze()
-	self.rb:setPosition(Vec3(0,0,FLOOR_Z + 0.55))
+	self.rb:setPosition(Vec3(0,0,FLOOR_Z + 0.25))
 	gameOverBool=false
 end
 

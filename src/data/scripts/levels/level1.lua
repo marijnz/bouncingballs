@@ -22,7 +22,7 @@ function Level1:createLevel(center, id)
 	level = GameObjectManager:createGameObject("level"..id)
 	level.render = level:createRenderComponent()
 	level.render:setPath("data/models/cube-level.thModel")
-	level:setPosition(center + Vec3(0, 0, 0))
+	level:setPosition(center + Vec3(-100, 0, 0))
 
 	floor = GameObjectManager:createGameObject("floor"..id)
 	floor:setParent(level)
