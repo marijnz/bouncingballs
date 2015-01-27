@@ -1,9 +1,9 @@
-logMessage("using level1.lua")
+logMessage("using level2.lua")
 
-Level1 = {}
-Level1.__index = Level1
+Level3 = {}
+Level3.__index = Level3
 
-setmetatable(Level1, {
+setmetatable(Level3, {
   __index = PoolObject, -- this is what makes the inheritance work
   __call = function (cls, ...)
     self = setmetatable({}, cls)
@@ -11,7 +11,7 @@ setmetatable(Level1, {
   end,
 })
 
-function Level1:createLevel(center, id)
+function Level3:createLevel(center, id)
 	level = GameObjectManager:createGameObject("level"..id)
 	level.render = level:createRenderComponent()
 	level.render:setPath("data/models/cube-level.thModel")
@@ -51,7 +51,11 @@ function Level1:createLevel(center, id)
 	return level
 end
 
-function Level1:startLevel(center, id)
+function Level3:startLevel(center, id)
 	local ball1 = objectManager:grab(MediumBall)
-	ball1:setInitialPositionAndMovement(center + Vec3(0.0, 0.0, 5.0), Vec3(2.0, 0.0, 0.0))
+	ball1:setInitialPositionAndMovement(center + Vec3(-3.0, 0.0, 5.0), Vec3(-2.0, 1.0, 0.0))
+	local ball2 = objectManager:grab(MediumBall)
+	ball2:setInitialPositionAndMovement(center + Vec3(3.0, 0.0, 5.0), Vec3(2.0, -1.0, 0.0))
+	local ball3 = objectManager:grab(BigBall)
+	ball3:setInitialPositionAndMovement(center + Vec3(0.0, 0.0, 5.0), Vec3(2.0, 2.0, 0.0))
 end

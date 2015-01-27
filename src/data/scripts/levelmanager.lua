@@ -37,11 +37,12 @@ function LevelManager:initializeLevels(levels)
 end
 
 function LevelManager:goNextLevel()
-if(self.isGoingNextLevel) then return end
+    if(self.isGoingNextLevel) then
+        return
+    end
 	self.isGoingNextLevel = true
 	disposeEverything()
 	playerTweener = objectManager:grab(Tweener)
-	
 	playerTweener:startTween(easing.inSine, player, player:getPosition() + Vec3(0,0,20), 1, self.onPlayerDisplaced)
 end
 
@@ -65,7 +66,6 @@ function LevelManager:loadLevel(levelId)
 	self = levelManager
 	self.currentLevelId = levelId
 	logMessage("id..: "..self.currentLevelId)
-	logMessage(level.center)
 	-- Spawn balls
 	
 	level.go:setPosition(Vec3(-15,8,0))
@@ -123,7 +123,7 @@ function LevelManager:update(deltaTime)
 	if(self.loadLevelAfterTime ~= 0) then
 		self.loadLevelAfterTime = self.loadLevelAfterTime + deltaTime
 		if(self.loadLevelAfterTime > 5) then
-			self.currentLevelId = 1		
+			self.currentLevelId = 1
 			self:loadLevel(self.currentLevelId)
 			self.loadLevelAfterTime = 0
 		end

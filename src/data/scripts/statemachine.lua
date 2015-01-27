@@ -13,7 +13,7 @@ State{
 	eventListeners = {
 		enter = {
 		function()
-			levelManager:resetLevel(1)
+			levelManager:loadLevel(1)
 			levelManager:loadLevel(1)
 			player:reset()
 		end
