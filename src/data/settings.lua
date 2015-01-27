@@ -10,7 +10,7 @@ Settings:load{
 	-- General settings.
 	general = {
 		-- The title of the application. Will be used as the window title.
-		applicationTitle = "Gameplay Programming",
+		applicationTitle = "Bouncing Balls",
 	},
 
 	scripts = {
@@ -62,7 +62,7 @@ Settings:load{
 		-- The default color of the background.
 		-- Format: rgba - Red, Green, Blue, Alpha -> 0.0 == none, 1.0 full.
 		-- Default:       0.0, 0.125, 0.3,  1.0   -> A blueish color.
-		clearColor = Color(0.0, 0.125, 0.3, 1.0),
+		clearColor = Color(0.9, 0.9, 0.9, 1.0),
 	},
 
 	-- Settings about the behavior of the scripting system.
