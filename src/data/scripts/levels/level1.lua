@@ -14,10 +14,6 @@ setmetatable(Level1, {
   end,
 })
 
-function Hookshot:create() end
-function Hookshot:dispose() end
-function Hookshot:update(deltaTime) end
-
 function Level1:createLevel(center, id)
 	level = GameObjectManager:createGameObject("level"..id)
 	level.render = level:createRenderComponent()
