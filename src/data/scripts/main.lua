@@ -78,10 +78,11 @@ levelManager = objectManager:grab(LevelManager)
 objectManager:addPool(MediumBall, 2)
 objectManager:addPool(SmallBall, 2 * 2)
 
+objectManager:addPool(Level1, 3)
 levels = {}
-levels[0] = Level1()
-levels[1] = Level1()
-levels[2] = Level1()
+levels[0] = objectManager:grab(Level1)
+levels[1] = objectManager:grab(Level1)
+levels[2] = objectManager:grab(Level1)
 logMessage(levels[0])
 levelManager:initializeLevels(levels)
 

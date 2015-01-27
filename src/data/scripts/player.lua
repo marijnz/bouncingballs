@@ -81,18 +81,7 @@ player.update = function (guid, deltaTime)
 
     -- The direction the player is going to walk this frame
     local direction = Vec3(0.0, 0.0, 0.0)
-    if (InputHandler:isPressed(Key.Up)) then
-        direction = direction + Vec3(-1, -1, 0)
-    end
-    if (InputHandler:isPressed(Key.Down)) then
-        direction = direction + Vec3(1, 1, 0)
-    end
-    if (InputHandler:isPressed(Key.Left)) then
-        direction = direction + Vec3(1, -1, 0)
-    end
-    if (InputHandler:isPressed(Key.Right)) then
-        direction = direction + Vec3(-1, 1, 0)
-    end
+
 	-- virtual analog stick (WASD)
 	local virtualStick = Vec2(0, 0)
 	if (InputHandler:isPressed(Key.Left)) then virtualStick.x = virtualStick.x - 1 end
@@ -100,19 +89,6 @@ player.update = function (guid, deltaTime)
 	if (InputHandler:isPressed(Key.Up)) then virtualStick.y = virtualStick.y + 1 end
 	if (InputHandler:isPressed(Key.Down)) then virtualStick.y = virtualStick.y - 1 end
 	virtualStick = virtualStick:normalized()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     -- If a direction is set, walk & rotate
 	-- gamepad input
@@ -132,7 +108,7 @@ player.update = function (guid, deltaTime)
 			player.lastDirectionTimer = 0
 			player.updateMovement(direction)
 		else
-			if(player.lastDirectionTimer < 0.03) then
+			if(player.lastDirectionTimer < 0.30) then
 				player.updateMovement(player.lastDirection)
 			else
 				player.updateMovement(direction)
@@ -165,7 +141,7 @@ end
 
 function player:reset()
 	player:unfreeze()
-	self.rb:setPosition(Vec3(0,0,FLOOR_Z + 0.25))
+	self.rb:setPosition(Vec3(0,0,FLOOR_Z + 0.55))
 	gameOverBool=false
 end
 
@@ -184,7 +160,7 @@ player.collision = function(event)
 	for k, v in pairs(levelManager.balls) do				
 		if (self:equals(v:getRigidBody())) then		
 			logMessage("player hit ball")
-			gameOverBool=true
+			--gameOverBool=true
 		end					
 	end	
 end

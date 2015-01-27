@@ -15,7 +15,7 @@ function Tweener:create()
 	
 end
 
-function Tweener:startTween(easeType, transform, toPosition, timeToTake)
+function Tweener:startTween(easeType, transform, toPosition, timeToTake, onComplete)
 	if(self.isMoving) then
 		return
 	end
@@ -26,6 +26,7 @@ function Tweener:startTween(easeType, transform, toPosition, timeToTake)
 	self.timeSinceMoving = 0
 	self.timeToTake = timeToTake
 	self.isMoving = true
+	self.onComplete = onComplete
 end
 
 function Tweener:update(deltaTime)
@@ -37,6 +38,7 @@ function Tweener:update(deltaTime)
 		
 		if(self.timeSinceMoving > self.timeToTake) then
 			self.isMoving = false
+			self.onComplete()
 		end
 	end
 end

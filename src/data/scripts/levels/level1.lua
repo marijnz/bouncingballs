@@ -3,12 +3,20 @@ logMessage("using level1.lua")
 Level1 = {}
 Level1.__index = Level1
 
+BULLET_SPEED = 13
+
+
 setmetatable(Level1, {
+  __index = PoolObject, -- this is what makes the inheritance work
   __call = function (cls, ...)
-    local self = setmetatable({}, cls)
+    self = setmetatable({}, cls)
     return self
   end,
 })
+
+function Hookshot:create() end
+function Hookshot:dispose() end
+function Hookshot:update(deltaTime) end
 
 function Level1:createLevel(center, id)
 	level = GameObjectManager:createGameObject("level"..id)
