@@ -95,7 +95,7 @@ function Ball.BallCollision(event)
     -- Save data in the rigid body
     self:setUserData(newBallCollisionData)
 
-    for keys, value in pairs(objectManager:getActiveFromPool(Hookshot)) do
+    for keys, value in pairs(objectManager:getActiveFromPool({Hookshot})) do
         if (value ~= nil and other:equals(value:getRigidBody())) then
             v.hitHookshot = true
         end					

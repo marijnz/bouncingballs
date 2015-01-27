@@ -59,7 +59,7 @@ end
 
 function LevelManager:removeBall(ball)
 	rawset(self.balls, "ball" .. ball.uniqueIdentifier, nil)
-	checkAndRespondIfLevelIsDone()
+	self:checkAndRespondIfLevelIsDone()
 end
 
 function LevelManager:initialize() 
