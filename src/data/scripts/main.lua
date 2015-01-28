@@ -19,6 +19,7 @@ PhysicsSystem:setDebugDrawingEnabled(options.debugDrawing)
 
 --gameOver boolean for the state machine
 gameOverBool = false
+gameLoadedBool = false
 
 -- Default state machine.
 include("stateMachine.lua")

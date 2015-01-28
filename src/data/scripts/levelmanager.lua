@@ -127,6 +127,7 @@ function LevelManager:update(deltaTime)
 			self.currentLevelId = 1
 			self:loadLevel(self.currentLevelId)
 			self.loadLevelAfterTime = 0
+            gameLoadedBool = true
 		end
 	end
 end

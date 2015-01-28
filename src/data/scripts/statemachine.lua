@@ -8,6 +8,23 @@ State{
 }
 
 State{
+	name = "loading",
+	parent = "/game",
+	eventListeners = {
+		enter = {
+			function()
+			toggleScreen(gameStartScreen)
+			end
+		},
+		leave = {
+			function()
+				toggleScreen(gameStartScreen)
+			end
+		}
+	}
+}
+
+State{
 	name = "restart",
 	parent = "/game",
 	eventListeners = {
@@ -65,7 +82,8 @@ State{
 
 StateTransitions{
 	parent = "/game",
-	{ from = "__enter", to = "default" },
+	{ from = "__enter", to = "loading" },
+	{ from = "loading", to = "default", condition = function() return gameLoadedBool end },
 	{ from = "default", to = "__leave", condition = function() return InputHandler:wasTriggered(Key.Escape) end },
 	{ from = "default", to = "pause", condition = function() return InputHandler:wasTriggered(Key.P) end },
 	{ from = "pause", to = "default", condition = function() return InputHandler:wasTriggered(Key.P) end },
