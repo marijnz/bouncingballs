@@ -2,6 +2,10 @@
 
 ### Bubble Trouble in 3D
 
+## Where to go
+
+The Lua code for the actual game is in "/src/data/scripts"
+
 ## Setup
 
 1. Clone this project
