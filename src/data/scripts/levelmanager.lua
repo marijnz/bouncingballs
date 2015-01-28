@@ -66,6 +66,7 @@ function LevelManager:loadLevel(levelId)
 	self = levelManager
 	self.currentLevelId = levelId
 	logMessage("id..: "..self.currentLevelId)
+	level = self.levels[self.currentLevelId]
 	-- Spawn balls
 	
 	level = self.levels[self.currentLevelId]
@@ -128,6 +129,7 @@ function LevelManager:update(deltaTime)
 			self.currentLevelId = 1
 			self:loadLevel(self.currentLevelId)
 			self.loadLevelAfterTime = 0
+            gameLoadedBool = true
 		end
 	end
 end
