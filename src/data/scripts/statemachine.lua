@@ -46,7 +46,7 @@ State{
 		enter = {
 		function()
 			disposeEverything()
-			levelManager:setCurrentLevelId(0)
+			levelManager:setCurrentLevelId(levelManager:getCurrentLevelId() - 1)
 			levelManager:goNextLevel()
 			player:reset()
 		end

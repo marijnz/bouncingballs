@@ -57,7 +57,7 @@ function LevelManager:onLevelUnloaded()
 	logMessage("onLevelUnloaded")
 	self = levelManager
 	level = self.levels[self.currentLevelId]
-	objectManager:put(Level1, level)
+	--objectManager:put(Level1, level)
 	self:loadLevel(self.currentLevelId + 1)
 end
 
