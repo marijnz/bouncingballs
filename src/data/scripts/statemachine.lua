@@ -13,7 +13,9 @@ State{
 	eventListeners = {
 		enter = {
 		function()
-			levelManager:loadLevel(1)
+			disposeEverything()
+			levelManager:setCurrentLevelId(0)
+			levelManager:goNextLevel()
 			player:reset()
 		end
 		}
@@ -26,7 +28,9 @@ State{
 	eventListeners = {
 		enter = {
 		function()
-			levelManager:loadLevel(levelManager:getCurrentLevelId())
+			disposeEverything()
+			levelManager:setCurrentLevelId(0)
+			levelManager:goNextLevel()
 			player:reset()
 		end
 		}
@@ -41,8 +45,8 @@ State{
 	eventListeners = {
 		enter = {
 			function()
-			toggleScreen(gameOverScreen)
-			freezeEverything()
+				toggleScreen(gameOverScreen)
+				freezeEverything()
 			end
 		},
 		leave = {

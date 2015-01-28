@@ -15,6 +15,7 @@ function unfreezeEverything()
 end
 
 function disposeEverything()
+	logMessage("disposing everything")
 	for k, v in pairs(objectManager:getActiveFromPool({MediumBall})) do				
 		objectManager:put(MediumBall,v)
 	end

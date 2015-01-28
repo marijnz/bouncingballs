@@ -68,6 +68,8 @@ function LevelManager:loadLevel(levelId)
 	logMessage("id..: "..self.currentLevelId)
 	-- Spawn balls
 	
+	level = self.levels[self.currentLevelId]
+	
 	level.go:setPosition(Vec3(-15,8,0))
 
 	tweener = objectManager:grab(Tweener)
@@ -133,4 +135,8 @@ end
 --needed to restart current level
 function LevelManager:getCurrentLevelId()
 	return self.currentLevelId
+end
+
+function LevelManager:setCurrentLevelId(id)
+	self.currentLevelId=id
 end
