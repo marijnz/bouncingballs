@@ -32,6 +32,7 @@ function ObjectManager:getActiveFromPool(baseTypeArray)
 		for k, activeObject in pairs(self.poolObjects[baseType]["active"]) do
 			if activeObject~=nil then 
 				activeObjects[k] = activeObject 
+				logMessage(activeObject.go:getGuid().."gottenFromPool")
 			end
 		end
 	end
@@ -96,6 +97,7 @@ function ObjectManager:grab(baseType)
 		tempPoolObject = self.poolObjects[baseType]["active"][i]
 		if(tempPoolObject == nil) then
 			self.poolObjects[baseType]["active"][i] = poolObject
+			logMessage(poolObject, "went active")
 			break
 		end
 	end
