@@ -14,7 +14,6 @@ State{
 		enter = {
 		function()
 			levelManager:loadLevel(1)
-			levelManager:loadLevel(1)
 			player:reset()
 		end
 		}
@@ -88,7 +87,8 @@ StateTransitions{
 	{ from = "default", to = "gameOver", condition = function() return gameOverBool end },
 	{ from = "gameOver", to = "restartGame", condition = function() return InputHandler:wasTriggered(Key.R) end },
 	{ from = "default", to = "restartGame", condition = function() return InputHandler:wasTriggered(Key.R) end },
-	{ from = "gameOver", to = "restartLevel", condition = function() return InputHandler:wasTriggered(Key.Return) end },
+	{ from = "gameOver", to = "restartLevel", condition = function() return InputHandler:wasTriggered(Key.L) end },
+	{ from = "default", to = "restartLevel", condition = function() return InputHandler:wasTriggered(Key.L) end },
 	{ from = "restartLevel", to = "default" },
 	{ from = "restartGame", to = "default" }	
 }
