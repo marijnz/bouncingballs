@@ -131,3 +131,8 @@ function LevelManager:update(deltaTime)
 		end
 	end
 end
+
+--needed to restart current level
+function LevelManager:getCurrentLevelId()
+	return self.currentLevelId
+end

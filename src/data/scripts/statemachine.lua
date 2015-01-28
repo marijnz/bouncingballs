@@ -25,7 +25,7 @@ State{
 }
 
 State{
-	name = "restart",
+	name = "restartGame",
 	parent = "/game",
 	eventListeners = {
 		enter = {
@@ -36,6 +36,20 @@ State{
 		}
 	}
 }
+
+State{
+	name = "restartLevel",
+	parent = "/game",
+	eventListeners = {
+		enter = {
+		function()
+			levelManager:loadLevel(levelManager:getCurrentLevelId())
+			player:reset()
+		end
+		}
+	}
+}
+
 
 State{
 	name = "gameOver",
@@ -89,7 +103,10 @@ StateTransitions{
 	{ from = "pause", to = "default", condition = function() return InputHandler:wasTriggered(Key.P) end },
 	{ from = "gameOver", to = "__leave", condition = function() return InputHandler:wasTriggered(Key.Escape) end },
 	{ from = "default", to = "gameOver", condition = function() return gameOverBool end },
-	{ from = "gameOver", to = "restart", condition = function() return InputHandler:wasTriggered(Key.R) end },
-	{ from = "restart", to = "default" },
-	
+	{ from = "gameOver", to = "restartGame", condition = function() return InputHandler:wasTriggered(Key.R) end },
+	{ from = "default", to = "restartGame", condition = function() return InputHandler:wasTriggered(Key.R) end },
+	{ from = "gameOver", to = "restartLevel", condition = function() return InputHandler:wasTriggered(Key.L) end },
+	{ from = "default", to = "restartLevel", condition = function() return InputHandler:wasTriggered(Key.L) end },
+	{ from = "restartLevel", to = "default" },
+	{ from = "restartGame", to = "default" }	
 }
