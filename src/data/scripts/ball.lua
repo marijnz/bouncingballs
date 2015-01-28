@@ -104,7 +104,7 @@ function Ball.BallCollision(event)
 
     -- Save data in the rigid body
     self:setUserData(newBallCollisionData)
-
+	
     return EventResult.Handled
 end
 
@@ -116,6 +116,9 @@ function Ball:setInitialPositionAndMovement(position, LinearVelocity)
 end
 
 function Ball:dispose()
+
+	logMessage(self.go:getGuid().."disposed")
+
 	levelManager:removeBall(self)
 	
 	self.go:setComponentStates(ComponentState.Inactive)
@@ -124,6 +127,7 @@ function Ball:dispose()
 end
 
 function Ball:freeze()
+	logMessage(self.go:getGuid().."freezed")
 	self.go.pc:setState(ComponentState.Inactive)
 end
 
@@ -146,7 +150,8 @@ function Ball:update()
     local newCollisionData = {type = USERDATA_TYPE_BALL}
 
     if (lastCollisionData.resetVelocityZ) then
-        print("resetVelocityZ")
+        print(self.go:getGuid(),"resetVelocityZ")
+		--logMessage(self.go:getGuid().."restetedVelocityZ")
         local velocity = self.go.rb:getLinearVelocity()
         velocity = Vec3(velocity.x, velocity.y, self.speedZ)
         self.go.rb:setLinearVelocity(velocity)

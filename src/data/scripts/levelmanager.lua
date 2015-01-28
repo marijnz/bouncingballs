@@ -41,7 +41,7 @@ function LevelManager:goNextLevel()
         return
     end
 	self.isGoingNextLevel = true
-	disposeEverything()
+	--disposeEverything()
 	playerTweener = objectManager:grab(Tweener)
 	playerTweener:startTween(easing.inSine, player, player:getPosition() + Vec3(0,0,20), 1, self.onPlayerDisplaced)
 end

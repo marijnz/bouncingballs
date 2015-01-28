@@ -2,20 +2,24 @@ logMessage("using freeze.lua")
 
 function freezeEverything()
 	player:freeze()
-	for k, v in pairs(objectManager:getActiveFromPool({MediumBall, SmallBall})) do				
+	for k, v in pairs(objectManager:getActiveFromPool({MediumBall, SmallBall, BigBall})) do				
+		logMessage(v.go:getGuid().."attempting to freeze")
 		v:freeze()
 	end	
 end
 
 function unfreezeEverything()
 	player:unfreeze()
-	for k, v in pairs(objectManager:getActiveFromPool({MediumBall, SmallBall})) do				
+	for k, v in pairs(objectManager:getActiveFromPool({MediumBall, SmallBall, BigBall})) do		
 		v:unfreeze()
 	end	
 end
 
 function disposeEverything()
 	logMessage("disposing everything")
+	for k, v in pairs(objectManager:getActiveFromPool({BigBall})) do	
+		objectManager:put(BigBall,v)
+	end
 	for k, v in pairs(objectManager:getActiveFromPool({MediumBall})) do				
 		objectManager:put(MediumBall,v)
 	end

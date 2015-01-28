@@ -121,7 +121,8 @@ player.update = function (guid, deltaTime)
 		end
 	elseif (InputHandler:isPressed(32) or bit32.btest(InputHandler:gamepad(0):buttonsTriggered(), Button.A)) then
 		
-		
+		gamepad:rumbleLeftFor(0.5,0.0001)
+		gamepad:rumbleRightFor(0.5, 0.0001)
 		hookshot = objectManager:grab(Hookshot)
 		hookshot:setInitialPosition(player:getPosition() + Vec3(0,0,1.5))
 		hookshotCooldown = hookshotCooldown - deltaTime
